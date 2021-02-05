@@ -36,4 +36,4 @@ async function post(obj){
 	}
 	return res
 }
-export {get,post}
+export {url,get,post}

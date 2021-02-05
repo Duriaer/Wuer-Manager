@@ -2,12 +2,11 @@ import Vue from 'vue'
 import App from './App'
 
 //请求
-import {get,post} from '@/api/request.js'
+import {url,get,post} from '@/api/request.js'
+Vue.prototype.$url = url
 Vue.prototype.$get = get
 Vue.prototype.$post = post
 
-import {url} from '@/api/url.js'
-Vue.prototype.$url = url
 
 // 路由
 import {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toLogin,to401} from '@/api/router.js'
