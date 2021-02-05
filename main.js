@@ -1,0 +1,41 @@
+import Vue from 'vue'
+import App from './App'
+
+//请求
+import {get,post} from '@/api/request.js'
+Vue.prototype.$get = get
+Vue.prototype.$post = post
+
+import {url} from '@/api/url.js'
+Vue.prototype.$url = url
+
+// 路由
+import {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toLogin,to401} from '@/api/router.js'
+Vue.prototype.$toPath = toPath
+Vue.prototype.$goPath = goPath
+Vue.prototype.$back = back
+Vue.prototype.$toHome = toHome
+Vue.prototype.$toGoods = toGoods
+Vue.prototype.$addGoods = addGoods
+Vue.prototype.$editGoods = editGoods
+Vue.prototype.$toLogin = toLogin
+Vue.prototype.$to401 = to401
+
+// 图片
+import {imgUrl,previewImg} from '@/api/forImg.js'
+Vue.prototype.$imgUrl = imgUrl
+Vue.prototype.$previewImg = previewImg
+
+// 对象,数组验证
+import {isObject,isArray} from '@/api/isObject.js'
+Vue.prototype.$isObject = isObject
+Vue.prototype.$isArray = isArray
+
+Vue.config.productionTip = false
+
+App.mpType = 'app'
+
+const app = new Vue({
+    ...App
+})
+app.$mount()
