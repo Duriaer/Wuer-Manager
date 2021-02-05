@@ -94,6 +94,14 @@
 					</view>
 					<view class="line_input">
 						<view class="line_name">
+							<text>刻印&序列号</text>
+						</view>
+						<view class="right">
+							<input v-model="manufacturerCode" type="text" placeholder="请输入" />
+						</view>
+					</view>
+					<view class="line_input">
+						<view class="line_name">
 							<text>尺寸</text>
 						</view>
 						<view class="right">
@@ -154,6 +162,14 @@
 						</view>
 						<view class="right">
 							<input v-model="peerPrice" type="number" placeholder="请输入同行价" />
+						</view>
+					</view>
+					<view class="line_input">
+						<view class="line_name">
+							<text>成本价</text>
+						</view>
+						<view class="right">
+							<input v-model="costPrice" type="number" placeholder="请输入成本价" />
 						</view>
 					</view>
 					<view class="line_button">
@@ -283,6 +299,13 @@
 							</picker>
 						</view>
 					</view>
+				</view>
+			</view>
+			<view id="other_box">
+				<view class="id_title">
+					<text>其他</text>
+				</view>
+				<view class="ul">
 					<view class="line_textarea">
 						<view class="line_name">
 							<text>内部备注</text>
@@ -290,6 +313,15 @@
 						<view class="textarea">
 							<textarea v-model="internalRemark" placeholder="请输入" maxlength="200" />
 							<text class="count">{{internalRemark.length}}/200</text>
+						</view>
+					</view>
+					<view class="line_button">
+						<view class="line_name">
+							<text>是否借出</text>
+						</view>
+						<view class="right">
+							<view class="unchecked" :class="hasLent ? 'active':''" @tap.stop="tabHasLent(1)"><text >是</text></view>
+							<view class="unchecked" :class="!hasLent ? 'active':''" @tap.stop="tabHasLent(0)"><text>否</text></view>
 						</view>
 					</view>
 				</view>
@@ -360,81 +392,88 @@
 				date: currentDate,
 				
 				//#1
-				//1
 				picList:[],//商品图片列表
-				//2
+			
 				goodsBrand:{},//品牌
 				goodsBrandId:'',//品牌 id
 				goodsBrandName:'',//品牌名称
-				//3
+
 				goodsType:{},//类型
 				goodsTypeId:'',//类型id
 				goodsTypeName:'',//类型名称
 				goodsTypeArr:[],//分类数组 传id 获取
 				goodsTypePickerArr:[],//分类选择器数组
 				goodsTypeIndex:'',//分类选择器index
-				//4
+			
 				quality:'',//成色 
 				qualityInfo:'',//成色描述
 				qualityArr:[],//成色数组 传value 获取
 				qualityPickerArr:[],//成色选择器数组
 				qualityIndex:'',
-				//5
+		
 				name:'',//商品名称
-				//6
+		
 				marketingDocument:'',//营销描述
-				//7
+				
+				manufacturerCode:'',//印刻 序列号
+			
 				size:'',//尺寸
-				//8
+
 				material:'',//材质
-				//9
+	
 				defects:'',//瑕疵
-				//10
+	
 				accessories:'',//商品配件
 				
 				//#2
-				//11
 				salePrice:'',//销售价
-				//12
+
 				counterPrice :'',//专柜价
-				//13
+		
 				peerPrice:'',//同行价
-				//14
+				
+				costPrice:'',//成本价
+			
 				peerSharing:true,//是否同行共享
 				
 				//#3
-				//15
 				originType:'',//商品来源(代码)
 				originTypeInfo:'',//商品来源说明
 				originTypeArr:[],//来源数组 传value 获取
 				originTypePickerArr:[],//来源选择器数组
 				originTypeIndex:'',
 				
-				//16
+			
 				//同行合作
 				addAagentShow:false,//添加合作同行
-				//17
+				cooperatePercentage:'',//合作店铺分成比例
+				cooperateShopId:'',	//合作店铺id
+				goodsSkuId:'',//商品id
+				launchShopId:'',//发起店铺id
+				
 				storeInCurrShop:false,//是否存放本店仓库
 				storePlaceId:'',//存放地点id, 若storeInCurrShop为真，则表示商品存在本店的某个仓库中,此处存仓库id,否则存门店id
 				storePlaceName:'',//存放地点名称, 若storeInCurrShop为真，则表示商品存在本店的某个仓库中,此处存仓库id,否则存门店id
 				storePlaceArr:[],//存放地点 传value 获取
 				storePlacePickerArr:[],//存放地点选择器数组
 				storePlaceIndex:'',
-				//18
+
 				recycleUserId:'',//回收员工id
 				recycleUserName:'',//回收员工用户名
 				shopUserArr:[],//所有员工 传id 获取
 				shopUserPickerArr:[],//所有员工选择器数组
 				recycleUserIndex:'',
-				//19
+
 				checkupUserId:'',//鉴定员工id
 				checkupUserName:'',//鉴定员工用户名
 				checkupUserIndex:'',
-				//20
+
 				storeTime:'',//入库完整时间(日期+时间),格式：yyyy-MM-dd HH:mm:ss
-				//21
+
 				internalRemark:'',//内部备注
 				
+				//#4
+				hasLent:false,//是否借出
 				shopId: uni.getStorageSync("shopUser").shopId, // 所选店铺id,此处为固定值,根据登录用户从本地存储中取
 			};
 		},
@@ -567,62 +606,72 @@
 					})
 					console.log(res.data)
 					let goods = res.data.data
-					//1
+				
 					this.picList = []
 					for(let i=0;i<goods.picList.length;i++){
 						this.picList.push(this.$imgUrl+goods.picList[i].thumbnail)
 						console.log(this.$imgUrl+goods.picList[i].thumbnail)
 					}
 					console.log(this.picList)
-					//2
+		
 					this.goodsBrand = goods.goodsBrand//品牌
 					this.goodsBrandId = goods.goodsBrandId//品牌 id
 					this.goodsBrandName = goods.goodsBrandName//品牌名称
-					//3
+			
 					this.goodsType = goods.goodsType//类型
 					this.goodsTypeId = goods.goodsTypeId//类型id
 					this.goodsTypeName = goods.goodsTypeName//类型名称
-					//4
+		
 					this.quality = goods.quality//成色 
 					this.qualityInfo = goods.qualityInfo//成色描述
-					//5
+			
 					this.name = goods.name//商品名称
-					//6
+				
 					this.marketingDocument = goods.marketingDocument//营销描述
-					//7
+				    
+					this.manufacturerCode = goods.manufacturerCode//印刻 序列号
+					
 					this.size = goods.size//尺寸
-					//8
+				
 					this.material = goods.material//材质
-					//9
+				
 					this.defects = goods.defects//瑕疵
-					//10
+			
 					this.accessories = goods.accessories//商品配件
-					//11
+				
 					this.salePrice = goods.salePrice//销售价
-					//12
+		
 					this.counterPrice = goods.counterPrice//专柜价
-					//13
+			
 					this.peerPrice = goods.peerPrice//同行价
-					//14
+					
+					this.costPrice = goods.costPrice//成本价
+			
 					this.peerSharing = goods.peerSharing//是否同行共享
 					
-					//15
+				
 					this.originType = goods.originType//商品来源(代码)
 					this.originTypeInfo = goods.originTypeInfo//商品来源说明
 					
-					//17
+			
 					this.storePlaceId = goods.storePlaceId//存放地点id
 					this.storePlaceName = goods.storePlaceName//存放地点名称
-					//18
+				
 					this.recycleUserId = goods.recycleUserId//回收员工id
 					this.recycleUserName = goods.recycleUserName//回收员工用户名
-					//19
+				
 					this.checkupUserId = goods.checkupUserId//鉴定员工id
 					this.checkupUserName = goods.checkupUserName//鉴定员工用户名
-					//20
+				
 					this.storeTime = goods.storeTime//入库完整时间(日期+时间)
-					//21
+			
 					this.internalRemark = goods.internalRemark//内部备注
+					
+					this.hasLent = goods.hasLent//是否借出
+					
+					this.goodsCode = goods.goodsCode//编号或编码
+					
+					this.detailedDescription = goods.detailedDescription//商品详细描述
 			},
 			tabNav(index) {
 				if(index == 1){
@@ -722,6 +771,10 @@
 			hideAgentMask(){
 				this.addAagentShow = false
 			},
+			//是否借出
+			tabHasLent(type){
+				this.hasLent = type
+			},
 			async save(){
 				uni.showLoading({title:'发布中...'})
 				let res = await this.$post({
@@ -730,23 +783,30 @@
 						"accessories": this.accessories,
 						"checkupUserId": this.checkupUserId,
 						"checkupUserName": this.checkupUserName,
+						// "cooperateSettings": this.cooperateSettings,  //同行合作配置列表
+						"costPrice": this.costPrice,
 						"counterPrice": this.counterPrice,
 						"createTime": this.createTime,
 						"defects": this.defects,
+						"detailedDescription": this.detailedDescription,//商品详细描述
 						"goodsBrand": this.goodsBrand,
 						"goodsBrandId": this.goodsBrandId,
 						"goodsBrandName": this.goodsBrandName,
+						"goodsCode": this.goodsCode,//编号或编码
 						"goodsType": this.goodsType,
 						"goodsTypeId": this.goodsTypeId,
 						"goodsTypeName": this.goodsTypeName,
+						"hasLent":this.hasLent, 
 						"id": this.goodsId,
 						"internalRemark": this.internalRemark,
+						"manufacturerCode":this.manufacturerCode,
 						"marketingDocument": this.marketingDocument,
 						"material": this.material,
 						"name": this.name,
 						"originType":this.originType,
 						"originTypeInfo": this.originTypeInfo,
 						"peerPrice": this.peerPrice,
+						"costPrice": this.costPrice,
 						"peerSharing": this.peerSharing,
 						// "picList": this.picList,
 						"quality": this.quality,

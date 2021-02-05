@@ -653,6 +653,7 @@
 							console.log('用户点击确定');
 					        let res = await this.$get({
 							    url:'/goodsSku/logicDelete?id='+this.goodsId,
+								data:this.goodsId
 							})
 							console.log(res)
 						} else if (resolve.cancel) {
