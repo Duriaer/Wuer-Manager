@@ -210,7 +210,7 @@
 							<image src="../../../static/depot/bq.png"></image>
 							<text>打印标签</text>
 						</view>
-						<view class="window-li" @tap.stop="delGoods()">
+						<view class="window-li" @tap.stop="delGoods(item.id)">
 							<image src="../../../static/depot/sc.png"></image>
 							<text>删除</text>
 						</view>
@@ -644,20 +644,25 @@
 					this.qualityArr = res.data.data
 			},
 			//删除商品
-		   delGoods(){
+			delGoods(goodsId){
 				uni.showModal({
 					title: '提示',
 					content: '确实要删除商品吗？',
-				    success: async(resolve)=> {
-					    if (resolve.confirm) {
-							console.log('用户点击确定');
+					success: async (resolve)=> {
+						if(resolve.confirm){
 					        let res = await this.$get({
-							    url:'/goodsSku/logicDelete?id='+this.goodsId,
-								data:this.goodsId
+							    url:'/goodsSku/logicDelete?id='+goodsId,
 							})
-							console.log(res)
-						} else if (resolve.cancel) {
-							console.log('用户点击取消');
+							if(res.data.succeed){
+								for(let i=0;i<this.goodsArr.length;i++){
+									if(goodsId==this.goodsArr[i].id){
+										this.goodsArr.splice(i,1)
+										return
+									}
+								}
+							}
+						}else if(resolve.cancel) {
+							
 						}
 					}
 				})
