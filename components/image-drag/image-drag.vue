@@ -61,7 +61,7 @@ export default {
   },
   props: {
     // 返回排序后图片
-    picList: {
+    list: {
       type: Array,
       default: function() {
         return []
@@ -127,18 +127,11 @@ export default {
         this.colsValue = this.cols
         this.viewWidth = data.width / this.cols
       }
-      for (let item of this.picList) {
+      for (let item of this.list) {
         this.addProperties(item)
       }
     })
     query.exec()
-  },
-  watch:{
-	picList(val){
-		for (let item of this.picList) {
-		  this.addProperties(item)
-		}
-	}
   },
   methods: {
     onChange(e, item) {
@@ -228,9 +221,9 @@ export default {
       if(this.timer && this.preStatus && this.changeStatus && item.offset < 28.28){
         clearTimeout(this.timer)
         this.timer = null
-        let src = this.picList.findIndex(v => v === item.src)
+        let src = this.list.findIndex(v => v === item.src)
         uni.previewImage({
-          urls: this.picList,
+          urls: this.list,
           current: src,
           success: () => {
             this.preStatus = false
@@ -289,9 +282,21 @@ export default {
           count: checkNumber,
           sourceType: ['album', 'camera'],
           success: res => {
+			uni.showLoading({title:'上传中...'})
             let count = checkNumber <= res.tempFilePaths.length ? checkNumber : res.tempFilePaths.length
-            for (let i = 0; i < count; i++) {
-              this.addProperties(res.tempFilePaths[i])
+			for (let i=0;i<res.tempFilePaths.length;i++) {
+				uni.uploadFile({
+					url: this.$url+'/goodsSkuPic/upload',
+					filePath: res.tempFilePaths[i],
+					name: 'file',
+					success: (uploadFileRes) => {
+						if(i==res.tempFilePaths.length-1){
+							uni.hideLoading()
+						}
+						this.addProperties(this.$imgUrl+JSON.parse(uploadFileRes.data).data[0].imagePath)
+					}
+				});
+              
             }
           }
         })
@@ -324,16 +329,16 @@ export default {
       this.delImage(item, index)
       //#endif
     },
-    sortList() {
-      let picList = this.imageList.slice()
-      picList.sort((a, b) => {
-        return a.index - b.index
-      })
-      for (let i = 0; i < picList.length; i++) {
-        picList[i] = picList[i].src
-      }
-      this.$emit('update:picList', picList)
-    },
+	sortList() {
+	 let list = this.imageList.slice()
+	 list.sort((a, b) => {
+	   return a.index - b.index
+	 })
+	 for (let i = 0; i < list.length; i++) {
+	   list[i] = list[i].src
+	 }
+	 this.$emit('updateList', list)
+	},
     addProperties(item){
       let absX = this.imageList.length % this.colsValue
       let absY = Math.floor(this.imageList.length / this.colsValue)

@@ -32,7 +32,12 @@
 							<text class="right">{{picList.length}}/9 张</text>
 						</view>
 						<view class="img_ul">
-							<image-drag :picList="picList"></image-drag>
+							<image-drag :list="picList" @updateList="updateList" v-if="dragShow"></image-drag>
+							<view class="drag" v-if="!dragShow">
+								<view class="drag_mask" @tap.stop.prevent></view>
+								<image-drag></image-drag>
+							</view>
+							
 						</view>
 					</view>
 					<view class="line_picker">
@@ -392,6 +397,7 @@
 				date: currentDate,
 				
 				//#1
+				dragShow:true,
 				picList:[],//商品图片列表
 			
 				goodsBrand:{},//品牌
@@ -601,77 +607,78 @@
 			},
 			// 获取商品详情数据
 			async getDetailArr(){
-					let res = await this.$get({
-						url:'/goodsSku/detail?id='+this.goodsId,
-					})
-					console.log(res.data)
-					let goods = res.data.data
+				this.dragShow=false
+				let res = await this.$get({
+					url:'/goodsSku/detail?id='+this.goodsId,
+				})
+				let goods = res.data.data
 				
-					this.picList = []
-					for(let i=0;i<goods.picList.length;i++){
-						this.picList.push(this.$imgUrl+goods.picList[i].thumbnail)
-						console.log(this.$imgUrl+goods.picList[i].thumbnail)
-					}
-					console.log(this.picList)
+				this.picList = []
+				for(let i=0;i<goods.picList.length;i++){
+					this.picList.push(this.$imgUrl+goods.picList[i].thumbnail)
+					console.log(this.$imgUrl+goods.picList[i].thumbnail)
+				}
+				this.dragShow=true
+				console.log(this.picList)
+	
+				this.goodsBrand = goods.goodsBrand//品牌
+				this.goodsBrandId = goods.goodsBrandId//品牌 id
+				this.goodsBrandName = goods.goodsBrandName//品牌名称
 		
-					this.goodsBrand = goods.goodsBrand//品牌
-					this.goodsBrandId = goods.goodsBrandId//品牌 id
-					this.goodsBrandName = goods.goodsBrandName//品牌名称
-			
-					this.goodsType = goods.goodsType//类型
-					this.goodsTypeId = goods.goodsTypeId//类型id
-					this.goodsTypeName = goods.goodsTypeName//类型名称
+				this.goodsType = goods.goodsType//类型
+				this.goodsTypeId = goods.goodsTypeId//类型id
+				this.goodsTypeName = goods.goodsTypeName//类型名称
+	
+				this.quality = goods.quality//成色 
+				this.qualityInfo = goods.qualityInfo//成色描述
 		
-					this.quality = goods.quality//成色 
-					this.qualityInfo = goods.qualityInfo//成色描述
+				this.name = goods.name//商品名称
 			
-					this.name = goods.name//商品名称
+				this.marketingDocument = goods.marketingDocument//营销描述
 				
-					this.marketingDocument = goods.marketingDocument//营销描述
-				    
-					this.manufacturerCode = goods.manufacturerCode//印刻 序列号
-					
-					this.size = goods.size//尺寸
+				this.manufacturerCode = goods.manufacturerCode//印刻 序列号
 				
-					this.material = goods.material//材质
-				
-					this.defects = goods.defects//瑕疵
+				this.size = goods.size//尺寸
 			
-					this.accessories = goods.accessories//商品配件
-				
-					this.salePrice = goods.salePrice//销售价
+				this.material = goods.material//材质
+			
+				this.defects = goods.defects//瑕疵
 		
-					this.counterPrice = goods.counterPrice//专柜价
+				this.accessories = goods.accessories//商品配件
 			
-					this.peerPrice = goods.peerPrice//同行价
-					
-					this.costPrice = goods.costPrice//成本价
+				this.salePrice = goods.salePrice//销售价
+	
+				this.counterPrice = goods.counterPrice//专柜价
+		
+				this.peerPrice = goods.peerPrice//同行价
+				
+				this.costPrice = goods.costPrice//成本价
+		
+				this.peerSharing = goods.peerSharing//是否同行共享
+				
 			
-					this.peerSharing = goods.peerSharing//是否同行共享
-					
+				this.originType = goods.originType//商品来源(代码)
+				this.originTypeInfo = goods.originTypeInfo//商品来源说明
 				
-					this.originType = goods.originType//商品来源(代码)
-					this.originTypeInfo = goods.originTypeInfo//商品来源说明
-					
+		
+				this.storePlaceId = goods.storePlaceId//存放地点id
+				this.storePlaceName = goods.storePlaceName//存放地点名称
 			
-					this.storePlaceId = goods.storePlaceId//存放地点id
-					this.storePlaceName = goods.storePlaceName//存放地点名称
-				
-					this.recycleUserId = goods.recycleUserId//回收员工id
-					this.recycleUserName = goods.recycleUserName//回收员工用户名
-				
-					this.checkupUserId = goods.checkupUserId//鉴定员工id
-					this.checkupUserName = goods.checkupUserName//鉴定员工用户名
-				
-					this.storeTime = goods.storeTime//入库完整时间(日期+时间)
+				this.recycleUserId = goods.recycleUserId//回收员工id
+				this.recycleUserName = goods.recycleUserName//回收员工用户名
 			
-					this.internalRemark = goods.internalRemark//内部备注
-					
-					this.hasLent = goods.hasLent//是否借出
-					
-					this.goodsCode = goods.goodsCode//编号或编码
-					
-					this.detailedDescription = goods.detailedDescription//商品详细描述
+				this.checkupUserId = goods.checkupUserId//鉴定员工id
+				this.checkupUserName = goods.checkupUserName//鉴定员工用户名
+			
+				this.storeTime = goods.storeTime//入库完整时间(日期+时间)
+		
+				this.internalRemark = goods.internalRemark//内部备注
+				
+				this.hasLent = goods.hasLent//是否借出
+				
+				this.goodsCode = goods.goodsCode//编号或编码
+				
+				this.detailedDescription = goods.detailedDescription//商品详细描述
 			},
 			tabNav(index) {
 				if(index == 1){
@@ -705,7 +712,10 @@
 					this.originTop = data.top-45
 				}).exec();
 			},
-			
+			updateList(list){
+				console.log(list)
+				this.picList = list
+			},
 			//普通选择器触发
 			pickerChang(e,type){
 				if(type == 'goodsType'){
@@ -837,4 +847,25 @@
 
 <style lang="scss">
 	@import "./addGoods.scss";
+	.drag{
+		width: 222rpx;
+		height: 220rpx;
+		position: relative;
+		.add-wrap{
+			width: 222rpx;
+			height: 220rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.drag_mask{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+		}
+	}
+	
 </style>
