@@ -245,7 +245,7 @@
 							<text>总成本价</text>
 						</view>
 						<view class="right">
-							<input v-model="costPrice" type="number" placeholder="请输入成本价" />
+							<input v-model="costPrice" type="number" placeholder="请输入总成本" />
 						</view>
 					</view>
 					<view class="line_picker">
@@ -342,8 +342,14 @@
 							<view class="left">
 								<text>名称</text>
 							</view>
-							<view class="right" style="padding-right: 20rpx;color: #8F8F8F;">
-								<text>本店</text>
+							<view class="right">
+								<picker :value="storePlaceIndex" :range="storePlacePickerArr" @change="pickerChang($event,'storePlace')" >
+									<view class="picker">
+										<text class="noSet" v-if="!storePlaceId">请选择</text>
+										<text v-else>{{storePlaceName}}</text>
+										<image src="../../static/addGoods/go.png" ></image>
+									</view>
+								</picker>
 							</view>
 						</view>
 						<view class="agentli">

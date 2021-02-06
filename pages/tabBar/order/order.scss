@@ -1,0 +1,153 @@
+.order-box{
+	font-family: PingFang SC;
+	color: #333333;
+	background: #F9F9F9;
+}
+.status{
+	background: #FFFFFF;
+}
+.pagination{
+	width: 750rpx;
+	height: 90rpx;
+	background: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 2rpx solid #EEEEEE;
+	.ul{
+		width: 556rpx;
+		height: 54rpx;
+		border: 2rpx solid #505050;
+		border-radius: 6rpx;
+		display: flex;
+		justify-content: space-between;
+		&:before{
+			content: '';
+			display: block;
+		}
+		&:after{
+			content: '';
+			display: block;
+		}
+		.li{
+			font-size: 26rpx;
+			line-height: 54rpx;
+		}
+		.line{
+			width: 2rpx;
+			height: 54rpx;
+			background-color: #505050;
+		}
+	}
+	.img{
+		position: absolute;
+		right: 10rpx;
+		display: flex;
+		align-items: center;
+		image{
+			width: 68rpx;
+			height: 68rpx;
+		}
+	}
+}
+.pagination_search{
+	width: 750rpx;
+	height: 90rpx;
+	background: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	&:before{
+		content: '';
+		display: block;
+	}
+	.search{
+		width: 636rpx;
+		height: 60rpx;
+		display: flex;
+		align-items: center;
+		background: #F6F7F8;
+		image{
+			margin-left: 20rpx;
+			width: 25rpx;
+			height: 25rpx;
+		}
+	}
+	.screen{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		image{
+			width: 52rpx;
+			height: 52rpx;
+		}
+		text{
+			font-size: 18rpx;
+			color: #7F7F7F;
+		}
+	}
+}
+.statistics{
+	width: 750rpx;
+	height: 60rpx;
+	font-size: 20rpx;
+	color: #8F8F8F;
+	.ul{
+		height: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		.li{
+			.number{
+				color: #57BFA3;
+			}
+		}
+	}
+}
+.order-details{
+	width: 702rpx;
+	height: 146rpx;
+	background: #FFFFFF;
+	padding: 24rpx;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16rpx;
+	.img{
+		image{
+			width: 148rpx;
+			height: 148rpx;
+		}
+	}
+	.details{
+		margin-left: -74rpx;
+		display: flex;
+		flex-direction: column;
+		font-size: 24rpx;
+		line-height: 38rpx;
+		color: #8F8F8F;
+		.title{
+			font-size: 28rpx;
+			color: #333333;
+			font-weight: 500;
+		}
+	}
+	.state{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.top{
+			font-size: 24rpx;
+			margin-bottom: 40rpx;
+		}
+		.centre{
+			font-weight: bold;
+			font-size: 28rpx;
+			.symbol{
+				font-size: 16rpx;
+			}
+		}
+		.bot{
+			font-size: 20rpx;
+		}
+	}
+}

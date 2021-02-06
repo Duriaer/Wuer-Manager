@@ -37,8 +37,10 @@
 	    ,{
             "path" : "pages/tabBar/order/order",
             "style" :{
-				"navigationBarTitleText": "销售",
+				"navigationBarTitleText": "订单",
+				"navigationBarTextStyle": "black",
 				"app-plus": {
+					"titleNView": false,//禁用原生导航栏
 					"bounce":"none",
 					"scrollIndicator": "none"
 				}
@@ -127,7 +129,7 @@
 	"tabBar": {
 	    "color": "#D9D9D9",
 	    "selectedColor": "#57BFA3",
-	    "borderStyle": "black",
+	    "borderStyle": "#EEEEEE",
 	    "backgroundColor": "#ffffff",
 	    "list": [{
 	        "pagePath": "pages/tabBar/index/index",
@@ -143,7 +145,7 @@
 	    },
 		{
 	        "pagePath": "pages/tabBar/order/order",
-	        "text": "销售",
+	        "text": "订单",
 			"iconPath":"static/tabBar/order.png",
 			"selectedIconPath":"static/tabBar/order_selected.png"
 	    },
