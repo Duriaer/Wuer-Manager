@@ -227,7 +227,6 @@ page{
 		width: 100%;
 		border-bottom: 2rpx solid #F2F2F2;
 		.source_top{
-			margin-bottom: 28rpx;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -257,6 +256,7 @@ page{
 			width: 702rpx;	
 			box-shadow: 0px 2rpx 12rpx rgba(143, 143, 143, 0.18);
 			border-radius: 20rpx;
+			margin-top: 28rpx;
 			.agent_title{
 				padding-left: 20rpx;
 				height: 100rpx;

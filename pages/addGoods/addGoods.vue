@@ -169,14 +169,6 @@
 							<input v-model="peerPrice" type="number" placeholder="请输入同行价" />
 						</view>
 					</view>
-					<view class="line_input">
-						<view class="line_name">
-							<text>成本价</text>
-						</view>
-						<view class="right">
-							<input v-model="costPrice" type="number" placeholder="请输入成本价" />
-						</view>
-					</view>
 					<view class="line_button">
 						<view class="line_name">
 							<text>是否开启合作同行共享</text>
@@ -210,7 +202,7 @@
 								</picker>
 							</view>
 						</view>
-						<view class="agent">
+						<view class="agent" v-if="originType=='COOPERATIVE_SALES'">
 							<view class="agent_title">
 								<text>同行合作</text>
 							</view>
@@ -220,32 +212,40 @@
 										<text>总成本</text>
 									</view>
 									<view class="right">
-										<input v-model="counterPrice" type="number" placeholder="请输入" />
+										<input v-model="costPrice" type="number" placeholder="请输入" :focus="costPriceFocus" />
 									</view>
 								</view>
-								<view class="total_cost">
+								<view class="total_cost" v-for="(item,index) in cooperateSettings" :key="index">
 									<view class="left_box">
-										<view class="img">
-											<image src="../../static/addGoods/sc.png" @tap.stop="deleteRow()"></image>
+										<view class="img" @tap.stop="delAgent(index)">
+											<image src="../../static/addGoods/sc.png"></image>
 										</view>
 										<view class="text">
 											<view class="top">
 												<text>本店</text>
 											</view>
 											<view class="bot">
-												<text style="margin-right: 30rpx;">出资10000元</text>
-												<text>分润比例50%</text>
+												<text style="margin-right: 30rpx;">出资{{item.cooperatePrice}}元</text>
+												<text>分润比例{{item.cooperatePercentage}}%</text>
 											</view>
 										</view>
 									</view>
-									<view class="right" @tap.stop="showAddAagent()">
+									<view class="right" @tap.stop="showAgent(1,index)">
 										<image src="../../static/addGoods/go.png"></image>
 									</view>
 								</view>
-								<view class="add_agent"  @tap.stop="showAddAagent()">
+								<view class="add_agent" v-if="agentBtnShow" @tap.stop="showAgent(0)">
 									<text>+ 添加合作同行</text>
 								</view>
 							</view>
+						</view>
+					</view>
+					<view class="line_input" v-if="originType!='COOPERATIVE_SALES'">
+						<view class="line_name">
+							<text>总成本价</text>
+						</view>
+						<view class="right">
+							<input v-model="costPrice" type="number" placeholder="请输入成本价" />
 						</view>
 					</view>
 					<view class="line_picker">
@@ -332,8 +332,8 @@
 				</view>
 			</view>
 			<!-- 添加合作同行 -->
-			<view class="agentMask" v-if="addAagentShow" @touchmove.prevent @tap.stop="hideAgentMask()">
-				<view class="agent-box">
+			<view class="agentMask" v-if="agentMaskShow" @touchmove.prevent @tap.stop="hideAgent()">
+				<view class="agent-box" @tap.stop>
 					<view class="addAgent-title">
 						<text>添加合作同行</text>
 					</view>
@@ -342,7 +342,7 @@
 							<view class="left">
 								<text>名称</text>
 							</view>
-							<view class="right"  style="padding-right: 20rpx;color: #8F8F8F;">
+							<view class="right" style="padding-right: 20rpx;color: #8F8F8F;">
 								<text>本店</text>
 							</view>
 						</view>
@@ -351,7 +351,7 @@
 								<text>出资金额（元）</text>
 							</view>
 							<view class="right">
-								<input v-model="name" type="number" placeholder="请输入" />
+								<input v-model="cooperatePrice" type="number" placeholder="请输入" :focus="cooperatePriceFocus" />
 							</view>
 						</view>
 						<view class="agentli">
@@ -359,13 +359,14 @@
 								<text>分润比例（%）</text>
 							</view>
 							<view class="right">
-								<input v-model="name" type="number" placeholder="请输入" />
+								<input v-model="cooperatePercentage" type="number" placeholder="请输入" disabled />
 							</view>
 						</view>
 					</view>
 					<view class="agent_btn">
-						<view class="agent_left">取消</view>
-						<view class="agent_right">完成</view>
+						<view class="agent_left" @tap.stop="hideAgent()">取消</view>
+						<view class="agent_right" @tap.stop="addAgent(0)" v-if="!agentEdit">完成</view>
+						<view class="agent_right" @tap.stop="addAgent(1)" v-else>完成</view>
 					</view>
 				</view>
 			</view>
@@ -438,7 +439,6 @@
 		
 				peerPrice:'',//同行价
 				
-				costPrice:'',//成本价
 			
 				peerSharing:true,//是否同行共享
 				
@@ -451,11 +451,18 @@
 				
 			
 				//同行合作
-				addAagentShow:false,//添加合作同行
-				cooperatePercentage:'',//合作店铺分成比例
-				cooperateShopId:'',	//合作店铺id
-				goodsSkuId:'',//商品id
-				launchShopId:'',//发起店铺id
+				agentBtnShow:true,
+				agentMaskShow:false,//添加合作同行
+				agentEdit:false,//false新增 true编辑
+				agentEditIndex:'',//编辑index
+				cooperateSettings:[],//同行合作配置列表
+				cooperatePrice:'',
+				cooperatePriceFocus:false,
+				// cooperatePercentage:'',
+				
+				costPrice:'',//成本价
+				costPriceFocus:false,
+				
 				
 				storeInCurrShop:false,//是否存放本店仓库
 				storePlaceId:'',//存放地点id, 若storeInCurrShop为真，则表示商品存在本店的某个仓库中,此处存仓库id,否则存门店id
@@ -518,6 +525,18 @@
 			this.getBoxTop()
 		},
 		computed: {
+			cooperatePercentage(){
+				if(this.costPrice==''||this.costPrice==null||this.cooperatePrice==''||this.cooperatePrice==null){
+					return ''
+				}else{
+					let percentage = Number(this.cooperatePrice) / Number(this.costPrice) * 100
+					if(percentage.toFixed(2)==parseInt(percentage)){
+						return parseInt(percentage)
+					}else{
+						return percentage.toFixed(2)
+					}
+				}
+			},
 			startDate() {
 				return this.getDate('start');
 			},
@@ -526,6 +545,51 @@
 			}
 		},
 		watch:{
+			costPrice(val){
+				let total = 0
+				for(let item of this.cooperateSettings){
+					total += Number(item.cooperatePrice)
+				}
+				if(val<total){
+					uni.showModal({
+						title:'注意',
+						content:'总成本不能小于'+total,
+						showCancel:false,
+						success: (res) => {
+							this.costPrice = total
+							this.costPriceFocus = false
+							setTimeout(()=>{
+								this.costPriceFocus = true
+							},100)
+						}
+					})
+					return
+				}
+				console.log(val)
+				for(let item of this.cooperateSettings){
+					let percentage = Number(item.cooperatePrice) / Number(val) * 100
+					if(percentage.toFixed(2)==parseInt(percentage)){
+						item.cooperatePercentage =  parseInt(percentage)
+					}else{
+						item.cooperatePercentage =  percentage.toFixed(2)
+					}
+				}
+			},
+			cooperateSettings:{
+				handler(val){
+					let total = 0
+					for(let item of val){
+						total += Number(item.cooperatePercentage)
+					}
+					console.log(total)
+					if(total>=100){
+						this.agentBtnShow = false
+					}else{
+						this.agentBtnShow = true
+					}
+				},
+				deep:true
+			},
 			goodsTypeIndex(val){
 				this.goodsType = this.goodsTypeArr[val]
 				this.goodsTypeId = this.goodsTypeArr[val].id
@@ -538,6 +602,7 @@
 			originTypeIndex(val){
 				this.originType = this.originTypeArr[val].itemValue
 				this.originTypeInfo = this.originTypeArr[val].itemName
+				console.log(this.originTypeArr[val])
 			},
 			storePlaceIndex(val){
 				this.storeInCurrShop = this.storePlaceArr[val].storeInCurrShop
@@ -616,10 +681,8 @@
 				this.picList = []
 				for(let i=0;i<goods.picList.length;i++){
 					this.picList.push(this.$imgUrl+goods.picList[i].thumbnail)
-					console.log(this.$imgUrl+goods.picList[i].thumbnail)
 				}
 				this.dragShow=true
-				console.log(this.picList)
 	
 				this.goodsBrand = goods.goodsBrand//品牌
 				this.goodsBrandId = goods.goodsBrandId//品牌 id
@@ -753,9 +816,6 @@
 			day = day > 9 ? day : '0' + day;
 			return `${year}-${month}-${day}`;
 			},
-			deleteRow(){
-				
-			},
 			//是否开启合作同行共享弹窗
 			popupPeerSharing() {
 				uni.showModal({
@@ -775,11 +835,106 @@
 				this.peerSharing = type
 			},
 			//添加合作同行弹窗
-			showAddAagent(){
-				this.addAagentShow = true
+			showAgent(type,index){
+				//type:0新增 1编辑
+				if(this.costPrice==''||this.costPrice==null){
+					uni.showModal({
+						title:'注意',
+						content:'请填写总成本',
+						showCancel:false,
+						success: (res) => {
+							this.costPriceFocus = false
+							setTimeout(()=>{
+								this.costPriceFocus = true
+							},100)
+						}
+					})
+					return
+				}
+				if(!type){
+					this.agentEdit = false
+				}else{
+					this.agentEdit = true
+					this.agentEditIndex = index
+					this.cooperatePrice = this.cooperateSettings[index].cooperatePrice
+					// this.cooperatePercentage = this.cooperateSettings[index].cooperatePercentage
+				}
+				this.agentMaskShow = true
 			},
-			hideAgentMask(){
-				this.addAagentShow = false
+			hideAgent(){
+				this.agentMaskShow = false
+				this.cooperatePrice = ''
+				this.agentEditIndex = ''
+				// this.cooperatePercentage = ''
+			},
+			addAgent(type){
+				//type:0新增 1编辑
+				if(this.cooperatePrice==''||this.cooperatePrice==null){
+					uni.showModal({
+						title:'注意',
+						content:'请填写出资金额',
+						showCancel:false,
+						success: (res) => {
+							this.cooperatePriceFocus = false
+							setTimeout(()=>{
+								this.cooperatePriceFocus = true
+							},100)
+						}
+					})
+				}
+				let total = 0
+				if(!type){
+					for(let item of this.cooperateSettings){
+						total += this.costPrice * item.cooperatePercentage / 100
+					}
+					if((this.costPrice - total - this.cooperatePrice) < 0){
+						uni.showModal({
+							title:'注意',
+							content:'金额不能超过'+(this.costPrice - total),
+							showCancel:false,
+							success: (res) => {
+								this.cooperatePrice = ''
+								this.cooperatePriceFocus = false
+								setTimeout(()=>{
+									this.cooperatePriceFocus = true
+								},100)
+							}
+						})
+						return
+					}
+					this.cooperateSettings.push({
+						cooperatePrice:this.cooperatePrice,
+						cooperatePercentage:this.cooperatePercentage,
+					})
+					
+				}else{
+					for(let i=0;i<this.cooperateSettings.length;i++){
+						if(i!=this.agentEditIndex){
+							total += this.costPrice * this.cooperateSettings[i].cooperatePercentage / 100
+						}
+					}
+					if((this.costPrice - total - this.cooperatePrice) < 0){
+						uni.showModal({
+							title:'注意',
+							content:'金额不能超过'+(this.costPrice - total),
+							showCancel:false,
+							success: (res) => {
+								this.cooperatePrice = ''
+								this.cooperatePriceFocus = false
+								setTimeout(()=>{
+									this.cooperatePriceFocus = true
+								},100)
+							}
+						})
+						return
+					}
+					this.cooperateSettings[this.agentEditIndex].cooperatePrice=this.cooperatePrice
+					this.cooperateSettings[this.agentEditIndex].cooperatePercentage=this.cooperatePercentage
+				}
+				this.hideAgent()
+			},
+			delAgent(index){
+				this.cooperateSettings.splice(index,1)
 			},
 			//是否借出
 			tabHasLent(type){
