@@ -326,7 +326,6 @@
 				originTypeList:[], //  所选来源id, 用数组 （value)
 				storePlaceList:[],//所选所在位置id 
 				qualityList: [],//  所选成色, 用数组 （value）
-				accessoryList: [],//  所选配件, 用数组 （value）
 				shopId: uni.getStorageSync("shopUser").shopId, // 所选店铺id,此处为固定值,根据登录用户从本地存储中取
 				
 				//页面交互
@@ -450,7 +449,6 @@
 					originTypeList:this.originTypeList, //  所选来源id
 					storePlaceList: this.storePlaceList,//所选所在位置id
 					qualityList: this.qualityList,//所选成色
-					accessoryList: this.accessoryList,//所选配件
 					shopId: this.shopId,
 				};
 				let res = await this.$post({

@@ -225,7 +225,7 @@
 												<text>本店</text>
 											</view>
 											<view class="bot">
-												<text style="margin-right: 30rpx;">出资{{item.cooperatePrice}}元</text>
+												<text style="margin-right: 30rpx;">出资{{item.contributionAmount}}元</text>
 												<text>分润比例{{item.cooperatePercentage}}%</text>
 											</view>
 										</view>
@@ -357,7 +357,7 @@
 								<text>出资金额（元）</text>
 							</view>
 							<view class="right">
-								<input v-model="cooperatePrice" type="number" placeholder="请输入" :focus="cooperatePriceFocus" />
+								<input v-model="contributionAmount" type="number" placeholder="请输入" :focus="contributionAmountFocus" />
 							</view>
 						</view>
 						<view class="agentli">
@@ -462,8 +462,8 @@
 				agentEdit:false,//false新增 true编辑
 				agentEditIndex:'',//编辑index
 				cooperateSettings:[],//同行合作配置列表
-				cooperatePrice:'',
-				cooperatePriceFocus:false,
+				contributionAmount:'',//出资金额
+				contributionAmountFocus:false,
 				// cooperatePercentage:'',
 				
 				costPrice:'',//成本价
@@ -532,10 +532,10 @@
 		},
 		computed: {
 			cooperatePercentage(){
-				if(this.costPrice==''||this.costPrice==null||this.cooperatePrice==''||this.cooperatePrice==null){
+				if(this.costPrice==''||this.costPrice==null||this.contributionAmount==''||this.contributionAmount==null){
 					return ''
 				}else{
-					let percentage = Number(this.cooperatePrice) / Number(this.costPrice) * 100
+					let percentage = Number(this.contributionAmount) / Number(this.costPrice) * 100
 					if(percentage.toFixed(2)==parseInt(percentage)){
 						return parseInt(percentage)
 					}else{
@@ -554,7 +554,7 @@
 			costPrice(val){
 				let total = 0
 				for(let item of this.cooperateSettings){
-					total += Number(item.cooperatePrice)
+					total += Number(item.contributionAmount)
 				}
 				if(val<total){
 					uni.showModal({
@@ -571,9 +571,9 @@
 					})
 					return
 				}
-				console.log(val)
+				// console.log(val)
 				for(let item of this.cooperateSettings){
-					let percentage = Number(item.cooperatePrice) / Number(val) * 100
+					let percentage = Number(item.contributionAmount) / Number(val) * 100
 					if(percentage.toFixed(2)==parseInt(percentage)){
 						item.cooperatePercentage =  parseInt(percentage)
 					}else{
@@ -587,7 +587,7 @@
 					for(let item of val){
 						total += Number(item.cooperatePercentage)
 					}
-					console.log(total)
+					// console.log(total)
 					if(total>=100){
 						this.agentBtnShow = false
 					}else{
@@ -608,7 +608,6 @@
 			originTypeIndex(val){
 				this.originType = this.originTypeArr[val].itemValue
 				this.originTypeInfo = this.originTypeArr[val].itemName
-				console.log(this.originTypeArr[val])
 			},
 			storePlaceIndex(val){
 				this.storeInCurrShop = this.storePlaceArr[val].storeInCurrShop
@@ -675,6 +674,13 @@
 					for(let i=0;i<this.shopUserArr.length;i++){
 						this.shopUserPickerArr.push(this.shopUserArr[i].username)
 					}
+			},
+			//获取所有友店信息
+			async getFriendShops(){
+					let res = await this.$get({
+						url:'/shop/getFriendShops',
+					})
+					console.log(res)
 			},
 			// 获取商品详情数据
 			async getDetailArr(){
@@ -782,7 +788,7 @@
 				}).exec();
 			},
 			updateList(list){
-				console.log(list)
+				// console.log(list)
 				this.picList = list
 			},
 			//普通选择器触发
@@ -862,28 +868,28 @@
 				}else{
 					this.agentEdit = true
 					this.agentEditIndex = index
-					this.cooperatePrice = this.cooperateSettings[index].cooperatePrice
+					this.contributionAmount = this.cooperateSettings[index].contributionAmount
 					// this.cooperatePercentage = this.cooperateSettings[index].cooperatePercentage
 				}
 				this.agentMaskShow = true
 			},
 			hideAgent(){
 				this.agentMaskShow = false
-				this.cooperatePrice = ''
+				this.contributionAmount = ''
 				this.agentEditIndex = ''
 				// this.cooperatePercentage = ''
 			},
 			addAgent(type){
 				//type:0新增 1编辑
-				if(this.cooperatePrice==''||this.cooperatePrice==null){
+				if(this.contributionAmount==''||this.contributionAmount==null){
 					uni.showModal({
 						title:'注意',
 						content:'请填写出资金额',
 						showCancel:false,
 						success: (res) => {
-							this.cooperatePriceFocus = false
+							this.contributionAmountFocus = false
 							setTimeout(()=>{
-								this.cooperatePriceFocus = true
+								this.contributionAmountFocus = true
 							},100)
 						}
 					})
@@ -893,23 +899,23 @@
 					for(let item of this.cooperateSettings){
 						total += this.costPrice * item.cooperatePercentage / 100
 					}
-					if((this.costPrice - total - this.cooperatePrice) < 0){
+					if((this.costPrice - total - this.contributionAmount) < 0){
 						uni.showModal({
 							title:'注意',
 							content:'金额不能超过'+(this.costPrice - total),
 							showCancel:false,
 							success: (res) => {
-								this.cooperatePrice = ''
-								this.cooperatePriceFocus = false
+								this.contributionAmount = ''
+								this.contributionAmountFocus = false
 								setTimeout(()=>{
-									this.cooperatePriceFocus = true
+									this.contributionAmountFocus = true
 								},100)
 							}
 						})
 						return
 					}
 					this.cooperateSettings.push({
-						cooperatePrice:this.cooperatePrice,
+						contributionAmount:this.contributionAmount,
 						cooperatePercentage:this.cooperatePercentage,
 					})
 					
@@ -919,22 +925,22 @@
 							total += this.costPrice * this.cooperateSettings[i].cooperatePercentage / 100
 						}
 					}
-					if((this.costPrice - total - this.cooperatePrice) < 0){
+					if((this.costPrice - total - this.contributionAmount) < 0){
 						uni.showModal({
 							title:'注意',
 							content:'金额不能超过'+(this.costPrice - total),
 							showCancel:false,
 							success: (res) => {
-								this.cooperatePrice = ''
-								this.cooperatePriceFocus = false
+								this.contributionAmount = ''
+								this.contributionAmountFocus = false
 								setTimeout(()=>{
-									this.cooperatePriceFocus = true
+									this.contributionAmountFocus = true
 								},100)
 							}
 						})
 						return
 					}
-					this.cooperateSettings[this.agentEditIndex].cooperatePrice=this.cooperatePrice
+					this.cooperateSettings[this.agentEditIndex].contributionAmount=this.contributionAmount
 					this.cooperateSettings[this.agentEditIndex].cooperatePercentage=this.cooperatePercentage
 				}
 				this.hideAgent()
@@ -994,7 +1000,7 @@
 	},
 				})
 				uni.hideLoading()
-				console.log(res)
+				// console.log(res)
 				if(res.data.succeed){
 					uni.showToast({title:'发布成功'})
 					setTimeout(()=>{
