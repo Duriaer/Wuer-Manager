@@ -91,7 +91,10 @@
 			}
 		}
 		.bot{
-			
+			display: flex;
+			justify-content: flex-end;
+			font-size: 20rpx;
+			color: #A8A8A8;
 		}
 	}
 }

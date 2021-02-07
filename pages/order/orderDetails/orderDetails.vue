@@ -53,7 +53,15 @@
 					</view>
 				</view>
 				<view class="bot">
-					
+					<view class="left">
+						<text>销售价¥销售价</text>
+					</view>
+					<view class="middle">
+						<text>优惠¥600</text>
+					</view>
+					<view class="right">
+						<text>实付价</text><text>¥</text><text>100800</text>
+					</view>
 				</view>
 			</view>
 		</view>
