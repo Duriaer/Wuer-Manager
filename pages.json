@@ -106,7 +106,12 @@
                     "style" :  {
 						"navigationBarTitleText": "销售单信息",
 						"navigationBarBackgroundColor":"#FFFFFF",
-						"navigationBarTextStyle":"black"
+						"navigationBarTextStyle":"black",
+						"app-plus": {
+							"titleNView": false,//禁用原生导航栏
+							"bounce":"none",
+							"scrollIndicator": "none"
+						}
 					}
 				}
             ]

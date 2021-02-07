@@ -182,7 +182,7 @@
 						</view>
 						<view class="bot_bot">
 							<view class="address">
-								<image src= "../../../static/goods/coordinate.png" />
+								<image src="../../../static/goods/coordinate.png"></image>
 								<text>{{item.storePlaceName}}</text>
 							</view>
 							<view class="dot_ul" @tap.stop="tabWindow(index)">
