@@ -137,6 +137,14 @@
 							<input v-model="accessories" type="text" placeholder="请输入" />
 						</view>
 					</view>
+					<view class="line_input">
+						<view class="line_name">
+							<text>自定义标签</text>
+						</view>
+						<view class="right">
+							<input v-model="customLabel" type="text" placeholder="最多五个哟~" />
+						</view>
+					</view>
 				</view>
 			</view>
 			
@@ -447,6 +455,8 @@
 	
 				accessories:'',//商品配件
 				
+				customLabel:'',//自定义标签
+				
 				//#2
 				salePrice:'',//销售价
 
@@ -730,7 +740,9 @@
 			
 				this.defects = goods.defects//瑕疵
 		
-				this.accessories = goods.accessories//商品配件
+				this.customLabelList = goods.customLabelList//商品配件
+				
+				this.customLabel = goods.customLabel//自定义标签
 			
 				this.salePrice = goods.salePrice//销售价
 	
@@ -974,6 +986,7 @@
 						"accessories": this.accessories,
 						"checkupUserId": this.checkupUserId,
 						"checkupUserName": this.checkupUserName,
+						"customLabelList": this.customLabelList,//自定义商品标签
 						// "cooperateSettings": this.cooperateSettings,  //同行合作配置列表
 						"costPrice": this.costPrice,
 						"counterPrice": this.counterPrice,

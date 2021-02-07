@@ -89,6 +89,7 @@
 				"navigationBarBackgroundColor":"#FFFFFF",
 				"navigationBarTextStyle":"black",
 				"app-plus": {
+					"titleNView": {"splitLine": {"color": "#EEEEEE"}},
 					"bounce":"none",
 					"scrollIndicator": "none"
 				}

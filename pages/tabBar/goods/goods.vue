@@ -157,10 +157,10 @@
 							<view class="label_li" v-else-if="item.originTypeInfo=='合作销售'" style="background:#FFF0F5 ;color: #DDA0DD;">
 								<text>{{item.originTypeInfo}}</text>
 							</view>
-							<!-- 新增标签 -->
-							<!-- <view class="label_li labal_li2">
-								<text>标签标签</text>
-							</view> -->
+							<!-- 自定义标签 -->
+							<view class="label_li labal_li2" v-if="item.customLabelList!=null&&item.customLabelList!=''">
+								<text>{{item.customLabelList}}</text>
+							</view>
 							<!-- 品牌标签 -->
 							<view class="label_li">
 								<text>{{item.goodsBrandName}}</text>
@@ -178,7 +178,7 @@
 								<text class="currency">¥</text>
 								<text>{{item.salePrice || '暂无价格'}}</text>
 							</view>
-							<text class="opponent" v-if="item.peerPrice">同行价{{item.peerPrice}}</text>
+							<text class="opponent" v-if="item.peerPrice">同行价¥{{item.peerPrice}}</text>
 						</view>
 						<view class="bot_bot">
 							<view class="address">
@@ -456,6 +456,7 @@
 					data:params,
 				})
 				uni.hideLoading()
+				// console.log(res.data.data)
 				if(res.data.succeed&&res.data.status){
 					let data = res.data.data
 					this.hasTotal = data.hasTotal
