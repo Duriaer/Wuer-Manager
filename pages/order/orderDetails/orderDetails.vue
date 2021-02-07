@@ -1,5 +1,16 @@
 <template>
 	<view class="order-detail">
+		<view class="head">
+			<view class="left">
+				<image src="../../../static/addGoods/fh.png"></image>
+			</view>
+			<view class="middle">
+				<text>销售单信息</text>
+			</view>
+			<view class="right">
+				<text>查看日志</text>
+			</view>
+		</view>
 		<view class="wares">
 			<view class="title">
 				<text>商品</text>
