@@ -15,5 +15,5 @@
 </script>
 
 <style lang="scss">
-
+    @import "./orderDetails.scss";
 </style>

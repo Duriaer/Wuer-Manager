@@ -22,17 +22,17 @@ function toHome(){
 
 function toGoods(id){
 	uni.navigateTo({
-		url:"/pages/goodsDetails/goodsDetails?goodsId="+id,
+		url:"/pages/goods/goodsDetails/goodsDetails?goodsId="+id,
 	})
 }
 function addGoods(){
 	uni.navigateTo({
-		url:"/pages/addGoods/addGoods?mode=add",
+		url:"/pages/goods/addGoods/addGoods?mode="+'add',
 	})
 }
 function editGoods(id){
 	uni.navigateTo({
-		url:"/pages/addGoods/addGoods?goodsId="+id,
+		url:"/pages/goods/addGoods/addGoods?goodsId="+id,
 	})
 }
 

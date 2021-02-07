@@ -4,7 +4,7 @@
 			<view class="status"></view>
 			<view class="header">
 				<view class="searchBox" >
-					<image class="search" src="../../../static/depot/fdj.png"></image>
+					<image class="search" src="../../../../static/goods/fdj.png"></image>
 					<text></text>
 				</view>
 			</view>

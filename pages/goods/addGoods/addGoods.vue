@@ -48,7 +48,7 @@
 							<view class="picker">
 								<text class="noSet" v-if="!goodsBrandId">请选择</text>
 								<text v-else>{{goodsBrandName}}</text>
-								<image src="../../static/addGoods/go.png" ></image>
+								<image src="../../../static/addGoods/go.png" ></image>
 							</view>
 						</view>
 					</view>
@@ -61,7 +61,7 @@
 								<view class="picker">
 									<text class="noSet" v-if="!goodsTypeId">请选择</text>
 									<text v-else>{{goodsTypeName}}</text>
-									<image src="../../static/addGoods/go.png" ></image>
+									<image src="../../../static/addGoods/go.png" ></image>
 								</view>
 							</picker>
 						</view>
@@ -75,7 +75,7 @@
 								<view class="picker">
 									<text class="noSet" v-if="!quality">请选择</text>
 									<text v-else>{{qualityInfo}}</text>
-									<image src="../../static/addGoods/go.png" ></image>
+									<image src="../../../static/addGoods/go.png" ></image>
 								</view>
 							</picker>
 						</view>
@@ -172,7 +172,7 @@
 					<view class="line_button">
 						<view class="line_name">
 							<text>是否开启合作同行共享</text>
-							<image class="warn_img" src="../../static/addGoods/jg.png" @tap.stop="popupPeerSharing()"></image>
+							<image class="warn_img" src="../../../static/addGoods/jg.png" @tap.stop="popupPeerSharing()"></image>
 						</view>
 						<view class="right">
 							<view class="unchecked" :class="peerSharing ? 'active':''" @tap.stop="tabPeerSharing(1)"><text >是</text></view>
@@ -197,7 +197,7 @@
 									<view class="picker">
 										<text class="noSet" v-if="!originType">请选择</text>
 										<text v-else>{{originTypeInfo}}</text>
-										<image src="../../static/addGoods/go.png" ></image>
+										<image src="../../../static/addGoods/go.png" ></image>
 									</view>
 								</picker>
 							</view>
@@ -218,7 +218,7 @@
 								<view class="total_cost" v-for="(item,index) in cooperateSettings" :key="index">
 									<view class="left_box">
 										<view class="img" @tap.stop="delAgent(index)">
-											<image src="../../static/addGoods/sc.png"></image>
+											<image src="../../../static/addGoods/sc.png"></image>
 										</view>
 										<view class="text">
 											<view class="top">
@@ -231,7 +231,7 @@
 										</view>
 									</view>
 									<view class="right" @tap.stop="showAgent(1,index)">
-										<image src="../../static/addGoods/go.png"></image>
+										<image src="../../../static/addGoods/go.png"></image>
 									</view>
 								</view>
 								<view class="add_agent" v-if="agentBtnShow" @tap.stop="showAgent(0)">
@@ -240,12 +240,20 @@
 							</view>
 						</view>
 					</view>
-					<view class="line_input" v-if="originType!='COOPERATIVE_SALES'">
+					<view class="line_input" v-if="originType!='COOPERATIVE_SALES'&&originType!='CUSTOMER_CONSIGN'">
 						<view class="line_name">
 							<text>总成本价</text>
 						</view>
 						<view class="right">
-							<input v-model="costPrice" type="number" placeholder="请输入总成本" />
+							<input v-model="costPrice" type="number" placeholder="请输入总成本价" />
+						</view>
+					</view>
+					<view class="line_input" v-if="originType=='CUSTOMER_CONSIGN'">
+						<view class="line_name">
+							<text>总销售额</text>
+						</view>
+						<view class="right">
+							<input v-model="costPrice" type="number" placeholder="请输入总销售额" disabled/>
 						</view>
 					</view>
 					<view class="line_picker">
@@ -257,7 +265,7 @@
 								<view class="picker">
 									<text class="noSet" v-if="!storePlaceId">请选择</text>
 									<text v-else>{{storePlaceName}}</text>
-									<image src="../../static/addGoods/go.png" ></image>
+									<image src="../../../static/addGoods/go.png" ></image>
 								</view>
 							</picker>
 						</view>
@@ -271,7 +279,7 @@
 								<view class="picker">
 									<text class="noSet" v-if="!recycleUserId">请选择</text>
 									<text v-else>{{recycleUserName}}</text>
-									<image src="../../static/addGoods/go.png" ></image>
+									<image src="../../../static/addGoods/go.png" ></image>
 								</view>
 							</picker>
 						</view>
@@ -285,7 +293,7 @@
 								<view class="picker">
 									<text class="noSet" v-if="!checkupUserId">请选择</text>
 									<text v-else>{{checkupUserName}}</text>
-									<image src="../../static/addGoods/go.png" ></image>
+									<image src="../../../static/addGoods/go.png" ></image>
 								</view>
 							</picker>
 						</view>
@@ -299,7 +307,7 @@
 								<view class="picker">
 									<text class="noSet" v-if="!storeTime">请选择</text>
 									<text v-else>{{storeTime}}</text>
-									<image src="../../static/addGoods/rq.png"></image>
+									<image src="../../../static/addGoods/rq.png"></image>
 								</view>
 							</picker>
 						</view>
@@ -343,11 +351,11 @@
 								<text>名称</text>
 							</view>
 							<view class="right">
-								<picker :value="storePlaceIndex" :range="storePlacePickerArr" @change="pickerChang($event,'storePlace')" >
+								<picker :value="friendShopsIndex" :range="friendShopsPickerArr" @change="pickerChang($event,'shortName')" >
 									<view class="picker">
-										<text class="noSet" v-if="!storePlaceId">请选择</text>
-										<text v-else>{{storePlaceName}}</text>
-										<image src="../../static/addGoods/go.png" ></image>
+										<text class="noSet" v-if="!cooperateShopId">请选择</text>
+										<text v-else>{{shortName}}</text>
+										<image src="../../../static/addGoods/go.png" ></image>
 									</view>
 								</picker>
 							</view>
@@ -365,7 +373,7 @@
 								<text>分润比例（%）</text>
 							</view>
 							<view class="right">
-								<input v-model="cooperatePercentage" type="number" placeholder="请输入" disabled />
+								<input v-model="cooperatePercentage" type="number" placeholder="请输入"/>
 							</view>
 						</view>
 					</view>
@@ -379,6 +387,7 @@
 			<view class="publishan_button" @tap.stop="save()">
 				<text>发布商品</text>
 			</view>
+			<view class="safety" style="background-color: #57BFA3;"></view>
 		</scroll-view>
 	</view>
 </template>
@@ -464,11 +473,16 @@
 				cooperateSettings:[],//同行合作配置列表
 				contributionAmount:'',//出资金额
 				contributionAmountFocus:false,
-				// cooperatePercentage:'',
+				cooperatePercentage:'',//分润比例
 				
 				costPrice:'',//成本价
 				costPriceFocus:false,
 				
+				cooperateShopId:'',//合作店铺id
+				shortName:'',//合作店铺简称
+				friendShopsArr:[],//所有合作店铺
+				friendShopsPickerArr:[],//所有合作店铺选择器数组
+				friendShopsIndex:'',
 				
 				storeInCurrShop:false,//是否存放本店仓库
 				storePlaceId:'',//存放地点id, 若storeInCurrShop为真，则表示商品存在本店的某个仓库中,此处存仓库id,否则存门店id
@@ -515,6 +529,7 @@
 			this.getOriginTypeArr()
 			this.getStorePlaceArr()
 			this.getShopUserItems()
+			this.getFriendShops()
 			
 		},
 		onShow() {
@@ -531,18 +546,6 @@
 			this.getBoxTop()
 		},
 		computed: {
-			cooperatePercentage(){
-				if(this.costPrice==''||this.costPrice==null||this.contributionAmount==''||this.contributionAmount==null){
-					return ''
-				}else{
-					let percentage = Number(this.contributionAmount) / Number(this.costPrice) * 100
-					if(percentage.toFixed(2)==parseInt(percentage)){
-						return parseInt(percentage)
-					}else{
-						return percentage.toFixed(2)
-					}
-				}
-			},
 			startDate() {
 				return this.getDate('start');
 			},
@@ -581,6 +584,7 @@
 					}
 				}
 			},
+			//添加合作同行按钮是否显示
 			cooperateSettings:{
 				handler(val){
 					let total = 0
@@ -622,6 +626,10 @@
 				this.checkupUserId = this.shopUserArr[val].id
 				this.checkupUserName = this.shopUserArr[val].username
 			},
+			friendShopsIndex(val){
+				this.cooperateShopId = this.friendShopsArr[val].id
+				this.shortName = this.friendShopsArr[val].shortName
+			}
 		},
 		methods: {
 			//获取全部分类列表
@@ -669,7 +677,6 @@
 					let res = await this.$get({
 						url:'/goodsSku/getShopUserItems',
 					})
-					// console.log(res.data.data)
 					this.shopUserArr = res.data.data
 					for(let i=0;i<this.shopUserArr.length;i++){
 						this.shopUserPickerArr.push(this.shopUserArr[i].username)
@@ -680,7 +687,11 @@
 					let res = await this.$get({
 						url:'/shop/getFriendShops',
 					})
-					console.log(res)
+					// console.log(res.data.data)
+					this.friendShopsArr = res.data.data
+					for(let i=0;i<this.friendShopsArr.length;i++){
+						this.friendShopsPickerArr.push(this.friendShopsArr[i].fullName)
+					}
 			},
 			// 获取商品详情数据
 			async getDetailArr(){
@@ -726,6 +737,9 @@
 				this.counterPrice = goods.counterPrice//专柜价
 		
 				this.peerPrice = goods.peerPrice//同行价
+				
+				this.cooperateShopId = goods.cooperateShopId //合作店铺id
+				this.shortName = goods.shortName //合作店铺
 				
 				this.costPrice = goods.costPrice//成本价
 		
@@ -803,8 +817,8 @@
 					this.storePlaceIndex = e.detail.value
 				}else if(type == 'recycleUser'){
 					this.recycleUserIndex = e.detail.value
-				}else if(type == 'checkupUser'){
-					this.checkupUserIndex = e.detail.value
+				}else if(type == 'shortName'){
+					this.friendShopsIndex = e.detail.value
 				}
 			},
 			selectItem(arr,index){
@@ -869,7 +883,7 @@
 					this.agentEdit = true
 					this.agentEditIndex = index
 					this.contributionAmount = this.cooperateSettings[index].contributionAmount
-					// this.cooperatePercentage = this.cooperateSettings[index].cooperatePercentage
+					this.cooperatePercentage = this.cooperateSettings[index].cooperatePercentage
 				}
 				this.agentMaskShow = true
 			},
@@ -877,7 +891,7 @@
 				this.agentMaskShow = false
 				this.contributionAmount = ''
 				this.agentEditIndex = ''
-				// this.cooperatePercentage = ''
+				this.cooperatePercentage = ''
 			},
 			addAgent(type){
 				//type:0新增 1编辑
@@ -1034,5 +1048,4 @@
 			left: 0;
 		}
 	}
-	
 </style>

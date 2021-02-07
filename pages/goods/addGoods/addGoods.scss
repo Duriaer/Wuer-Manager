@@ -1,5 +1,5 @@
 page{
-	background: #f7f7f7;
+	background: #F9F9F9;
 }
 .newProduct_content {
 	font-family: PingFang SC;
@@ -8,7 +8,7 @@ page{
 	.newProduct_nav{
 		width: 750rpx;
 		height: 88rpx;
-		border-top: 1rpx solid #EEEEEE;
+		border-top: 2rpx solid #EEEEEE;
 		background: #FFFFFF;
 		display: flex;
 		align-items: center;
@@ -44,9 +44,9 @@ page{
 .scroll-view_y{
 	width: 750rpx;
 	height: calc(100vh - 88rpx);
-	/* #ifdef H5*/    
+	/* #ifdef H5*/
 	height: calc(100vh - 88rpx - 88rpx);  
-	/* #endif */   
+	/* #endif */
 }
 #description_box,
 #price_box,

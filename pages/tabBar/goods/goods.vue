@@ -1,7 +1,7 @@
 <template>
-	<view class="depot_content">
+	<view class="goods_content">
 		<!-- 头部 -->
-		<view class="depot_header">
+		<view class="goods_header">
 			<!-- 头部安全区 -->
 			<view class="status"></view>
 			<!-- 标题 -->
@@ -22,11 +22,11 @@
 		<!-- 搜索栏 -->
 		<view class="search">
 			<view class="search-l">
-				<image src="../../../static/depot/fdj.png" />
+				<image src="../../../static/goods/fdj.png" />
 			</view>
 			
 			<view class="search-r">
-				<image src="../../../static/depot/scanning.png" />
+				<image src="../../../static/goods/scanning.png" />
 			</view>
 		</view>
 		<!-- 筛选栏 -->
@@ -35,30 +35,30 @@
 				
 				<view class="bar_list" :class="filterTopShow==1?'active':''" @tap.stop="tabFilterTop(0)">
 					<text>排序</text>
-					<image class="triangle" src="../../../static/depot/triangle_up.png" mode="widthFix" v-if="filterTopShow==1"></image>
-					<image class="triangle" src="../../../static/depot/triangle_dn.png" mode="widthFix" v-else></image>
+					<image class="triangle" src="../../../static/goods/triangle_up.png" mode="widthFix" v-if="filterTopShow==1"></image>
+					<image class="triangle" src="../../../static/goods/triangle_dn.png" mode="widthFix" v-else></image>
 				</view>
 				
 				<view class="bar_list" :class="filterTopShow==2?'active':''" @tap.stop="tabFilterTop(2)">
 					<text>全部分类</text>
-					<image class="triangle" src="../../../static/depot/triangle_up.png" mode="widthFix" v-if="filterTopShow==2"></image>
-					<image class="triangle" src="../../../static/depot/triangle_dn.png" mode="widthFix" v-else></image>
+					<image class="triangle" src="../../../static/goods/triangle_up.png" mode="widthFix" v-if="filterTopShow==2"></image>
+					<image class="triangle" src="../../../static/goods/triangle_dn.png" mode="widthFix" v-else></image>
 				</view>
 				
 				<view class="bar_list" :class="filterTopShow==3?'active':''" @tap.stop="tabFilterTop(3)">
 					<text>位置</text>
-					<image class="triangle" src="../../../static/depot/triangle_up.png" mode="widthFix" v-if="filterTopShow==3"></image>
-					<image class="triangle" src="../../../static/depot/triangle_dn.png" mode="widthFix" v-else></image>
+					<image class="triangle" src="../../../static/goods/triangle_up.png" mode="widthFix" v-if="filterTopShow==3"></image>
+					<image class="triangle" src="../../../static/goods/triangle_dn.png" mode="widthFix" v-else></image>
 				</view>
 				
 				<view class="bar_list" :class="filterTopShow==4?'active':''" @tap.stop="tabFilterTop(4)">
 					<text>来源</text>
-					<image class="triangle" src="../../../static/depot/triangle_up.png" mode="widthFix" v-if="filterTopShow==4"></image>
-					<image class="triangle" src="../../../static/depot/triangle_dn.png" mode="widthFix" v-else></image>
+					<image class="triangle" src="../../../static/goods/triangle_up.png" mode="widthFix" v-if="filterTopShow==4"></image>
+					<image class="triangle" src="../../../static/goods/triangle_dn.png" mode="widthFix" v-else></image>
 				</view>
 				<view class="bar_list" @tap.stop="showFilterRight()">
 					<text>筛选</text>
-					<image class="screenImg" src="../../../static/depot/screen.png" mode="widthFix"></image>
+					<image class="screenImg" src="../../../static/goods/screen.png" mode="widthFix"></image>
 				</view>
 			</view>
 			
@@ -182,7 +182,7 @@
 						</view>
 						<view class="bot_bot">
 							<view class="address">
-								<image src= "../../../static/depot/coordinate.png" />
+								<image src= "../../../static/goods/coordinate.png" />
 								<text>{{item.storePlaceName}}</text>
 							</view>
 							<view class="dot_ul" @tap.stop="tabWindow(index)">
@@ -195,23 +195,23 @@
 				<view class="window" v-if="item.windowShow">
 					<view class="window-ul">
 						<view class="window-li">
-							<image src="../../../static/depot/xd.png"></image>
+							<image src="../../../static/goods/xd.png"></image>
 							<text>下单</text>
 						</view>
 						<view class="window-li"  @tap.stop="$editGoods(item.id)">
-							<image src="../../../static/depot/bj.png"></image>
+							<image src="../../../static/goods/bj.png"></image>
 							<text>编辑</text>
 						</view>
 						<view class="window-li">
-							<image src="../../../static/depot/fx.png"></image>
+							<image src="../../../static/goods/fx.png"></image>
 							<text>分享</text>
 						</view>
 						<view class="window-li">
-							<image src="../../../static/depot/bq.png"></image>
+							<image src="../../../static/goods/bq.png"></image>
 							<text>打印标签</text>
 						</view>
 						<view class="window-li" @tap.stop="delGoods(item.id)">
-							<image src="../../../static/depot/sc.png"></image>
+							<image src="../../../static/goods/sc.png"></image>
 							<text>删除</text>
 						</view>
 					</view>
@@ -670,5 +670,5 @@
 </script>
 
 <style lang="scss">
-	@import "./depot.scss"
+	@import "./goods.scss"
 </style>

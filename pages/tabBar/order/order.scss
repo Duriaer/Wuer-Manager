@@ -1,6 +1,7 @@
 .order-box{
 	font-family: PingFang SC;
 	color: #333333;
+	height: 100vh;
 	background: #F9F9F9;
 }
 .status{
@@ -15,23 +16,25 @@
 	align-items: center;
 	border-bottom: 2rpx solid #EEEEEE;
 	.ul{
-		width: 556rpx;
+		width: 450rpx;
 		height: 54rpx;
 		border: 2rpx solid #505050;
-		border-radius: 6rpx;
+		border-radius: 8rpx;
 		display: flex;
-		justify-content: space-between;
-		&:before{
-			content: '';
-			display: block;
-		}
-		&:after{
-			content: '';
-			display: block;
-		}
 		.li{
+			border-right: 2rpx solid #505050;
+			text-align: center;
+			width: 100%;
+			height: 100%;
 			font-size: 26rpx;
 			line-height: 54rpx;
+			&:last-child{
+				border-right: 0;
+			}
+			.active{
+				color: #FFFFFF;
+				background: #505050;
+			}
 		}
 		.line{
 			width: 2rpx;
@@ -69,8 +72,8 @@
 		background: #F6F7F8;
 		image{
 			margin-left: 20rpx;
-			width: 25rpx;
-			height: 25rpx;
+			width: 28rpx;
+			height: 28rpx;
 		}
 	}
 	.screen{
@@ -104,50 +107,54 @@
 		}
 	}
 }
-.order-details{
-	width: 702rpx;
-	height: 146rpx;
-	background: #FFFFFF;
-	padding: 24rpx;
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 16rpx;
-	.img{
-		image{
-			width: 148rpx;
-			height: 148rpx;
-		}
-	}
-	.details{
-		margin-left: -74rpx;
+.order-cancel,
+.order-reserve,
+.order-sell{
+	.content{
+		width: 702rpx;
+		height: 146rpx;
+		background: #FFFFFF;
+		padding: 24rpx;
 		display: flex;
-		flex-direction: column;
-		font-size: 24rpx;
-		line-height: 38rpx;
-		color: #8F8F8F;
-		.title{
-			font-size: 28rpx;
-			color: #333333;
-			font-weight: 500;
-		}
-	}
-	.state{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		.top{
-			font-size: 24rpx;
-			margin-bottom: 40rpx;
-		}
-		.centre{
-			font-weight: bold;
-			font-size: 28rpx;
-			.symbol{
-				font-size: 16rpx;
+		justify-content: space-between;
+		margin-bottom: 16rpx;
+		.img{
+			image{
+				width: 148rpx;
+				height: 148rpx;
 			}
 		}
-		.bot{
-			font-size: 20rpx;
+		.details{
+			margin-left: -74rpx;
+			display: flex;
+			flex-direction: column;
+			font-size: 24rpx;
+			line-height: 38rpx;
+			color: #8F8F8F;
+			.title{
+				font-size: 28rpx;
+				color: #333333;
+				font-weight: 500;
+			}
+		}
+		.state{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			.top{
+				font-size: 24rpx;
+				margin-bottom: 40rpx;
+			}
+			.centre{
+				font-weight: bold;
+				font-size: 28rpx;
+				.symbol{
+					font-size: 16rpx;
+				}
+			}
+			.bot{
+				font-size: 20rpx;
+			}
 		}
 	}
 }

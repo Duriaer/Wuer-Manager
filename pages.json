@@ -24,7 +24,7 @@
 			}
 		}
 		,{
-			"path": "pages/tabBar/depot/depot",
+			"path": "pages/tabBar/goods/goods",
 			"style": {
 				"navigationBarTitleText": "",
 				"app-plus": {
@@ -37,7 +37,7 @@
 	    ,{
             "path" : "pages/tabBar/order/order",
             "style" :{
-				"navigationBarTitleText": "订单",
+				"navigationBarTitleText": "",
 				"navigationBarTextStyle": "black",
 				"app-plus": {
 					"titleNView": false,//禁用原生导航栏
@@ -57,7 +57,7 @@
             }
         }
         ,{
-            "path" : "pages/addGoods/addGoods",
+            "path" : "pages/goods/addGoods/addGoods",
             "style" :{
                 "navigationBarTitleText": "新增商品",
                 "navigationBarBackgroundColor":"#FFFFFF",
@@ -69,7 +69,7 @@
             }
         }
         ,{
-            "path" : "pages/addGoods/brandChoice/brandChoice",
+            "path" : "pages/goods/addGoods/brandChoice/brandChoice",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "品牌选择",
@@ -82,7 +82,7 @@
             
         }
         ,{
-            "path" : "pages/goodsDetails/goodsDetails",
+            "path" : "pages/goods/goodsDetails/goodsDetails",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "商品详情",
@@ -103,7 +103,9 @@
 				{
                     "path" : "orderDetails/orderDetails",
                     "style" :  {
-						"navigationBarTitleText": "订单详情"
+						"navigationBarTitleText": "销售单信息",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"navigationBarTextStyle":"black"
 					}
 				}
             ]
@@ -138,7 +140,7 @@
 			"selectedIconPath":"static/tabBar/home_selected.png"
 	    }, 
 		{
-	        "pagePath": "pages/tabBar/depot/depot",
+	        "pagePath": "pages/tabBar/goods/goods",
 	        "text": "商品",
 			"iconPath":"static/tabBar/sp.png",
 			"selectedIconPath":"static/tabBar/sp_selected.png"

@@ -20,11 +20,11 @@
 					</view>
 					<view class="right">
 						<view class="li" @tap.stop="downImg(imgArr)">
-							<image src="../../static/goodsDetails/xz.png"></image>
+							<image src="../../../static/goodsDetails/xz.png"></image>
 							<text>下载图片</text>
 						</view>
 						<view class="li">
-							<image src="../../static/goodsDetails/fz.png"></image>
+							<image src="../../../static/goodsDetails/fz.png"></image>
 							<text>复制描述</text>
 						</view>
 					</view>
@@ -70,7 +70,7 @@
 					</view>
 				</view>
 				<view class="loan">
-					<image src="../../static/depot/coordinate.png"></image>
+					<image src="../../../static/goods/coordinate.png"></image>
 					<text>员工-萍萍借出（客户看货） 1小时</text>
 				</view>
 			</view>
@@ -87,14 +87,6 @@
 					</view>
 					<view class="right">
 						<text>{{goods.manufacturerCode}}</text>
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						<text>系统编码</text>
-					</view>
-					<view class="right">
-						<text>{{goods.id}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -227,58 +219,25 @@
 			</view>
 		</view>
 		<!-- 日志 -->
-		<view class="details_journal">
+		<!-- <view class="details_journal">
 			<view class="title">
 				<text>日志</text>
 			</view>
-			<view class="ul">
-				<view class="li">
-					<view class="left">
-						<text>回收人员</text>
-					</view>
-					<view class="right">
-						<text>{{goods.recycleUserName}}</text>
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						<text>鉴定人员</text>
-					</view>
-					<view class="right">
-						<text>{{goods.checkupUserName}}</text>
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						<text>入库人员</text>
-					</view>
-					<view class="right">
-						<text>{{goods.operatorName}}</text>
-					</view>
-				</view>
-				<view class="li">
-					<view class="left">
-						<text>入库时间</text>
-					</view>
-					<view class="right">
-						<text>{{goods.operateDatetime}}</text>
-					</view>
-				</view>
-			</view>
-		</view>
+	
+		</view> -->
 		<view class="footer_placeholder"></view>
 		<view class="details_nav">
 			 <view class="nav_scroll">
 				<view class="li">
 					<view class="li-box">
-						<image src="../../static/depot/bj1.png"></image>
+						<image src="../../../static/goods/bj1.png"></image>
 						<text>编辑</text>
 					</view>
 				</view>
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/sc1.png"></image>
+						<image src="../../../static/goods/sc1.png"></image>
 						<text>删除</text>
 					</view>
 				</view>
@@ -286,42 +245,42 @@
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/xd1.png"></image>
+						<image src="../../../static/goods/xd1.png"></image>
 						<text>下单</text>
 					</view>
 				</view>
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/hold.png"></image>
+						<image src="../../../static/goods/hold.png"></image>
 						<text>hold</text>
 					</view>
 				</view>
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/jc.png"></image>
+						<image src="../../../static/goods/jc.png"></image>
 						<text>借出</text>
 					</view>
 				</view>
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/bq1.png"></image>
+						<image src="../../../static/goods/bq1.png"></image>
 						<text>打印标签</text>
 					</view>
 				</view>
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/sx.png"></image>
+						<image src="../../../static/goods/sx.png"></image>
 						<text>送洗</text>
 					</view>
 				</view>
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../static/depot/fx1.png"></image>
+						<image src="../../../static/goods/fx1.png"></image>
 						<text>分享</text>
 					</view>
 				</view>
