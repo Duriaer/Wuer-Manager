@@ -443,11 +443,11 @@
 					sort: "",
 					pageNo: 1,
 					pageSize: this.pageSize,
-					searchText: this.searchText, 
-					goodsTypeIdList:this.goodsTypeIdList,// 所选分类id
+					searchText: this.searchText, //搜索文本
+					goodsTypeIdList:this.goodsTypeIdList,// 所选分类
 					saleStatusList:this.saleStatusList,//  所选销售状态
-					originTypeList:this.originTypeList, //  所选来源id
-					storePlaceList: this.storePlaceList,//所选所在位置id
+					originTypeList:this.originTypeList, //  所选来源
+					storePlaceList: this.storePlaceList,//所选所在位置
 					qualityList: this.qualityList,//所选成色
 					shopId: this.shopId,
 				};
@@ -456,7 +456,7 @@
 					data:params,
 				})
 				uni.hideLoading()
-				// console.log(res.data.data)
+				console.log(res.data.data)
 				if(res.data.succeed&&res.data.status){
 					let data = res.data.data
 					this.hasTotal = data.hasTotal
@@ -479,12 +479,11 @@
 					pageNo: ++this.pageNo,
 					pageSize: this.pageSize,
 					searchText: this.searchText, 
-					goodsTypeIdList:this.goodsTypeIdList,// 所选分类id
+					goodsTypeIdList:this.goodsTypeIdList,// 所选分类
 					saleStatusList:this.saleStatusList,//  所选销售状态
-					originTypeList:this.originTypeList, //  所选来源id
-					storePlaceList: this.storePlaceList,//所选所在位置id
+					originTypeList:this.originTypeList, //  所选来源
+					storePlaceList: this.storePlaceList,//所选所在位置
 					qualityList: this.qualityList,//所选成色
-					accessoryList: this.accessoryList,//所选配件
 					shopId: this.shopId,
 				};
 				let res = await this.$post({
@@ -516,7 +515,6 @@
 					originTypeList:this.originTypeList, //  所选来源id
 					storePlaceList: JSON.stringify(this.storePlaceList),//所选所在位置id
 					qualityList: this.qualityList,//所选成色
-					accessoryList: this.accessoryList,//所选配件
 					shopId: this.shopId,
 				};
 				let res = await this.$post({
@@ -543,7 +541,6 @@
 				this.originTypeList = []
 				this.storePlaceList = []
 				this.qualityList =  []
-				this.accessoryList =  []
 				this.getGoodArr()
 			},
 			allSelectedFasle(arr){

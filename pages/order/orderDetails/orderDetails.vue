@@ -1,16 +1,5 @@
 <template>
 	<view class="order-detail">
-		<view class="head">
-			<view class="left">
-				<image src="../../../static/addGoods/fh.png"></image>
-			</view>
-			<view class="middle">
-				<text>销售单信息</text>
-			</view>
-			<view class="right">
-				<text>查看日志</text>
-			</view>
-		</view>
 		<view class="wares">
 			<view class="title">
 				<text>商品</text>
@@ -64,20 +53,26 @@
 					</view>
 				</view>
 				<view class="bot">
-					<view class="left">
-						<text>销售价¥销售价</text>
+					<view class="li">
+						<text>销售价</text>
+						<text class="symbol">¥</text>
+						<text>155862</text>
 					</view>
-					<view class="middle">
-						<text>优惠¥600</text>
+					<view class="li">
+						<text>优惠</text>
+						<text class="symbol">¥</text>
+						<text>600</text>
 					</view>
-					<view class="right">
-						<text>实付价</text><text>¥</text><text>100800</text>
+					<view class="li">
+						<text class="paid">实付价</text>
+						<text class="symbol" style="color: #EFA22A;">¥</text>
+						<text class="price">155262</text>
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 订单详情 -->
-		<view class="details">
+		<view class="cancel">
 			<view class="title">
 				<text>订单详情</text>
 			</view>
@@ -148,6 +143,89 @@
 				</view>
 			</view>
 		</view>
+		<!-- 退货详情 -->
+		<view class="details">
+			<view class="title">
+				<text>退货详情</text>
+			</view>
+			<view class="ul">
+				<view class="li">
+					<view class="left">
+						<text>退款金额</text>
+					</view>
+					<view class="right">
+						<text></text>
+					</view>
+				</view>
+				<view class="li">
+					<view class="left">
+						<text>退货员工</text>
+					</view>
+					<view class="right">
+						<text></text>
+					</view>
+				</view>
+				<view class="li">
+					<view class="left">
+						<text>退货日期</text>
+					</view>
+					<view class="right">
+						<text></text>
+					</view>
+				</view>
+				<view class="li">
+					<view class="left">
+						<text>备注</text>
+					</view>
+					<view class="right">
+						<text></text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="bottom-but">
+			<view class="left">
+				<text>编辑</text>
+			</view>
+			<!-- <view class="middle">
+				<text>取消</text>
+			</view> -->
+			<view class="right" @tap.stop="showPopup()">
+				<text>退货</text>
+			</view>
+		</view>
+		<view class="popupMask" v-if="popupMaskShow" @touchmove.prevent @tap.stop="hidePopup()">
+			<view class="popup" @tap.stop>
+				<view class="popup-title">
+					<text>退货</text>
+				</view>
+				<view class="popupul">
+					<view class="line_input">
+						<view class="left">
+							<text>退款金额（元）</text>
+						</view>
+						<view class="right">
+							<text>1000</text>
+						</view>
+					</view>
+					<view class="line_textarea">
+						<view class="line_name">
+							<text>备注</text>
+						</view>
+						<view class="textarea">
+							<textarea placeholder="请输入" maxlength="100" />
+							<text class="count">0/100</text>
+						</view>
+					</view>
+				</view>
+				<view class="popup_btn">
+					<view class="popup_left" @tap.stop="hidePopup()">取消</view>
+					<view class="popup_right">确定</view>
+				</view>
+				<view class="safety"></view>
+			</view>
+		</view>
+		<view class="safety"></view>
 	</view>
 </template>
 
@@ -155,8 +233,18 @@
 	export default {
 		data() {
 			return {
-				
+				popupMaskShow: false //弹窗蒙层
 			};
+		},
+		methods:{
+			//弹窗
+			showPopup(){
+				this.popupMaskShow = true
+			},
+			//关闭弹窗
+			hidePopup(){
+				this.popupMaskShow = false
+			},
 		}
 	}
 </script>

@@ -390,6 +390,7 @@
 						<view class="agent_right" @tap.stop="addAgent(0)" v-if="!agentEdit">完成</view>
 						<view class="agent_right" @tap.stop="addAgent(1)" v-else>完成</view>
 					</view>
+					<view class="safety"></view>
 				</view>
 			</view>
 			<view class="publishan_button" @tap.stop="save()">
@@ -477,7 +478,7 @@
 			
 				//同行合作
 				agentBtnShow:true,
-				agentMaskShow:false,//添加合作同行
+				agentMaskShow:false,//添加合作同行蒙层
 				agentEdit:false,//false新增 true编辑
 				agentEditIndex:'',//编辑index
 				cooperateSettings:[],//同行合作配置列表

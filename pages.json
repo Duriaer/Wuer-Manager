@@ -2,8 +2,8 @@
 	// "condition":{
 	// 	"current":1,
 	// 	"list":[{
-	// 		"name":"goodsDetails",
-	// 		"path":"pages/goodsDetails/goodsDetails"
+	// 		"name":"orderDetails",
+	// 		"path":"pages/order/orderDetails/orderDetails"
 	// 	}]
 	// },
 	"globalStyle": {
@@ -108,7 +108,6 @@
 						"navigationBarBackgroundColor":"#FFFFFF",
 						"navigationBarTextStyle":"black",
 						"app-plus": {
-							"titleNView": false,//禁用原生导航栏
 							"bounce":"none",
 							"scrollIndicator": "none"
 						}

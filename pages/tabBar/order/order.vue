@@ -73,31 +73,6 @@
 					</view>
 				</view>
 			</view>
-			<view class="content">
-				<view class="img">
-					<image src="../../../static/addGoods/add.png"></image>
-				</view>
-				<view class="details">
-					<view class="title">
-						<text style="margin-left: -10rpx;">【99新】GUCCI 迷你手提包</text>
-					</view>
-					<text>销售时间:2021-02-02 15:13</text>
-					<text>销售员工:莉莉卡</text>
-					<text>订单客户:薇薇安</text>
-				</view>
-				<view class="state">
-					<view class="top">
-						<text>已销售</text>
-					</view>
-					<view class="centre">
-						<text class="symbol">¥</text>
-						<text>10000</text>
-					</view>
-					<view class="bot">
-						<text>实收款</text>
-					</view>
-				</view>
-			</view>
 		</view>
 		<!-- 预定单 -->
 		<view class="order-reserve" v-if="navIndex==2">
@@ -163,9 +138,34 @@
 		data() {
 			return {
 				navIndex: 1,//导航栏index
+				//发送请求页码
+				pageNo: 1,
+				pageSize: 10,
+				
+				searchText: '', //搜索文本
 			};
 		},
+		onLoad(){
+			this.getShopOrderArr()
+		},
 		methods:{
+			//获取订单详情数据
+			async getShopOrderArr(){
+				uni.showLoading()
+				let params = {
+					sort: "",
+					searchText: this.searchText,
+					pageNo: 1,
+					pageSize: this.pageSize,
+				};
+				let res = await this.$post({
+					url:'/shopOrder/list',
+					data:params,
+				})
+				uni.hideLoading()
+				console.log(res.data)
+				// this.shopOrderArr = res.data.data
+			},
 			tabPagination(index) {
 				this.navIndex = index
 			},
