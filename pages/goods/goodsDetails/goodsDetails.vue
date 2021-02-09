@@ -273,13 +273,6 @@
 				<view class="li">
 					<view class="line"></view>
 					<view class="li-box">
-						<image src="../../../static/goods/sx.png"></image>
-						<text>送洗</text>
-					</view>
-				</view>
-				<view class="li">
-					<view class="line"></view>
-					<view class="li-box">
 						<image src="../../../static/goods/fx1.png"></image>
 						<text>分享</text>
 					</view>

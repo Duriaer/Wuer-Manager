@@ -116,6 +116,23 @@
             ]
 		},
 		{
+			"root":"pages/order",
+			"pages":[
+				{
+		            "path" : "placeOrder/placeOrder",
+		            "style" :  {
+						"navigationBarTitleText": "下单",
+						"navigationBarBackgroundColor":"#FFFFFF",
+						"navigationBarTextStyle":"black",
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none"
+						}
+					}
+				}
+		    ]
+		},
+		{
 			"root":"pages/my",
 			"pages":[
 				{
