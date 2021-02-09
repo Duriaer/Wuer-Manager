@@ -230,7 +230,7 @@
 										</view>
 										<view class="text">
 											<view class="top">
-												<text>本店</text>
+												<text>{{item.shortName}}</text>
 											</view>
 											<view class="bot">
 												<text style="margin-right: 30rpx;">出资{{item.contributionAmount}}元</text>
@@ -381,7 +381,7 @@
 								<text>分润比例（%）</text>
 							</view>
 							<view class="right">
-								<input v-model="cooperatePercentage" type="number" placeholder="请输入"/>
+								<input v-model="cooperatePercentage" type="number" placeholder="请输入" :focus="cooperatePercentageFocus" />
 							</view>
 						</view>
 					</view>
@@ -482,18 +482,20 @@
 				agentEdit:false,//false新增 true编辑
 				agentEditIndex:'',//编辑index
 				cooperateSettings:[],//同行合作配置列表
+				//{
 				contributionAmount:'',//出资金额
 				contributionAmountFocus:false,
 				cooperatePercentage:'',//分润比例
-				
-				costPrice:'',//成本价
-				costPriceFocus:false,
-				
+				cooperatePercentageFocus:false,
 				cooperateShopId:'',//合作店铺id
 				shortName:'',//合作店铺简称
 				friendShopsArr:[],//所有合作店铺
 				friendShopsPickerArr:[],//所有合作店铺选择器数组
 				friendShopsIndex:'',
+				//}
+				
+				costPrice:'',//成本价
+				costPriceFocus:false,
 				
 				storeInCurrShop:false,//是否存放本店仓库
 				storePlaceId:'',//存放地点id, 若storeInCurrShop为真，则表示商品存在本店的某个仓库中,此处存仓库id,否则存门店id
@@ -519,6 +521,9 @@
 				//#4
 				hasLent:false,//是否借出
 				shopId: uni.getStorageSync("shopUser").shopId, // 所选店铺id,此处为固定值,根据登录用户从本地存储中取
+				customLabelList:'',//商品配件
+				detailedDescription:'',//商品详细描述
+				goodsCode:'',//编号或编码
 			};
 		},
 		onLoad(options) {
@@ -535,23 +540,15 @@
 			}else if(this.mode == 'add'){
 				uni.setNavigationBarTitle({title:'新增商品'})
 			}
-			this.getGoodsTypeArr()
-			this.getQualityArr()
-			this.getOriginTypeArr()
-			this.getStorePlaceArr()
-			this.getShopUserItems()
-			this.getFriendShops()
-			
+			this.getPickerArr('/goodsSku/getGoodsTypes')
+			this.getPickerArr('/dictItem/getGoodsQualityItems')
+			this.getPickerArr('/dictItem/getOriginTypeItems')
+			this.getPickerArr('/shop/getStorePlaces')
+			this.getPickerArr('/goodsSku/getShopUserItems')
+			this.getPickerArr('/shop/getFriendShops')
 		},
 		onShow() {
-			let goodsBrands = uni.getStorageSync('goodsBrands')
-			// console.log(goodsBrands)
-			if(this.$isObject(goodsBrands)&&goodsBrands!={}){
-				this.goodsBrand = goodsBrands.goodsBrand
-				this.goodsBrandId = goodsBrands.goodsBrandId
-				this.goodsBrandName = goodsBrands.goodsBrandName
-				uni.removeStorageSync('goodsBrands')
-			}
+			this.getGoodsBrands()
 		},
 		onReady() {
 			this.getBoxTop()
@@ -585,25 +582,19 @@
 					})
 					return
 				}
-				// console.log(val)
-				for(let item of this.cooperateSettings){
-					let percentage = Number(item.contributionAmount) / Number(val) * 100
-					if(percentage.toFixed(2)==parseInt(percentage)){
-						item.cooperatePercentage =  parseInt(percentage)
-					}else{
-						item.cooperatePercentage =  percentage.toFixed(2)
-					}
-				}
 			},
 			//添加合作同行按钮是否显示
 			cooperateSettings:{
 				handler(val){
-					let total = 0
+					let conTotal = 0
+					let cooTotal = 0
 					for(let item of val){
-						total += Number(item.cooperatePercentage)
+						conTotal += Number(item.contributionAmount)
+						cooTotal += Number(item.cooperatePercentage)
 					}
-					// console.log(total)
-					if(total>=100){
+					if(conTotal>=this.costPrice){
+						this.agentBtnShow = false
+					}else if(cooTotal>=100){
 						this.agentBtnShow = false
 					}else{
 						this.agentBtnShow = true
@@ -625,6 +616,9 @@
 				this.originTypeInfo = this.originTypeArr[val].itemName
 			},
 			storePlaceIndex(val){
+				if(this.storePlaceArr==[]||!this.$isArray(this.storePlaceArr)||this.storePlaceArr==''||this.storePlaceArr==null||this.storePlaceArr==undefined){
+					return
+				}
 				this.storeInCurrShop = this.storePlaceArr[val].storeInCurrShop
 				this.storePlaceId = this.storePlaceArr[val].storePlaceId
 				this.storePlaceName = this.storePlaceArr[val].storePlaceName
@@ -643,66 +637,50 @@
 			}
 		},
 		methods: {
-			//获取全部分类列表
-			async getGoodsTypeArr(){
-					let res = await this.$get({
-						url:'/goodsSku/getGoodsTypes',
-					})
+			async getPickerArr(url){
+				let res = await this.$get({
+					url:url,
+				})
+				if(url == '/goodsSku/getGoodsTypes'){
 					this.goodsTypeArr = res.data.data
-					for(let i=0;i<this.goodsTypeArr.length;i++){
-						this.goodsTypePickerArr.push(this.goodsTypeArr[i].name)
+					for(let item of res.data.data){
+						this.goodsTypePickerArr.push(item.name)
 					}
-			},
-			//获取成色列表
-			async getQualityArr(){
-					let res = await this.$get({
-						url:'/dictItem/getGoodsQualityItems',
-					})
+				}else if(url == '/dictItem/getGoodsQualityItems'){
 					this.qualityArr = res.data.data
-					for(let i=0;i<this.qualityArr.length;i++){
-						this.qualityPickerArr.push(this.qualityArr[i].itemName)
+					for(let item of res.data.data){
+						this.qualityPickerArr.push(item.itemName)
 					}
-			},
-			//获取来源列表
-			async getOriginTypeArr(){
-					let res = await this.$get({
-						url:'/dictItem/getOriginTypeItems',
-					})
+				}else if(url == '/dictItem/getOriginTypeItems'){
 					this.originTypeArr = res.data.data
-					for(let i=0;i<this.originTypeArr.length;i++){
-						this.originTypePickerArr.push(this.originTypeArr[i].itemName)
+					for(let item of res.data.data){
+						this.originTypePickerArr.push(item.itemName)
 					}
-			},
-			//获取位置列表
-			async getStorePlaceArr(){
-					let res = await this.$get({
-						url:'/shop/getStorePlaces',
-					})
+				}else if(url == '/shop/getStorePlaces'){
 					this.storePlaceArr = res.data.data
-					for(let i=0;i<this.storePlaceArr.length;i++){
-						this.storePlacePickerArr.push(this.storePlaceArr[i].storePlaceName)
+					for(let item of res.data.data){
+						this.storePlacePickerArr.push(item.storePlaceName)
 					}
-			},
-			//获取本店所有员工列表
-			async getShopUserItems(){
-					let res = await this.$get({
-						url:'/goodsSku/getShopUserItems',
-					})
+				}else if(url == '/goodsSku/getShopUserItems'){
 					this.shopUserArr = res.data.data
-					for(let i=0;i<this.shopUserArr.length;i++){
-						this.shopUserPickerArr.push(this.shopUserArr[i].username)
+					for(let item of res.data.data){
+						this.shopUserPickerArr.push(item.username)
 					}
-			},
-			//获取所有友店信息
-			async getFriendShops(){
-					let res = await this.$get({
-						url:'/shop/getFriendShops',
-					})
-					// console.log(res.data.data)
+				}else if(url == '/shop/getFriendShops'){
 					this.friendShopsArr = res.data.data
-					for(let i=0;i<this.friendShopsArr.length;i++){
-						this.friendShopsPickerArr.push(this.friendShopsArr[i].fullName)
+					for(let item of res.data.data){
+						this.friendShopsPickerArr.push(item.fullName)
 					}
+				}
+			},
+			getGoodsBrands(){
+				let goodsBrands = uni.getStorageSync('goodsBrands')
+				if(this.$isObject(goodsBrands)&&goodsBrands!={}){
+					this.goodsBrand = goodsBrands.goodsBrand
+					this.goodsBrandId = goodsBrands.goodsBrandId
+					this.goodsBrandName = goodsBrands.goodsBrandName
+					uni.removeStorageSync('goodsBrands')
+				}
 			},
 			// 获取商品详情数据
 			async getDetailArr(){
@@ -711,17 +689,16 @@
 					url:'/goodsSku/detail?id='+this.goodsId,
 				})
 				let goods = res.data.data
-				
 				this.picList = []
-				for(let i=0;i<goods.picList.length;i++){
-					this.picList.push(this.$imgUrl+goods.picList[i].thumbnail)
+				for(let item of goods.picList){
+					this.picList.push(this.$imgUrl+item.imagePath)
 				}
 				this.dragShow=true
 	
 				this.goodsBrand = goods.goodsBrand//品牌
 				this.goodsBrandId = goods.goodsBrandId//品牌 id
 				this.goodsBrandName = goods.goodsBrandName//品牌名称
-		
+				
 				this.goodsType = goods.goodsType//类型
 				this.goodsTypeId = goods.goodsTypeId//类型id
 				this.goodsTypeName = goods.goodsTypeName//类型名称
@@ -751,18 +728,20 @@
 		
 				this.peerPrice = goods.peerPrice//同行价
 				
-				this.cooperateShopId = goods.cooperateShopId //合作店铺id
-				this.shortName = goods.shortName //合作店铺
+				if(goods.cooperateSettings==null){
+					this.cooperateSettings = []
+				}else{
+					this.cooperateSettings = goods.cooperateSettings
+				}
+				
 				
 				this.costPrice = goods.costPrice//成本价
 		
 				this.peerSharing = goods.peerSharing//是否同行共享
 				
-			
 				this.originType = goods.originType//商品来源(代码)
 				this.originTypeInfo = goods.originTypeInfo//商品来源说明
 				
-		
 				this.storePlaceId = goods.storePlaceId//存放地点id
 				this.storePlaceName = goods.storePlaceName//存放地点名称
 			
@@ -815,7 +794,6 @@
 				}).exec();
 			},
 			updateList(list){
-				// console.log(list)
 				this.picList = list
 			},
 			//普通选择器触发
@@ -833,9 +811,6 @@
 				}else if(type == 'shortName'){
 					this.friendShopsIndex = e.detail.value
 				}
-			},
-			selectItem(arr,index){
-				arr[index].selected = !arr[index].selected
 			},
 			//时间选择器触发
 			datePickerChang(e){
@@ -859,19 +834,16 @@
 			popupPeerSharing() {
 				uni.showModal({
 					title: '提示',
-					content: '开启合作同行共享后,合作同行可以通过同行大仓查询到本商品,仅限于图片、描述资料。',
-					confirmColor: '#57BFA3',
-					success: (res)=> {
-						if (res.confirm) {
-							console.log('用户点击确定');
-						} else if (res.cancel) {
-							console.log('用户点击取消');
-						}
-					}
+					content: '开启合作同行共享后,\n合作同行可以通过\n同行大仓查询到本商品,\n仅限于图片、描述资料。',
+					showCancel:false,
 				});
 			},
 			tabPeerSharing(type){
 				this.peerSharing = type
+			},
+			//是否借出
+			tabHasLent(type){
+				this.hasLent = type
 			},
 			//添加合作同行弹窗
 			showAgent(type,index){
@@ -897,6 +869,8 @@
 					this.agentEditIndex = index
 					this.contributionAmount = this.cooperateSettings[index].contributionAmount
 					this.cooperatePercentage = this.cooperateSettings[index].cooperatePercentage
+					this.cooperateShopId = this.cooperateSettings[index].cooperateShopId
+					this.shortName = this.cooperateSettings[index].shortName
 				}
 				this.agentMaskShow = true
 			},
@@ -905,9 +879,19 @@
 				this.contributionAmount = ''
 				this.agentEditIndex = ''
 				this.cooperatePercentage = ''
+				this.cooperateShopId = ''
+				this.shortName = ''
 			},
 			addAgent(type){
 				//type:0新增 1编辑
+				if(this.cooperateShopId==''||this.cooperateShopId==null){
+					uni.showModal({
+						title:'注意',
+						content:'请选择合作店铺',
+						showCancel:false,
+					})
+					return
+				}
 				if(this.contributionAmount==''||this.contributionAmount==null){
 					uni.showModal({
 						title:'注意',
@@ -920,67 +904,90 @@
 							},100)
 						}
 					})
+					return
 				}
-				let total = 0
+				if(this.cooperatePercentage==''||this.cooperatePercentage==null){
+					uni.showModal({
+						title:'注意',
+						content:'请填写分润比例',
+						showCancel:false,
+						success: (res) => {
+							this.cooperatePercentageFocus = false
+							setTimeout(()=>{
+								this.cooperatePercentageFocus = true
+							},100)
+						}
+					})
+					return
+				}
+				let conTotal = 0
+				let cooTotal = 0
+				for(let [i,item] of this.cooperateSettings.entries()){
+					if(!type){
+						conTotal += Number(item.contributionAmount)
+						cooTotal += Number(item.cooperatePercentage)
+					}else{
+						if(i!=this.agentEditIndex){
+							conTotal += Number(item.contributionAmount)
+							cooTotal += Number(item.cooperatePercentage)
+						}
+					}
+				}
+				if((this.costPrice - conTotal - this.contributionAmount) < 0){
+					uni.showModal({
+						title:'注意',
+						content:'金额不能超过'+(this.costPrice - conTotal),
+						showCancel:false,
+						success: (res) => {
+							this.contributionAmount = ''
+							this.contributionAmountFocus = false
+							setTimeout(()=>{
+								this.contributionAmountFocus = true
+							},100)
+						}
+					})
+					return
+				}
+				if((100 - cooTotal - this.cooperatePercentage) < 0){
+					uni.showModal({
+						title:'注意',
+						content:'比例不能超过'+(100 - cooTotal)+'%',
+						showCancel:false,
+						success: (res) => {
+							this.contributionAmount = ''
+							this.cooperatePercentageFocus = false
+							setTimeout(()=>{
+								this.cooperatePercentageFocus = true
+							},100)
+						}
+					})
+					return
+				}
 				if(!type){
-					for(let item of this.cooperateSettings){
-						total += this.costPrice * item.cooperatePercentage / 100
-					}
-					if((this.costPrice - total - this.contributionAmount) < 0){
-						uni.showModal({
-							title:'注意',
-							content:'金额不能超过'+(this.costPrice - total),
-							showCancel:false,
-							success: (res) => {
-								this.contributionAmount = ''
-								this.contributionAmountFocus = false
-								setTimeout(()=>{
-									this.contributionAmountFocus = true
-								},100)
-							}
-						})
-						return
-					}
 					this.cooperateSettings.push({
 						contributionAmount:this.contributionAmount,
 						cooperatePercentage:this.cooperatePercentage,
+						cooperateShopId:this.cooperateShopId,
+						shortName:this.shortName,
 					})
-					
 				}else{
-					for(let i=0;i<this.cooperateSettings.length;i++){
-						if(i!=this.agentEditIndex){
-							total += this.costPrice * this.cooperateSettings[i].cooperatePercentage / 100
-						}
-					}
-					if((this.costPrice - total - this.contributionAmount) < 0){
-						uni.showModal({
-							title:'注意',
-							content:'金额不能超过'+(this.costPrice - total),
-							showCancel:false,
-							success: (res) => {
-								this.contributionAmount = ''
-								this.contributionAmountFocus = false
-								setTimeout(()=>{
-									this.contributionAmountFocus = true
-								},100)
-							}
-						})
-						return
-					}
-					this.cooperateSettings[this.agentEditIndex].contributionAmount=this.contributionAmount
-					this.cooperateSettings[this.agentEditIndex].cooperatePercentage=this.cooperatePercentage
+					this.cooperateSettings[this.agentEditIndex].contributionAmount = this.contributionAmount
+					this.cooperateSettings[this.agentEditIndex].cooperatePercentage = this.cooperatePercentage
+					this.cooperateSettings[this.agentEditIndex].cooperateShopId = this.cooperateShopId
+					this.cooperateSettings[this.agentEditIndex].shortName = this.shortName
 				}
 				this.hideAgent()
 			},
 			delAgent(index){
 				this.cooperateSettings.splice(index,1)
 			},
-			//是否借出
-			tabHasLent(type){
-				this.hasLent = type
-			},
+			
 			async save(){
-				uni.showLoading({title:'发布中...'})
+				// uni.showLoading({title:'发布中...'})
+				let imgList = []
+				for(let i=0;i<this.picList.length;i++){
+					imgList.push(this.picList[i].substring(this.$imgUrl.length,this.picList[i].length))
+				}
 				let res = await this.$post({
 					url:'/goodsSku/save',
 					data:{
@@ -988,7 +995,7 @@
 						"checkupUserId": this.checkupUserId,
 						"checkupUserName": this.checkupUserName,
 						"customLabelList": this.customLabelList,//自定义商品标签
-						// "cooperateSettings": this.cooperateSettings,  //同行合作配置列表
+						"cooperateSettings": this.cooperateSettings,  //同行合作配置列表
 						"costPrice": this.costPrice,
 						"counterPrice": this.counterPrice,
 						"createTime": this.createTime,
@@ -1013,7 +1020,7 @@
 						"peerPrice": this.peerPrice,
 						"costPrice": this.costPrice,
 						"peerSharing": this.peerSharing,
-						// "picList": this.picList,
+						"picList": imgList,
 						"quality": this.quality,
 						"qualityInfo": this.qualityInfo,
 						"recycleUserId": this.recycleUserId,
@@ -1024,16 +1031,22 @@
 						"storeInCurrShop": this.storeInCurrShop,
 						"storePlaceId": this.storePlaceId,
 						"storePlaceName": this.storePlaceName,
-						"storeTime": this.storeTime,
-	},
+						// "storeTime": this.storeTime,
+						"storeTime": '2020-02-09 17:17:40'
+					},
 				})
 				uni.hideLoading()
-				// console.log(res)
+				console.log(res)
 				if(res.data.succeed){
 					uni.showToast({title:'发布成功'})
 					setTimeout(()=>{
 						this.$back()
 					},500)
+				}else if(res.data.failed){
+					uni.showToast({
+						title:res.data.message,
+						icon:"none"
+					})
 				}
 			},
 		},

@@ -236,7 +236,18 @@
 				popupMaskShow: false //弹窗蒙层
 			};
 		},
+		onLoad(){
+			this.getOrderDetailsArr()
+		},
 		methods:{
+			//获取订单详情数据
+			async getOrderDetailsArr(){
+					let res = await this.$get({
+						url:'/shopOrder/detail?id=27',
+					})
+					// console.log(res.data.data)
+					this.orderDetailsArr = res.data.data
+			},
 			//弹窗
 			showPopup(){
 				this.popupMaskShow = true

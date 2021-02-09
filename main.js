@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App'
+import store from './store'
+Vue.prototype.$store = store
 
 //请求
 import {url,get,post} from '@/api/request.js'

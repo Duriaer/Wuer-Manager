@@ -340,9 +340,14 @@
 			this.getOriginTypeArr()
 			this.getStorePlaceArr()
 			this.getQualityArr()
+			this.getGoodArr()
 		},
 		onShow() {
-			this.getGoodArr()
+			if(this.$store.state.upGoodsId == 'all'){
+				
+			}else if(this.$store.state.upGoodsId){
+				
+			}
 		},
 		onReachBottom(){
 			this.addGoodArr()

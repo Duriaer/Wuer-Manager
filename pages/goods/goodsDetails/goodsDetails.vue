@@ -325,7 +325,6 @@
 				for(let i=0;i<this.goods.picList.length;i++){
 					this.imgArr.push(this.$imgUrl+this.goods.picList[i].imagePath)
 				}
-				console.log(this.imgArr)
 			},
 			downImg(arr){
 				for(let i=0;i<arr.length;i++){
