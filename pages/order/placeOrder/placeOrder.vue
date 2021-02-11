@@ -15,13 +15,13 @@
 					<text>客户名称</text>
 				</view>
 				<view class="right">
-					<picker>
+					<!-- <picker>
 						<view class="picker">
 							<text class="noSet">请选择</text>
 							<text v-else></text>
 							<image src="../../../static/addGoods/go.png" ></image>
 						</view>
-					</picker>
+					</picker> -->
 				</view>
 			</view>
 			<view class="line_picker">
@@ -29,13 +29,13 @@
 					<text>销售员工</text>
 				</view>
 				<view class="right">
-					<picker>
+					<!-- <picker>
 						<view class="picker">
 							<text class="noSet">请选择</text>
 							<text v-else></text>
 							<image src="../../../static/addGoods/go.png" ></image>
 						</view>
-					</picker>
+					</picker> -->
 				</view>
 			</view>
 		</view>
