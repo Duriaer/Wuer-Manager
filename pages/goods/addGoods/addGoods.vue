@@ -40,7 +40,7 @@
 							
 						</view>
 					</view>
-					<view class="line_picker">
+					<view id="goodsBrand" class="line_picker">
 						<view class="line_name">
 							<text>品牌</text><text class="star">*</text>
 						</view>
@@ -52,7 +52,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="line_picker">
+					<view class="line_picker" id="goodsType">
 						<view class="line_name">
 							<text>分类</text><text class="star">*</text>
 						</view>
@@ -66,7 +66,7 @@
 							</picker>
 						</view>
 					</view>
-					<view class="line_picker">
+					<view class="line_picker" id="quality">
 						<view class="line_name">
 							<text>成色</text><text class="star">*</text>
 						</view>
@@ -80,7 +80,7 @@
 							</picker>
 						</view>
 					</view>
-					<view class="line_picker">
+					<view class="line_picker" id="name">
 						<view class="line_name">
 							<text>名称</text><text class="star">*</text>
 						</view>
@@ -153,7 +153,7 @@
 					<text>价格</text>
 				</view>
 				<view class="ul">
-					<view class="line_input">
+					<view class="line_input" id='salePrice'>
 						<view class="line_name">
 							<text>销售价</text><text class="star">*</text>
 						</view>
@@ -795,6 +795,7 @@
 			},
 			updateList(list){
 				this.picList = list
+				console.log(this.picList)
 			},
 			//普通选择器触发
 			pickerChang(e,type){
@@ -983,11 +984,65 @@
 			},
 			
 			async save(){
-				// uni.showLoading({title:'发布中...'})
-				let imgList = []
-				for(let i=0;i<this.picList.length;i++){
-					imgList.push(this.picList[i].substring(this.$imgUrl.length,this.picList[i].length))
+				uni.showLoading({title:'发布中...'})
+				console.log(this.picList)
+				if(this.goodsBrandId==''||this.goodsBrandId==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请选择品牌',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'goodsBrand'
+					},100)
+					return
+				}else if(this.goodsTypeId==''||this.goodsTypeId==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请选择分类',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'goodsType'
+					},100)
+					return
+				}else if(this.quality==''||this.quality==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请选择成色',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'quality'
+					},100)
+					return
+				}else if(this.name==''||this.name==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请输入名称',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'name'
+					},100)
+					return
+				}else if(this.salePrice==''||this.salePrice==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请输入销售价',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'salePrice'
+					},100)
+					return
 				}
+				
 				let res = await this.$post({
 					url:'/goodsSku/save',
 					data:{
@@ -1020,7 +1075,7 @@
 						"peerPrice": this.peerPrice,
 						"costPrice": this.costPrice,
 						"peerSharing": this.peerSharing,
-						"picList": imgList,
+						"picList": this.picList,
 						"quality": this.quality,
 						"qualityInfo": this.qualityInfo,
 						"recycleUserId": this.recycleUserId,

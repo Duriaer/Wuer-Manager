@@ -17,7 +17,7 @@
           :style="{ width: viewWidth + 'px', height: viewWidth + 'px', 'z-index': item.zIndex, opacity: item.opacity }"
         >
           <view class="area-con" :style="{ width: childWidth, height: childWidth, transform: 'scale(' + item.scale + ')' }">
-            <image class="pre-image" :src="item.src" mode="aspectFill"></image>
+            <image class="pre-image" :src="$imgUrl+item.src" mode="aspectFill"></image>
             <view class="del-con" @click="delImage(item, index)" @touchstart.stop="delImageMp(item, index)" @touchend.stop="nothing()" @mousedown.stop="nothing()" @mouseup.stop="nothing()">
               <view class="del-wrap">
                 <image class="del-image" src="../../static/addGoods/x.png"></image>
@@ -222,8 +222,12 @@ export default {
         clearTimeout(this.timer)
         this.timer = null
         let src = this.list.findIndex(v => v === item.src)
+		let imgList = []
+		for(let i of this.list){
+			imgList.push(this.$imgUrl+i)
+		}
         uni.previewImage({
-          urls: this.list,
+          urls: imgList,
           current: src,
           success: () => {
             this.preStatus = false
@@ -293,7 +297,7 @@ export default {
 						if(i==res.tempFilePaths.length-1){
 							uni.hideLoading()
 						}
-						this.addProperties(this.$imgUrl+JSON.parse(uploadFileRes.data).data[0].imagePath)
+						this.addProperties(JSON.parse(uploadFileRes.data).data[0].imagePath)
 					}
 				});
               
@@ -305,7 +309,13 @@ export default {
     addImage(image){
       this.addProperties(image)
     },
-    delImage(item, index){
+    async delImage(item, index){
+		await this.$post({
+			url:'/goodsSkuPic/delete',
+			data:{
+				imagePath:this.imageList[index].src
+			}
+		})
       this.imageList.splice(index, 1)
       for (let obj of this.imageList) {
         if (obj.index > item.index) {
