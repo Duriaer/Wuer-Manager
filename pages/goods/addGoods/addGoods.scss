@@ -115,10 +115,6 @@ page{
 				width: 36rpx;
 				height: 36rpx;
 			}
-			.picker{
-				display: flex;
-				align-items: center;
-			}
 			input{
 				width: 100%;
 				box-sizing: border-box;
@@ -245,10 +241,6 @@ page{
 				image{
 					width: 36rpx;
 					height: 36rpx;
-				}
-				.picker{
-					display: flex;
-					align-items: center;
 				}
 			}
 		}
@@ -408,10 +400,6 @@ page{
 					width: 36rpx;
 					height: 36rpx;
 				}
-				.picker{
-					display: flex;
-					align-items: center;
-				}
 				input{
 					width: 100%;
 					box-sizing: border-box;
@@ -462,5 +450,8 @@ page{
 		}
 	}
 }
-
+.picker{
+	display: flex;
+	align-items: center;
+}
 

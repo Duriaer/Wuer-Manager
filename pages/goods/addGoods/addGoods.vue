@@ -311,13 +311,13 @@
 							<text>入库日期</text>
 						</view>
 						<view class="right">
-							<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="datePickerChang">
+							<uni-datetime-picker :value="storeTime" @change="datePickerChang($event)">
 								<view class="picker">
 									<text class="noSet" v-if="!storeTime">请选择</text>
 									<text v-else>{{storeTime}}</text>
 									<image src="../../../static/addGoods/rq.png"></image>
 								</view>
-							</picker>
+							</uni-datetime-picker>
 						</view>
 					</view>
 				</view>
@@ -404,9 +404,6 @@
 <script>
 	export default {
 		data() {
-			let currentDate = this.getDate({
-				format: true
-			})
 			return {
 				mode:'edit',//add 增加 edit编辑
 				goodsId:'',
@@ -418,8 +415,6 @@
 				descriptionTop:0,
 				priceTop:0,
 				originTop:0,
-				
-				date: currentDate,
 				
 				//#1
 				dragShow:true,
@@ -513,7 +508,7 @@
 				checkupUserId:'',//鉴定员工id
 				checkupUserName:'',//鉴定员工用户名
 				checkupUserIndex:'',
-
+				
 				storeTime:'',//入库完整时间(日期+时间),格式：yyyy-MM-dd HH:mm:ss
 
 				internalRemark:'',//内部备注
@@ -527,6 +522,7 @@
 			};
 		},
 		onLoad(options) {
+			this.storeTime = this.getDate()
 			if(options.mode){
 				this.mode = options.mode
 			}else{
@@ -552,14 +548,6 @@
 		},
 		onReady() {
 			this.getBoxTop()
-		},
-		computed: {
-			startDate() {
-				return this.getDate('start');
-			},
-			endDate() {
-				return this.getDate('end');
-			}
 		},
 		watch:{
 			costPrice(val){
@@ -815,21 +803,20 @@
 			},
 			//时间选择器触发
 			datePickerChang(e){
-				this.storeTime = e.detail.value
+				this.storeTime = e
 			},
-			getDate(type) {
+			getDate(){
 			const date = new Date();
 			let year = date.getFullYear();
 			let month = date.getMonth() + 1;
+			month = month > 9 ? month : '0' + month;
 			let day = date.getDate();
-			if (type === 'start') {
-				year = year - 60;
-			} else if (type === 'end') {
-				year = year + 2;
-			}
-			month = month > 9 ? month : '0' + month;;
 			day = day > 9 ? day : '0' + day;
-			return `${year}-${month}-${day}`;
+			let hh = date.getHours()
+			hh = hh > 9 ? hh : '0' + hh;
+			let mm = date.getMinutes()
+			mm = mm > 9 ? mm : '0' + mm;
+			return `${year}-${month}-${day} ${hh}:${mm}:00`;
 			},
 			//是否开启合作同行共享弹窗
 			popupPeerSharing() {
@@ -1086,8 +1073,7 @@
 						"storeInCurrShop": this.storeInCurrShop,
 						"storePlaceId": this.storePlaceId,
 						"storePlaceName": this.storePlaceName,
-						// "storeTime": this.storeTime,
-						"storeTime": '2020-02-09 17:17:40'
+						"storeTime": this.storeTime,
 					},
 				})
 				uni.hideLoading()
