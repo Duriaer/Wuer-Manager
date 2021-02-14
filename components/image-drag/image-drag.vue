@@ -297,6 +297,7 @@ export default {
 						if(i==res.tempFilePaths.length-1){
 							uni.hideLoading()
 						}
+						console.log(JSON.parse(uploadFileRes.data).data)
 						this.addProperties(JSON.parse(uploadFileRes.data).data[0].imagePath)
 					}
 				});

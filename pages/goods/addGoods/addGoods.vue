@@ -522,7 +522,7 @@
 			};
 		},
 		onLoad(options) {
-			this.storeTime = this.getDate()
+			this.storeTime = this.$getNewDate()
 			if(options.mode){
 				this.mode = options.mode
 			}else{
@@ -625,6 +625,58 @@
 			}
 		},
 		methods: {
+			tabNav(index) {
+				if(index == 1){
+					this.scrollTopId = 'description_box'
+				}else if(index == 2){
+					this.scrollTopId = 'price_box'
+				}else if(index == 3){
+					this.scrollTopId = 'origin_box'
+				}
+				setTimeout(()=>{
+					this.navIndex = index
+				},50)
+			},
+			scrollY(e){
+				if(e.target.scrollTop >= this.descriptionTop&&e.target.scrollTop <= this.priceTop){
+					this.navIndex = 1
+				}else if(e.target.scrollTop >= this.priceTop&&e.target.scrollTop <= this.originTop){
+					this.navIndex = 2
+				}else if(e.target.scrollTop >= this.originTop){
+					this.navIndex = 3
+				}
+			},
+			getBoxTop(){
+				uni.createSelectorQuery().select("#description_box").boundingClientRect((data) => {
+					this.descriptionTop = data.top-45
+				}).exec();
+				uni.createSelectorQuery().select("#price_box").boundingClientRect((data) => {
+					this.priceTop = data.top-45
+				}).exec();
+				uni.createSelectorQuery().select("#origin_box").boundingClientRect((data) => {
+					this.originTop = data.top-45
+				}).exec();
+			},
+			//普通选择器触发
+			pickerChang(e,type){
+				if(type == 'goodsType'){
+					this.goodsTypeIndex = e.detail.value
+				}else if(type == 'quality'){
+					this.qualityIndex = e.detail.value
+				}else if(type == 'originType'){
+					this.originTypeIndex = e.detail.value
+				}else if(type == 'storePlace'){
+					this.storePlaceIndex = e.detail.value
+				}else if(type == 'recycleUser'){
+					this.recycleUserIndex = e.detail.value
+				}else if(type == 'shortName'){
+					this.friendShopsIndex = e.detail.value
+				}
+			},
+			//时间选择器触发
+			datePickerChang(e){
+				this.storeTime = e
+			},
 			async getPickerArr(url){
 				let res = await this.$get({
 					url:url,
@@ -678,8 +730,9 @@
 				})
 				let goods = res.data.data
 				this.picList = []
+				console.log(goods.picList)
 				for(let item of goods.picList){
-					this.picList.push(this.$imgUrl+item.imagePath)
+					this.picList.push(item.imagePath)
 				}
 				this.dragShow=true
 	
@@ -749,74 +802,8 @@
 				
 				this.detailedDescription = goods.detailedDescription//商品详细描述
 			},
-			tabNav(index) {
-				if(index == 1){
-					this.scrollTopId = 'description_box'
-				}else if(index == 2){
-					this.scrollTopId = 'price_box'
-				}else if(index == 3){
-					this.scrollTopId = 'origin_box'
-				}
-				setTimeout(()=>{
-					this.navIndex = index
-				},50)
-			},
-			scrollY(e){
-				if(e.target.scrollTop >= this.descriptionTop&&e.target.scrollTop <= this.priceTop){
-					this.navIndex = 1
-				}else if(e.target.scrollTop >= this.priceTop&&e.target.scrollTop <= this.originTop){
-					this.navIndex = 2
-				}else if(e.target.scrollTop >= this.originTop){
-					this.navIndex = 3
-				}
-			},
-			getBoxTop(){
-				uni.createSelectorQuery().select("#description_box").boundingClientRect((data) => {
-					this.descriptionTop = data.top-45
-				}).exec();
-				uni.createSelectorQuery().select("#price_box").boundingClientRect((data) => {
-					this.priceTop = data.top-45
-				}).exec();
-				uni.createSelectorQuery().select("#origin_box").boundingClientRect((data) => {
-					this.originTop = data.top-45
-				}).exec();
-			},
 			updateList(list){
 				this.picList = list
-				console.log(this.picList)
-			},
-			//普通选择器触发
-			pickerChang(e,type){
-				if(type == 'goodsType'){
-					this.goodsTypeIndex = e.detail.value
-				}else if(type == 'quality'){
-					this.qualityIndex = e.detail.value
-				}else if(type == 'originType'){
-					this.originTypeIndex = e.detail.value
-				}else if(type == 'storePlace'){
-					this.storePlaceIndex = e.detail.value
-				}else if(type == 'recycleUser'){
-					this.recycleUserIndex = e.detail.value
-				}else if(type == 'shortName'){
-					this.friendShopsIndex = e.detail.value
-				}
-			},
-			//时间选择器触发
-			datePickerChang(e){
-				this.storeTime = e
-			},
-			getDate(){
-			const date = new Date();
-			let year = date.getFullYear();
-			let month = date.getMonth() + 1;
-			month = month > 9 ? month : '0' + month;
-			let day = date.getDate();
-			day = day > 9 ? day : '0' + day;
-			let hh = date.getHours()
-			hh = hh > 9 ? hh : '0' + hh;
-			let mm = date.getMinutes()
-			mm = mm > 9 ? mm : '0' + mm;
-			return `${year}-${month}-${day} ${hh}:${mm}:00`;
 			},
 			//是否开启合作同行共享弹窗
 			popupPeerSharing() {
@@ -972,7 +959,6 @@
 			
 			async save(){
 				uni.showLoading({title:'发布中...'})
-				console.log(this.picList)
 				if(this.goodsBrandId==''||this.goodsBrandId==null){
 					uni.hideLoading()
 					uni.showToast({
@@ -1029,7 +1015,16 @@
 					},100)
 					return
 				}
-				
+				let picList = []
+				for(let i=0;i<this.picList.length;i++){
+					let obj = {
+						
+						imagePath:this.picList[i],
+						sort:i+1
+					}
+					picList.push(obj)
+				}
+				console.log(picList)
 				let res = await this.$post({
 					url:'/goodsSku/save',
 					data:{
@@ -1062,7 +1057,7 @@
 						"peerPrice": this.peerPrice,
 						"costPrice": this.costPrice,
 						"peerSharing": this.peerSharing,
-						"picList": this.picList,
+						"picList": picList,
 						"quality": this.quality,
 						"qualityInfo": this.qualityInfo,
 						"recycleUserId": this.recycleUserId,

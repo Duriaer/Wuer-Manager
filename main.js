@@ -9,7 +9,6 @@ Vue.prototype.$url = url
 Vue.prototype.$get = get
 Vue.prototype.$post = post
 
-
 // 路由
 import {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toLogin,to401} from '@/api/router.js'
 Vue.prototype.$toPath = toPath
@@ -31,6 +30,10 @@ Vue.prototype.$previewImg = previewImg
 import {isObject,isArray} from '@/api/isObject.js'
 Vue.prototype.$isObject = isObject
 Vue.prototype.$isArray = isArray
+
+//时间
+import {getNewDate} from '@/api/date.js'
+Vue.prototype.$getNewDate = getNewDate
 
 Vue.config.productionTip = false
 
