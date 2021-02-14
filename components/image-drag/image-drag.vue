@@ -17,7 +17,7 @@
           :style="{ width: viewWidth + 'px', height: viewWidth + 'px', 'z-index': item.zIndex, opacity: item.opacity }"
         >
           <view class="area-con" :style="{ width: childWidth, height: childWidth, transform: 'scale(' + item.scale + ')' }">
-            <image class="pre-image" :src="$imgUrl+item.src" mode="aspectFill"></image>
+            <image class="pre-image" :src="$imgUrl+item.src.imagePath" mode="aspectFill"></image>
             <view class="del-con" @click="delImage(item, index)" @touchstart.stop="delImageMp(item, index)" @touchend.stop="nothing()" @mousedown.stop="nothing()" @mouseup.stop="nothing()">
               <view class="del-wrap">
                 <image class="del-image" src="../../static/addGoods/x.png"></image>
@@ -298,7 +298,7 @@ export default {
 							uni.hideLoading()
 						}
 						console.log(JSON.parse(uploadFileRes.data).data)
-						this.addProperties(JSON.parse(uploadFileRes.data).data[0].imagePath)
+						this.addProperties(JSON.parse(uploadFileRes.data).data[0])
 					}
 				});
               

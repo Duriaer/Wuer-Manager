@@ -729,11 +729,7 @@
 					url:'/goodsSku/detail?id='+this.goodsId,
 				})
 				let goods = res.data.data
-				this.picList = []
-				console.log(goods.picList)
-				for(let item of goods.picList){
-					this.picList.push(item.imagePath)
-				}
+				this.picList = goods.picList
 				this.dragShow=true
 	
 				this.goodsBrand = goods.goodsBrand//品牌
@@ -804,6 +800,7 @@
 			},
 			updateList(list){
 				this.picList = list
+				console.log(this.picList)
 			},
 			//是否开启合作同行共享弹窗
 			popupPeerSharing() {
@@ -1015,16 +1012,10 @@
 					},100)
 					return
 				}
-				let picList = []
 				for(let i=0;i<this.picList.length;i++){
-					let obj = {
-						
-						imagePath:this.picList[i],
-						sort:i+1
-					}
-					picList.push(obj)
+					this.picList[i].sort = i+1
 				}
-				console.log(picList)
+				console.log(this.picList)
 				let res = await this.$post({
 					url:'/goodsSku/save',
 					data:{
@@ -1057,7 +1048,7 @@
 						"peerPrice": this.peerPrice,
 						"costPrice": this.costPrice,
 						"peerSharing": this.peerSharing,
-						"picList": picList,
+						"picList": this.picList,
 						"quality": this.quality,
 						"qualityInfo": this.qualityInfo,
 						"recycleUserId": this.recycleUserId,
