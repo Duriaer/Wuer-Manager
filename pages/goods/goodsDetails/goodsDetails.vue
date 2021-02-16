@@ -305,11 +305,11 @@
 		onLoad(options) {
 			console.log(options)
 			this.goodsId = options.goodsId
-			this.getDetailArr()
+			this.getDetailObj()
 		},
 		methods:{
 			// 获取商品详情数据
-			async getDetailArr(){
+			async getDetailObj(){
 				let res = await this.$get({
 					url:'/goodsSku/detail?id='+this.goodsId,
 				})

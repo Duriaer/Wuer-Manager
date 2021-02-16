@@ -230,11 +230,11 @@
 										</view>
 										<view class="text">
 											<view class="top">
-												<text>{{item.shortName}}</text>
+												<text>{{item.cooperateShopName}}</text>
 											</view>
 											<view class="bot">
 												<text style="margin-right: 30rpx;">出资{{item.contributionAmount}}元</text>
-												<text>分润比例{{item.cooperatePercentage}}%</text>
+												<text>分润比例{{item.profitPercentage}}%</text>
 											</view>
 										</view>
 									</view>
@@ -256,14 +256,14 @@
 							<input v-model="costPrice" type="number" placeholder="请输入总成本价" />
 						</view>
 					</view>
-					<view class="line_input" v-if="originType=='CUSTOMER_CONSIGN'">
+					<!-- <view class="line_input" v-if="originType=='CUSTOMER_CONSIGN'">
 						<view class="line_name">
 							<text>总销售额</text>
 						</view>
 						<view class="right">
-							<input v-model="costPrice" type="number" placeholder="请输入总销售额" disabled/>
+							<input type="number" placeholder="请输入总销售额" disabled/>
 						</view>
-					</view>
+					</view> -->
 					<view class="line_picker">
 						<view class="line_name">
 							<text>存放地点</text>
@@ -359,10 +359,10 @@
 								<text>名称</text>
 							</view>
 							<view class="right">
-								<picker :value="friendShopsIndex" :range="friendShopsPickerArr" @change="pickerChang($event,'shortName')" >
+								<picker :value="friendShopsIndex" :range="friendShopsPickerArr" @change="pickerChang($event,'cooperateShopName')" >
 									<view class="picker">
 										<text class="noSet" v-if="!cooperateShopId">请选择</text>
-										<text v-else>{{shortName}}</text>
+										<text v-else>{{cooperateShopName}}</text>
 										<image src="../../../static/addGoods/go.png" ></image>
 									</view>
 								</picker>
@@ -381,7 +381,7 @@
 								<text>分润比例（%）</text>
 							</view>
 							<view class="right">
-								<input v-model="cooperatePercentage" type="number" placeholder="请输入" :focus="cooperatePercentageFocus" />
+								<input v-model="profitPercentage" type="number" placeholder="请输入" :focus="profitPercentageFocus" />
 							</view>
 						</view>
 					</view>
@@ -408,6 +408,7 @@
 				mode:'edit',//add 增加 edit编辑
 				goodsId:'',
 				token:uni.getStorageSync('token'),
+				shopUser: uni.getStorageSync("shopUser"),
 				
 				navIndex: 1,//导航栏index
 				scrollTopId:'',//滚动ID
@@ -480,10 +481,11 @@
 				//{
 				contributionAmount:'',//出资金额
 				contributionAmountFocus:false,
-				cooperatePercentage:'',//分润比例
-				cooperatePercentageFocus:false,
+				profitPercentage:'',//分润比例
+				profitPercentageFocus:false,
+				
 				cooperateShopId:'',//合作店铺id
-				shortName:'',//合作店铺简称
+				cooperateShopName:'',//合作店铺简称
 				friendShopsArr:[],//所有合作店铺
 				friendShopsPickerArr:[],//所有合作店铺选择器数组
 				friendShopsIndex:'',
@@ -501,13 +503,16 @@
 
 				recycleUserId:'',//回收员工id
 				recycleUserName:'',//回收员工用户名
-				shopUserArr:[],//所有员工 传id 获取
-				shopUserPickerArr:[],//所有员工选择器数组
 				recycleUserIndex:'',
-
 				checkupUserId:'',//鉴定员工id
 				checkupUserName:'',//鉴定员工用户名
 				checkupUserIndex:'',
+				
+				shopUserArr:[],//所有员工 传id 获取
+				shopUserPickerArr:[],//所有员工选择器数组
+				
+
+				
 				
 				storeTime:'',//入库完整时间(日期+时间),格式：yyyy-MM-dd HH:mm:ss
 
@@ -522,6 +527,7 @@
 			};
 		},
 		onLoad(options) {
+			console.log(this.shopUser)
 			this.storeTime = this.$getNewDate()
 			if(options.mode){
 				this.mode = options.mode
@@ -578,7 +584,7 @@
 					let cooTotal = 0
 					for(let item of val){
 						conTotal += Number(item.contributionAmount)
-						cooTotal += Number(item.cooperatePercentage)
+						cooTotal += Number(item.profitPercentage)
 					}
 					if(conTotal>=this.costPrice){
 						this.agentBtnShow = false
@@ -621,7 +627,7 @@
 			},
 			friendShopsIndex(val){
 				this.cooperateShopId = this.friendShopsArr[val].id
-				this.shortName = this.friendShopsArr[val].shortName
+				this.cooperateShopName = this.friendShopsArr[val].shortName
 			}
 		},
 		methods: {
@@ -669,7 +675,9 @@
 					this.storePlaceIndex = e.detail.value
 				}else if(type == 'recycleUser'){
 					this.recycleUserIndex = e.detail.value
-				}else if(type == 'shortName'){
+				}else if(type == 'checkupUser'){
+					this.checkupUserIndex = e.detail.value
+				}else if(type == 'cooperateShopName'){
 					this.friendShopsIndex = e.detail.value
 				}
 			},
@@ -698,8 +706,17 @@
 					}
 				}else if(url == '/shop/getStorePlaces'){
 					this.storePlaceArr = res.data.data
+					console.log(res.data.data)
 					for(let item of res.data.data){
 						this.storePlacePickerArr.push(item.storePlaceName)
+					}
+					if(this.mode == 'add'){
+						for(let i=0;i<this.storePlaceArr.length;i++){
+							if(this.storePlaceArr[i].storePlaceId==this.shopUser.shopId){
+								this.storePlaceIndex = i
+								break
+							}
+						}
 					}
 				}else if(url == '/goodsSku/getShopUserItems'){
 					this.shopUserArr = res.data.data
@@ -779,6 +796,7 @@
 				this.originType = goods.originType//商品来源(代码)
 				this.originTypeInfo = goods.originTypeInfo//商品来源说明
 				
+				this.storeInCurrShop = goods.storeInCurrShop
 				this.storePlaceId = goods.storePlaceId//存放地点id
 				this.storePlaceName = goods.storePlaceName//存放地点名称
 			
@@ -840,9 +858,9 @@
 					this.agentEdit = true
 					this.agentEditIndex = index
 					this.contributionAmount = this.cooperateSettings[index].contributionAmount
-					this.cooperatePercentage = this.cooperateSettings[index].cooperatePercentage
+					this.profitPercentage = this.cooperateSettings[index].profitPercentage
 					this.cooperateShopId = this.cooperateSettings[index].cooperateShopId
-					this.shortName = this.cooperateSettings[index].shortName
+					this.cooperateShopName = this.cooperateSettings[index].cooperateShopName
 				}
 				this.agentMaskShow = true
 			},
@@ -850,9 +868,9 @@
 				this.agentMaskShow = false
 				this.contributionAmount = ''
 				this.agentEditIndex = ''
-				this.cooperatePercentage = ''
+				this.profitPercentage = ''
 				this.cooperateShopId = ''
-				this.shortName = ''
+				this.cooperateShopName = ''
 			},
 			addAgent(type){
 				//type:0新增 1编辑
@@ -878,15 +896,15 @@
 					})
 					return
 				}
-				if(this.cooperatePercentage==''||this.cooperatePercentage==null){
+				if(this.profitPercentage==''||this.profitPercentage==null){
 					uni.showModal({
 						title:'注意',
 						content:'请填写分润比例',
 						showCancel:false,
 						success: (res) => {
-							this.cooperatePercentageFocus = false
+							this.profitPercentageFocus = false
 							setTimeout(()=>{
-								this.cooperatePercentageFocus = true
+								this.profitPercentageFocus = true
 							},100)
 						}
 					})
@@ -897,11 +915,11 @@
 				for(let [i,item] of this.cooperateSettings.entries()){
 					if(!type){
 						conTotal += Number(item.contributionAmount)
-						cooTotal += Number(item.cooperatePercentage)
+						cooTotal += Number(item.profitPercentage)
 					}else{
 						if(i!=this.agentEditIndex){
 							conTotal += Number(item.contributionAmount)
-							cooTotal += Number(item.cooperatePercentage)
+							cooTotal += Number(item.profitPercentage)
 						}
 					}
 				}
@@ -920,16 +938,16 @@
 					})
 					return
 				}
-				if((100 - cooTotal - this.cooperatePercentage) < 0){
+				if((100 - cooTotal - this.profitPercentage) < 0){
 					uni.showModal({
 						title:'注意',
 						content:'比例不能超过'+(100 - cooTotal)+'%',
 						showCancel:false,
 						success: (res) => {
 							this.contributionAmount = ''
-							this.cooperatePercentageFocus = false
+							this.profitPercentageFocus = false
 							setTimeout(()=>{
-								this.cooperatePercentageFocus = true
+								this.profitPercentageFocus = true
 							},100)
 						}
 					})
@@ -938,15 +956,20 @@
 				if(!type){
 					this.cooperateSettings.push({
 						contributionAmount:this.contributionAmount,
-						cooperatePercentage:this.cooperatePercentage,
 						cooperateShopId:this.cooperateShopId,
-						shortName:this.shortName,
+						cooperateShopName:this.cooperateShopName,
+						goodsSkuId:this.goodsId,
+						launchShopId:this.shopUser.shopId,
+						launchShopName:this.shopUser.shopName,
+						// profitAmount:this.costPrice * this.profitPercentage / 100
+						profitPercentage:this.profitPercentage,
 					})
 				}else{
 					this.cooperateSettings[this.agentEditIndex].contributionAmount = this.contributionAmount
-					this.cooperateSettings[this.agentEditIndex].cooperatePercentage = this.cooperatePercentage
 					this.cooperateSettings[this.agentEditIndex].cooperateShopId = this.cooperateShopId
-					this.cooperateSettings[this.agentEditIndex].shortName = this.shortName
+					this.cooperateSettings[this.agentEditIndex].cooperateShopName = this.cooperateShopName
+					this.cooperateSettings[this.agentEditIndex].profitPercentage = this.profitPercentage
+					
 				}
 				this.hideAgent()
 			},
@@ -1063,8 +1086,12 @@
 					},
 				})
 				uni.hideLoading()
-				console.log(res)
 				if(res.data.succeed){
+					if(this.mode == 'edit'){
+						this.$store.commit('setUpGoodsId',this.goodsId)
+					}else if(this.mode == 'add'){
+						this.$store.commit('setUpGoodsId','all')
+					}
 					uni.showToast({title:'发布成功'})
 					setTimeout(()=>{
 						this.$back()

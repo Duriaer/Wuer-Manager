@@ -8,7 +8,9 @@ const store = new Vuex.Store({
 		upGoodsId:''
 	},
 	mutations: {
-		
+		setUpGoodsId(state,value){
+			state.upGoodsId = value
+		}
 	},
 	actions: {
 		

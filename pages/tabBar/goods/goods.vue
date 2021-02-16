@@ -198,7 +198,7 @@
 							<image src="../../../static/goods/xd.png"></image>
 							<text>下单</text>
 						</view>
-						<view class="window-li"  @tap.stop="$editGoods(item.id)">
+						<view class="window-li"  @tap.stop="editGoods(item.id)">
 							<image src="../../../static/goods/bj.png"></image>
 							<text>编辑</text>
 						</view>
@@ -340,14 +340,24 @@
 			this.getOriginTypeArr()
 			this.getStorePlaceArr()
 			this.getQualityArr()
-			this.getGoodArr()
+			uni.startPullDownRefresh()
 		},
 		onShow() {
 			if(this.$store.state.upGoodsId == 'all'){
-				
-			}else if(this.$store.state.upGoodsId){
-				
+				uni.pageScrollTo({
+				    scrollTop: 0,
+				    duration: 100
+				});
+				uni.startPullDownRefresh()
+				this.$store.commit('setUpGoodsId','')
+			}else if(this.$store.state.upGoodsId&&typeof(this.$store.state.upGoodsId*1)=='number'&&this.$store.state.upGoodsId*1!=NaN){
+				this.replaceDetailObj(this.$store.state.upGoodsId)
+			}else{
+				console.log('空')
 			}
+		},
+		onPullDownRefresh(){
+			this.getGoodArr()
 		},
 		onReachBottom(){
 			this.addGoodArr()
@@ -389,7 +399,6 @@
 							this.originTypeList.push(val[i].itemValue)
 						}
 					}
-					// console.log(val)
 				},
 				deep:true
 			},
@@ -443,7 +452,7 @@
 		},
 		methods:{
 			async getGoodArr(){
-				uni.showLoading()
+				// uni.showLoading()
 				let params = {
 					sort: "",
 					pageNo: 1,
@@ -460,8 +469,8 @@
 					url:'/goodsSku/list',
 					data:params,
 				})
-				uni.hideLoading()
-				console.log(res.data.data)
+				// uni.hideLoading()
+				uni.stopPullDownRefresh()
 				if(res.data.succeed&&res.data.status){
 					let data = res.data.data
 					this.hasTotal = data.hasTotal
@@ -513,6 +522,24 @@
 					}
 				}
 			},
+			// 获取商品详情数据
+			async replaceDetailObj(goodsId){
+				console.log(goodsId)
+				let res = await this.$get({
+					url:'/goodsSku/detail?id='+goodsId,
+				})
+				console.log(res.data.data)
+				if(res.data.succeed){
+					for(let i=0;i<this.goodsArr.length;i++){
+						if(this.goodsArr[i].id==goodsId){
+							res.data.data.windowShow = false
+							this.goodsArr.splice(i,1,res.data.data)
+							this.$store.commit('setUpGoodsId','')
+							return
+						}
+					}
+				}
+			},
 			async getCount(){
 				let params = {
 					goodsTypeIdList:this.goodsTypeIdList,// 所选分类id
@@ -526,7 +553,6 @@
 					url:'/goodsSku/getCountByCondition',
 					data:params,
 				})
-				console.log(res.data)
 				if(res.data.succeed&&res.data.status){
 					this.rightCount = res.data.data
 					
@@ -644,8 +670,14 @@
 					}
 					this.qualityArr = res.data.data
 			},
+			//编辑商品
+			editGoods(goodsId){
+				this.hideWindow()
+				this.$editGoods(goodsId)
+			},
 			//删除商品
 			delGoods(goodsId){
+				this.hideWindow()
 				uni.showModal({
 					title: '提示',
 					content: '确实要删除商品吗？',
