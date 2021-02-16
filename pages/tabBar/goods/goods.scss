@@ -206,7 +206,8 @@
 	padding-right: 10rpx;
 	margin-bottom: 52rpx;
 	&:last-of-type{
-		margin-bottom: 0;
+		margin-bottom: 152rpx;
+		// margin-bottom: 0;
 	}
 	.img{
 		position: relative;
@@ -367,6 +368,7 @@
 	.window{
 		position: absolute;
 		top: 220rpx;
+		// bottom: 50rpx;
 		left: 0;
 		z-index: 3;
 		.window-ul{
