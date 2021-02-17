@@ -26,7 +26,7 @@
 		,{
 			"path": "pages/tabBar/goods/goods",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "商品",
 				"enablePullDownRefresh":true,
 				"app-plus": {
 					"titleNView": false,//禁用原生导航栏
@@ -38,8 +38,9 @@
 	    ,{
             "path" : "pages/tabBar/order/order",
             "style" :{
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "订单",
 				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh":true,
 				"app-plus": {
 					"titleNView": false,//禁用原生导航栏
 					"bounce":"none",
@@ -113,6 +114,7 @@
 						"navigationBarTitleText": "销售单信息",
 						"navigationBarBackgroundColor":"#FFFFFF",
 						"navigationBarTextStyle":"black",
+						"enablePullDownRefresh":true,
 						"app-plus": {
 							"bounce":"none",
 							"scrollIndicator": "none"
