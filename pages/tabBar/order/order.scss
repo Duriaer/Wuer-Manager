@@ -1,7 +1,7 @@
 .order-box{
 	font-family: PingFang SC;
 	color: #333333;
-	height: 100vh;
+	// height: 100vh;
 	background: #F9F9F9;
 }
 .status{
@@ -136,14 +136,18 @@
 				display: flex;
 				flex-direction: column;
 				font-size: 24rpx;
-				line-height: 38rpx;
+				line-height: 36rpx;
 				color: #8F8F8F;
 				.title{
-					font-size: 28rpx;
+					font-size: 26rpx;
 					color: #333333;
 					font-weight: 500;
-					line-height: 40rpx;
-					margin-bottom: 10rpx;
+					line-height: 34rpx;
+					margin-bottom: 12rpx;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2;
+					overflow: hidden;
 				}
 			}
 		}

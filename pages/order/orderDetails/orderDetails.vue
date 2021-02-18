@@ -5,14 +5,14 @@
 				<text>商品</text>
 				<image src="../../../static/addGoods/go.png"></image>
 			</view>
-			<view class="content">
+			<view class="content" >
 				<view class="top">
 					<view class="img">
-						<image src="../../../static/addGoods/add.png"></image>
+						<image :src="$imgUrl+pic.imagePath"></image>
 					</view>
 					<view class="middle">
 						<view class="goods-title">
-							<text style="margin-left: -10rpx;">【99新】GUCCI 迷你手提包</text>
+							<text style="margin-left: -10rpx;">【{{order.qualityInfo}}】{{order.name}}</text>
 						</view>
 						<view class="label">
 							<!-- <view class="label_li" v-if="item.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
@@ -39,13 +39,10 @@
 							<!-- <view class="label_li">
 								<text>{{item.goodsTypeName}}</text>
 							</view> -->
-							<view class="label_li">
-								<text>拉啊啦啦</text>
-							</view>
 						</view>
 						<view class="address">
 							<image src="../../../static/goods/coordinate.png"></image>
-							<text>什么什么店</text>
+							<text>{{order.storePlaceName}}</text>
 						</view>
 					</view>
 					<view class="right">
@@ -56,7 +53,7 @@
 					<view class="li">
 						<text>销售价</text>
 						<text class="symbol">¥</text>
-						<text>155862</text>
+						<text>{{order.salePrice}}</text>
 					</view>
 					<view class="li">
 						<text>优惠</text>
@@ -66,7 +63,7 @@
 					<view class="li">
 						<text class="paid">实付价</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
-						<text class="price">155262</text>
+						<text class="price">{{data.actualPaidAmount}}</text>
 					</view>
 				</view>
 			</view>
@@ -82,7 +79,7 @@
 						<text>单号</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.orderNo}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -90,7 +87,7 @@
 						<text>实付金额（元）</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.actualPaidAmount}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -98,7 +95,7 @@
 						<text>客户类型</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.customerTypeDesc}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -106,7 +103,7 @@
 						<text>客户名称</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.customerName}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -114,7 +111,7 @@
 						<text>销售员工</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.operatorName}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -122,7 +119,7 @@
 						<text>销售日期</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.orderTime}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -130,7 +127,7 @@
 						<text>发货方式</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.deliveryMethodDesc}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -233,20 +230,34 @@
 	export default {
 		data() {
 			return {
+				token:uni.getStorageSync('token'),
+				id:'',
+				data:{
+					
+				},
+				order:{
+					
+				},
+				pic:'',
 				popupMaskShow: false //弹窗蒙层
 			};
 		},
-		onLoad(){
-			this.getOrderDetailsArr()
+		onLoad(options){
+			console.log(options)
+			this.id = options.id
+			this.getOrderDetails()
 		},
 		methods:{
 			//获取订单详情数据
-			async getOrderDetailsArr(){
+			async getOrderDetails(){
 					let res = await this.$get({
-						url:'/shopOrder/detail?id=27',
+						url:'/shopOrder/detail?id='+this.id,
 					})
-					// console.log(res.data.data)
-					this.orderDetailsArr = res.data.data
+					this.data = res.data.data
+					this.order = res.data.data.items[0].goodsSku
+					this.pic = this.order.picList[0]
+					console.log(res.data.data)
+					console.log(res.data.data.items[0].goodsSku)
 			},
 			//弹窗
 			showPopup(){

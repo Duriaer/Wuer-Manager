@@ -48,14 +48,15 @@
 		</view>
 		<!-- 销售单 -->
 		<view class="order_ul">
-			<view class="order_li" v-for="(item,index) in orderArr" :key="index">
+			<view class="order_li" v-for="(item,index) in orderArr" :key="index"  @tap.stop="$toOrder(item.id)">
 				<view class="right">
 					<view class="img">
 						<image :src="item.mainItem.imageUrl" lazy-load></image>
 					</view>
 					<view class="details">
 						<view class="title">
-							<text v-if="item.mainItem.qualityInfo" style="margin-left: -10rpx;">【{{item.mainItem.qualityInfo}}】</text>{{item.mainItem.name}} 
+							<text v-if="item.mainItem.qualityInfo" style="margin-left: -10rpx;">【{{item.mainItem.qualityInfo}}】</text>
+							{{item.mainItem.name}}
 						</view>
 						<text>销售时间:{{item.orderTime}}</text>
 						<text>销售员工:{{item.operatorName}}</text>
@@ -75,10 +76,13 @@
 					</view>
 					<view class="centre">
 						<text class="symbol">¥</text>
-						<text>10000</text>
+						<text>{{item.sumPrice}}</text>
 					</view>
 					<view class="bot">
-						<text>实收款</text>
+						<text v-if="item.orderStatus==2&&navIndex!=2">实收款</text>
+						<text v-if="item.orderStatus==2&&navIndex==2">定金</text>
+						<text v-if="item.orderStatus==3&&navIndex==2">定金</text>
+						<text v-if="item.orderStatus==5">退款</text>
 					</view>
 				</view>
 			</view>
@@ -107,6 +111,7 @@
 				totalCount:'',
 				totalSaleAmount:'',
 				totalGrossProfits:'',
+				sumPrice:'',
 				orderArr:[],
 			};
 		},
@@ -141,6 +146,7 @@
 				this.totalCount = ''
 				this.totalSaleAmount = ''
 				this.totalGrossProfits =''
+				this.sumPrice = ''
 				uni.startPullDownRefresh()
 				console.log(index)
 			},
@@ -164,11 +170,12 @@
 				})
 				// uni.hideLoading()
 				uni.stopPullDownRefresh()
-				console.log(res.data)
+				// console.log(res.data)
 				let data = res.data.data
-				this.totalCount = data.totalCount
+				this.totalCount = data.totalCount,
 				this.totalSaleAmount = data.totalSaleAmount,
 				this.totalGrossProfits = data.totalGrossProfits,
+				this.sumPrice = data.sumPrice,
 				uni.pageScrollTo({
 				    scrollTop: 0,
 				    duration: 100
@@ -176,19 +183,16 @@
 				for(let item of data.pageData.records){
 					if(item.items.length>0&&item.items[0].goodsSku){
 						item.mainItem = item.items[0].goodsSku
-						if (item.mainItem.name.length > 24) {
-						    item.mainItem.name = item.mainItem.name.substring(0, 21) + '...';
-						}
 						item.mainItem.imageUrl = this.$imgUrl+item.items[0].goodsSku.picList[0].imagePath
 					}else{
-						iitem.mainItem = {
+						item.mainItem = {
 							name:'',
 							imageUrl:'',
 							qualityInfo:'',
 						}
 					}
 				}
-				console.log(data.pageData.records)
+				// console.log(data.pageData.records)
 				this.orderArr = data.pageData.records
 			},
 			//下滑订单详情数据
@@ -215,9 +219,6 @@
 					for(let item of data.pageData.records){
 						if(item.items.length>0&&item.items[0].goodsSku){
 							item.mainItem = item.items[0].goodsSku
-							if (item.mainItem.name.length > 24) {
-							    item.mainItem.name = item.mainItem.name.substring(0, 21) + '...';
-							}
 							item.mainItem.imageUrl = this.$imgUrl+item.items[0].goodsSku.picList[0].imagePath
 						}else{
 							iitem.mainItem = {

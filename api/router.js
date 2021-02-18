@@ -36,6 +36,12 @@ function editGoods(id){
 	})
 }
 
+function toOrder(id){
+	uni.navigateTo({
+		url:"/pages/order/orderDetails/orderDetails?id="+id,
+	})
+}
+
 function toLogin(){
 	uni.navigateTo({
 		url:"/pages/my/login/login"
@@ -55,4 +61,4 @@ function to401(){
 	},1000)
 }
 
-export {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toLogin,to401}
+export {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toOrder,toLogin,to401}
