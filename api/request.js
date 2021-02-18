@@ -1,5 +1,6 @@
 // 正式接口
-let url = "https://www.dreamer2020.site/wuerboss/api"
+// let url = "https://www.dreamer2020.site/wuerboss/api"
+let url = "http://www.dreamer2020.site/wuerboss/api"
 
 async function get(obj){
 	let [error, res] = await uni.request({

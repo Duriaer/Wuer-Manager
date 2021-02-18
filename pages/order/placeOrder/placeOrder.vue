@@ -12,7 +12,7 @@
 			</view>
 			<view class="line_picker">
 				<view class="line_name">
-					<text>客户名称</text>
+					<text>客户名称</text><!-- 默认匿名 -->
 				</view>
 				<view class="right">
 					<picker>
@@ -29,10 +29,10 @@
 					<text>销售员工</text>
 				</view>
 				<view class="right">
-					<picker>
+					<picker :value="shopUserIndex" :range="shopUserPickerArr" @change="pickerChang($event,'shopUser')" >
 						<view class="picker">
-							<text class="noSet">请选择</text>
-							<text ></text>
+							<text class="noSet" v-if="!shopUserId">请选择</text>
+							<text v-else>{{shopUserName}}</text>
 							<image src="../../../static/addGoods/go.png" ></image>
 						</view>
 					</picker>
@@ -92,10 +92,10 @@
 		<view class="payment">
 			<view class="line_picker">
 				<view class="line_name">
-					<text>实付金额(元)</text>
+					<text>实付金额(元)</text><!-- realPrice -->
 				</view>
 				<view class="right">
-					<input  type="text" placeholder="请输入" />
+					<input type="text" placeholder="请填写金额" />
 				</view>
 			</view>
 			<view class="line_picker">
@@ -103,10 +103,10 @@
 					<text>发货方式</text>
 				</view>
 				<view class="right">
-					<picker>
+					<picker :value="deliveryIndex" :range="deliveryPickerArr" @change="pickerChang($event,'delivery')" >
 						<view class="picker">
-							<text class="noSet">请选择</text>
-							<text></text>
+							<text class="noSet" v-if="!delivery">请选择</text>
+							<text v-else>{{deliveryInfo}}</text>
 							<image src="../../../static/addGoods/go.png" ></image>
 						</view>
 					</picker>
@@ -117,11 +117,33 @@
 					<text>备注</text>
 				</view>
 				<view class="textarea">
-					<textarea  placeholder="请输入" maxlength="100" />
+					<textarea  placeholder="请输入" maxlength="100"/>
 					<text class="count">0/200</text>
 				</view>
 			</view>
+			<view class="line_img">
+				<view class="line_name">
+					<view class="left">
+						<text>附件</text>
+					</view>
+					<text class="right">0/3 张</text>
+				</view>
+				<view class="img_ul">
+					<image src="../../../static/addGoods/add.png" mode="aspectFill"></image>
+				</view>
+			</view>
 		</view>
+		<view class="bot">
+			<view class="left">
+				<text class="paid">合计</text>
+				<text class="symbol">¥</text>
+				<text class="price">108500</text>
+			</view>
+			<view class="right">
+				<text>下单</text>
+			</view>
+		</view>
+		<view class="safety"></view>
 	</view>
 </template>
 
@@ -129,12 +151,64 @@
 	export default {
 		data() {
 			return {
-				customertype:'',//客户类型 客人/同行
+				customertype:false,//客户类型 客人/同行
+				
+				shopUserId:'',//所有员工id
+				shopUserName:'',//所有员工名
+				shopUserArr:[],//所有员工 传id 获取
+				shopUserPickerArr:[],//所有员工选择器数组
+				shopUserIndex:'',
+				
+				delivery:'',//发货方式
+				deliveryInfo:'',//发货方式描述
+				deliveryArr:[],//发货方式数组
+				deliveryPickerArr:[],//发货方式选择器数组
+				deliveryIndex:'',
 			};
+		},
+		onLoad() {
+			this.getPickerArr('/goodsSku/getShopUserItems')
+			this.getPickerArr('/goodsSku/getDeliveryMethodItems')
+			
+		},
+		watch:{
+			deliveryIndex(val){
+				this.delivery = this.deliveryArr[val].itemValue
+				this.deliveryInfo = this.deliveryArr[val].itemName
+			},
+			shopUserIndex(val){
+				this.shopUserId = this.shopUserArr[val].id
+				this.shopUserName = this.shopUserArr[val].username
+			}
 		},
 		methods:{
 			tabCustomertype(type){
 				this.customertype = type
+			},
+			//普通选择器触发
+			pickerChang(e,type){
+				if(type == 'shopUser'){
+					this.shopUserIndex = e.detail.value
+				}else if(type == 'delivery'){
+					this.deliveryIndex = e.detail.value
+				}
+			},
+			//获取选择器数组
+			async getPickerArr(url){
+				let res = await this.$get({
+					url:url,
+				})
+				if(url == '/goodsSku/getShopUserItems'){
+					this.shopUserArr = res.data.data
+					for(let item of res.data.data){
+						this.shopUserPickerArr.push(item.username)
+					}
+				}else if(url == '/goodsSku/getDeliveryMethodItems'){
+					this.deliveryArr = res.data.data
+					for(let item of res.data.data){
+						this.deliveryPickerArr.push(item.itemName)
+					}
+				}
 			},
 		}
 	}

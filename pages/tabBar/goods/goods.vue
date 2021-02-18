@@ -194,11 +194,11 @@
 				</view>
 				<view class="window" v-if="item.windowShow">
 					<view class="window-ul">
-						<view class="window-li">
+						<view class="window-li" @tap.stop="$toPlaceOrder(item.id)">
 							<image src="../../../static/goods/xd.png"></image>
 							<text>下单</text>
 						</view>
-						<view class="window-li"  @tap.stop="editGoods(item.id)">
+						<view class="window-li" @tap.stop="editGoods(item.id)">
 							<image src="../../../static/goods/bj.png"></image>
 							<text>编辑</text>
 						</view>
@@ -282,6 +282,17 @@
 								</view>
 							</view>
 						</view>
+						<!-- 现有品牌 -->
+						<!-- <view class="filterRightUlBox" v-if="qualityArr.length">
+							<view class="ulBox_top">
+								<text class="left">品牌</text>
+							</view>
+							<view class="ul">
+								<view class="list" :class="item.selected?'active':''" v-for="(item,index) in qualityArr" :key="index" @tap.stop="selectItem(qualityArr,index)">
+									<text>{{item.itemName}}</text>
+								</view>
+							</view>
+						</view> -->
 					</scroll-view>
 				</view>
 				<view class="box_bot">

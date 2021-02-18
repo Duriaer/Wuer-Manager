@@ -48,7 +48,7 @@
 		</view>
 		<!-- 销售单 -->
 		<view class="order_ul">
-			<view class="order_li" v-for="(item,index) in orderArr" :key="index"  @tap.stop="$toOrder(item.id)">
+			<view class="order_li" v-for="(item,index) in orderArr" :key="index"  @tap.stop="$toOrderDetails(item.id)">
 				<view class="right">
 					<view class="img">
 						<image :src="item.mainItem.imageUrl" lazy-load></image>

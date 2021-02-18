@@ -56,14 +56,9 @@
 						<text>{{order.salePrice}}</text>
 					</view>
 					<view class="li">
-						<text>优惠</text>
-						<text class="symbol">¥</text>
-						<text>600</text>
-					</view>
-					<view class="li">
 						<text class="paid">实付价</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
-						<text class="price">{{data.actualPaidAmount}}</text>
+						<text class="price">{{data.realPrice}}</text>
 					</view>
 				</view>
 			</view>
@@ -87,7 +82,7 @@
 						<text>实付金额（元）</text>
 					</view>
 					<view class="right">
-						<text>{{data.actualPaidAmount}}</text>
+						<text>{{data.realPrice}}</text>
 					</view>
 				</view>
 				<view class="li">
@@ -100,7 +95,7 @@
 				</view>
 				<view class="li">
 					<view class="left">
-						<text>客户名称</text>
+						<text>客户名称</text><!-- 默认匿名 -->
 					</view>
 					<view class="right">
 						<text>{{data.customerName}}</text>
@@ -135,13 +130,13 @@
 						<text>备注</text>
 					</view>
 					<view class="right">
-						<text></text>
+						<text>{{data.remark}}</text>
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 退货详情 -->
-		<view class="details">
+		<!-- <view class="details">
 			<view class="title">
 				<text>退货详情</text>
 			</view>
@@ -179,7 +174,7 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<view class="bottom-but">
 			<view class="left">
 				<text>编辑</text>

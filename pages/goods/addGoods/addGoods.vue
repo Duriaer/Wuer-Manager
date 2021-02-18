@@ -22,7 +22,7 @@
 			<view id="description_box" style="margin-top: 16rpx;">
 				<view class="id_title">
 					<text>商品描述</text>
-				</view>
+				</view> 
 				<view class="ul">
 					<view class="line_img">
 						<view class="line_name">
@@ -37,7 +37,6 @@
 								<view class="drag_mask" @tap.stop.prevent></view>
 								<image-drag></image-drag>
 							</view>
-							
 						</view>
 					</view>
 					<view id="goodsBrand" class="line_picker">
@@ -685,6 +684,7 @@
 			datePickerChang(e){
 				this.storeTime = e
 			},
+			//获取选择器数组
 			async getPickerArr(url){
 				let res = await this.$get({
 					url:url,

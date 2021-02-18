@@ -72,6 +72,7 @@ page{
 			}
 		}
 	}
+	.line_img,
 	.line_textarea{
 		display: flex;
 		flex-direction: column;
@@ -111,6 +112,34 @@ page{
 			}
 		}
 		
+	}
+	.line_img{
+		border-bottom:0;
+		.line_name{
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			width: 100%;
+			margin-bottom: 20rpx;
+			.right{
+				font-size: 20rpx;
+				line-height: 20rpx;
+				color: #CECECE;
+			}
+		}
+		.img_ul{
+			width: 100%;
+			display: flex;
+			image{
+				width: 218rpx;
+				height: 218rpx;
+				border-radius: 4px;
+				margin-right: 22rpx;
+				&:last-of-type{
+					margin-right: 0;
+				}
+			}
+		}
 	}
 	.payment,
 	.group{
@@ -201,10 +230,48 @@ page{
 					.price{
 						font-size: 30rpx;
 						color: #EFA22A;
-						margin-bottom: -5rpx;
 					}
 				}
 			}
 		}
 	}
+	.bot{
+		width: 750rpx;
+		height: 100rpx;
+		box-sizing: border-box;
+		padding: 0 24rpx;
+		margin-top: 200rpx;
+		background: #FFFFFF;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.left{
+			.paid{
+				font-size: 24rpx;
+				margin-right: 6rpx;
+			}
+			.symbol{
+				font-size: 15rpx;
+				color: #EFA22A;
+				margin-bottom: 2rpx;
+			}
+			.price{
+				font-size: 30rpx;
+				color: #EFA22A;
+			}
+		}
+		.right{
+			width: 340rpx;
+			height: 76rpx;
+			font-size: 32rpx;
+			color: #FFFFFF;
+			background: #57BFA3;
+			border-radius: 4px;
+			text-align: center;
+			line-height: 76rpx;
+		}
+	}
+}
+.safety{
+	background: #FFFFFF;
 }
