@@ -15,30 +15,30 @@
 							<text style="margin-left: -10rpx;">【{{order.qualityInfo}}】{{order.name}}</text>
 						</view>
 						<view class="label">
-							<!-- <view class="label_li" v-if="item.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
-								<text>{{item.originTypeInfo}}</text>
+							<view class="label_li" v-if="order.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
+								<text>{{order.originTypeInfo}}</text>
 							</view>
-							<view class="label_li" v-else-if="item.originTypeInfo=='回收客人'" style="background:#EFF7FF ;color: #759FFF;">
-								<text>{{item.originTypeInfo}}</text>
+							<view class="label_li" v-else-if="order.originTypeInfo=='回收客人'" style="background:#EFF7FF ;color: #759FFF;">
+								<text>{{order.originTypeInfo}}</text>
 							</view>
-							<view class="label_li" v-else-if="item.originTypeInfo=='客人寄售'" style="background:#FFF3E2 ;color: #EFA22A;">
-								<text>{{item.originTypeInfo}}</text>
+							<view class="label_li" v-else-if="order.originTypeInfo=='客人寄售'" style="background:#FFF3E2 ;color: #EFA22A;">
+								<text>{{order.originTypeInfo}}</text>
 							</view>
-							<view class="label_li" v-else-if="item.originTypeInfo=='合作销售'" style="background:#FFF0F5 ;color: #DDA0DD;">
-								<text>{{item.originTypeInfo}}</text>
-							</view> -->
+							<view class="label_li" v-else-if="order.originTypeInfo=='合作销售'" style="background:#FFF0F5 ;color: #DDA0DD;">
+								<text>{{order.originTypeInfo}}</text>
+							</view>
 							<!-- 自定义标签 -->
-							<!-- <view class="label_li labal_li2" v-if="item.customLabelList!=null&&item.customLabelList!=''">
-								<text>{{item.customLabelList}}</text>
+							<!-- <view class="label_li labal_li2" v-if="order.customLabelList!=null&&item.customLabelList!=''">
+								<text>{{order.customLabelList}}</text>
 							</view> -->
 							<!-- 品牌标签 -->
-							<!-- <view class="label_li">
-								<text>{{item.goodsBrandName}}</text>
-							</view> -->
+							<view class="label_li">
+								<text>{{order.goodsBrandName}}</text>
+							</view>
 							<!-- 分类标签 -->
-							<!-- <view class="label_li">
-								<text>{{item.goodsTypeName}}</text>
-							</view> -->
+							<view class="label_li">
+								<text>{{order.goodsTypeName}}</text>
+							</view>
 						</view>
 						<view class="address">
 							<image src="../../../static/goods/coordinate.png"></image>
@@ -253,10 +253,10 @@
 					let res = await this.$get({
 						url:'/shopOrder/detail?id='+this.id,
 					})
+					console.log(res.data.data)
 					this.data = res.data.data
 					this.order = res.data.data.items[0].goodsSku
 					this.pic = this.order.picList[0]
-					console.log(res.data.data)
 					console.log(res.data.data.items[0].goodsSku)
 			},
 			//弹窗
