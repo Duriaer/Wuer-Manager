@@ -228,6 +228,7 @@
 		data() {
 			return {
 				token:uni.getStorageSync('token'),
+				shopId: uni.getStorageSync("shopUser").shopId,
 				id:'',
 				ord:{
 					

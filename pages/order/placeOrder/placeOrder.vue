@@ -151,6 +151,8 @@
 		data() {
 			return {
 				token:uni.getStorageSync('token'),
+				shopUser: uni.getStorageSync("shopUser"),
+				shopId: uni.getStorageSync("shopUser").shopId,
 				
 				goods:{
 					

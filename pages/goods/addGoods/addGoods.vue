@@ -943,7 +943,7 @@
 						content:'比例不能超过'+(100 - cooTotal)+'%',
 						showCancel:false,
 						success: (res) => {
-							this.contributionAmount = ''
+							this.profitPercentage = ''
 							this.profitPercentageFocus = false
 							setTimeout(()=>{
 								this.profitPercentageFocus = true
