@@ -194,7 +194,7 @@
 				</view>
 				<view class="window" v-if="item.windowShow">
 					<view class="window-ul">
-						<view class="window-li" @tap.stop="$toPlaceOrder(item.id)">
+						<view class="window-li" @tap.stop="toPlaceOrder(item.id)">
 							<image src="../../../static/goods/xd.png"></image>
 							<text>下单</text>
 						</view>
@@ -680,6 +680,11 @@
 						res.data.data[i].selected = false
 					}
 					this.qualityArr = res.data.data
+			},
+			//下单
+			toPlaceOrder(goodsId){
+				this.hideWindow()
+				this.$toPlaceOrder(goodsId)
 			},
 			//编辑商品
 			editGoods(goodsId){

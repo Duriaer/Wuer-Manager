@@ -349,7 +349,11 @@
 					}
 				}
 				.dot_ul{
+					width: 80rpx;
+					height: 30rpx;
 					display: flex;
+					align-items: center;
+					justify-content: flex-end;
 					.dot{
 						width: 8rpx;
 						height: 8rpx;

@@ -58,7 +58,7 @@
 					<view class="li">
 						<text class="paid">实付价</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
-						<text class="price">{{data.realPrice}}</text>
+						<text class="price">{{ord.realPrice}}</text>
 					</view>
 				</view>
 			</view>
@@ -69,68 +69,68 @@
 				<text>订单详情</text>
 			</view>
 			<view class="ul">
-				<view class="li">
+				<view class="li" v-if="ord.orderNo">
 					<view class="left">
 						<text>单号</text>
 					</view>
 					<view class="right">
-						<text>{{data.orderNo}}</text>
+						<text>{{ord.orderNo}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.realPrice">
 					<view class="left">
 						<text>实付金额（元）</text>
 					</view>
 					<view class="right">
-						<text>{{data.realPrice}}</text>
+						<text>{{ord.realPrice}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.customerTypeDesc">
 					<view class="left">
 						<text>客户类型</text>
 					</view>
 					<view class="right">
-						<text>{{data.customerTypeDesc}}</text>
+						<text>{{ord.customerTypeDesc}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.customerName">
 					<view class="left">
-						<text>客户名称</text><!-- 默认匿名 -->
+						<text>客户名称</text>
 					</view>
 					<view class="right">
-						<text>{{data.customerName}}</text>
+						<text>{{ord.customerName}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.operatorName">
 					<view class="left">
 						<text>销售员工</text>
 					</view>
 					<view class="right">
-						<text>{{data.operatorName}}</text>
+						<text>{{ord.operatorName}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.orderTime">
 					<view class="left">
 						<text>销售日期</text>
 					</view>
 					<view class="right">
-						<text>{{data.orderTime}}</text>
+						<text>{{ord.orderTime}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.deliveryMethodDesc">
 					<view class="left">
 						<text>发货方式</text>
 					</view>
 					<view class="right">
-						<text>{{data.deliveryMethodDesc}}</text>
+						<text>{{ord.deliveryMethodDesc}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="ord.remark">
 					<view class="left">
 						<text>备注</text>
 					</view>
 					<view class="right">
-						<text>{{data.remark}}</text>
+						<text>{{ord.remark}}</text>
 					</view>
 				</view>
 			</view>
@@ -175,16 +175,19 @@
 				</view>
 			</view>
 		</view> -->
-		<view class="bottom-but">
-			<view class="left">
-				<text>编辑</text>
+		<view class="botBox">
+			<view class="bottom-but">
+				<view class="left">
+					<text>编辑</text>
+				</view>
+				<!-- <view class="middle">
+					<text>取消</text>
+				</view> -->
+				<view class="right" @tap.stop="showPopup()">
+					<text>退货</text>
+				</view>
 			</view>
-			<!-- <view class="middle">
-				<text>取消</text>
-			</view> -->
-			<view class="right" @tap.stop="showPopup()">
-				<text>退货</text>
-			</view>
+			<view class="safety"></view>
 		</view>
 		<view class="popupMask" v-if="popupMaskShow" @touchmove.prevent @tap.stop="hidePopup()">
 			<view class="popup" @tap.stop>
@@ -217,7 +220,6 @@
 				<view class="safety"></view>
 			</view>
 		</view>
-		<view class="safety"></view>
 	</view>
 </template>
 
@@ -227,7 +229,7 @@
 			return {
 				token:uni.getStorageSync('token'),
 				id:'',
-				data:{
+				ord:{
 					
 				},
 				order:{
@@ -249,7 +251,7 @@
 						url:'/shopOrder/detail?id='+this.id,
 					})
 					console.log(res.data.data)
-					this.data = res.data.data
+					this.ord = res.data.data
 					this.order = res.data.data.items[0].goodsSku
 					this.pic = this.order.picList[0]
 					console.log(res.data.data.items[0].goodsSku)

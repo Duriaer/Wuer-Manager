@@ -526,7 +526,6 @@
 			};
 		},
 		onLoad(options) {
-			console.log(this.shopUser)
 			this.storeTime = this.$getNewDate()
 			if(options.mode){
 				this.mode = options.mode
