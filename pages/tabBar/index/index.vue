@@ -2,7 +2,7 @@
 	<view class="home-page">
 		<view class="top">
 			<view class="search">
-				mmm
+				
 			</view>
 			<view class="sale">
 				
