@@ -46,7 +46,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- 销售单 -->
+		<!-- 订单 -->
 		<view class="order_ul">
 			<view class="order_li" v-for="(item,index) in orderArr" :key="index"  @tap.stop="$toOrderDetails(item.id)">
 				<view class="right">
@@ -76,7 +76,7 @@
 					</view>
 					<view class="centre">
 						<text class="symbol">¥</text>
-						<text>{{item.sumPrice}}</text>
+						<text>{{item.realPrice}}</text>
 					</view>
 					<view class="bot">
 						<text v-if="item.orderStatus==2&&navIndex!=2">实收款</text>

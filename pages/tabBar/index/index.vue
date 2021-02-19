@@ -1,5 +1,20 @@
 <template>
-	
+	<view class="home-page">
+		<view class="top">
+			<view class="search">
+				mmm
+			</view>
+			<view class="sale">
+				
+			</view>
+			<view class="button">
+				
+			</view>
+		</view>
+		<view class="bot">
+			
+		</view>
+	</view>
 </template>
 
 <script>
@@ -19,7 +34,7 @@
 </script>
 
 <style lang="scss">
-	
+	@import "./index.scss";
 </style>
 
 

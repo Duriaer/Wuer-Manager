@@ -81,7 +81,7 @@
 				<text>商品描述</text>
 			</view>
 			<view class="ul">
-				<view class="li">
+				<view class="li" v-if="goods.manufacturerCode">
 					<view class="left">
 						<text>刻印&序列号</text>
 					</view>
@@ -89,7 +89,7 @@
 						<text>{{goods.manufacturerCode}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.goodsTypeName">
 					<view class="left">
 						<text>系列</text>
 					</view>
@@ -97,7 +97,7 @@
 						<text>{{goods.goodsTypeName}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.material">
 					<view class="left">
 						<text>材质</text>
 					</view>
@@ -105,7 +105,7 @@
 						<text>{{goods.material}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.size">
 					<view class="left">
 						<text>尺寸</text>
 					</view>
@@ -113,7 +113,7 @@
 						<text>{{goods.size}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.defects">
 					<view class="left">
 						<text>瑕疵</text>
 					</view>
@@ -121,7 +121,7 @@
 						<text>{{goods.defects}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.accessoriesInfo">
 					<view class="left">
 						<text>配件</text>
 					</view>
@@ -136,7 +136,7 @@
 			<view class="title">
 				<text>来源信息</text>
 			</view>
-			<view class="ul">
+			<view class="ul" v-if="goods.costPrice">
 				<view class="li">
 					<view class="left">
 						<text>总成本</text>
@@ -145,7 +145,7 @@
 						<text>{{goods.costPrice}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.originTypeInfo">
 					<view class="left">
 						<text>商品来源</text>
 					</view>
@@ -184,7 +184,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.recycleUserName">
 					<view class="left">
 						<text>回收人员</text>
 					</view>
@@ -192,7 +192,7 @@
 						<text>{{goods.recycleUserName}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.checkupUserName">
 					<view class="left">
 						<text>鉴定人员</text>
 					</view>
@@ -200,7 +200,7 @@
 						<text>{{goods.checkupUserName}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.operatorName">
 					<view class="left">
 						<text>入库人员</text>
 					</view>
@@ -208,7 +208,7 @@
 						<text>{{goods.operatorName}}</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" v-if="goods.operateDatetime">
 					<view class="left">
 						<text>入库时间</text>
 					</view>
@@ -228,13 +228,13 @@
 		<view class="footer_placeholder"></view>
 		<view class="details_nav">
 			 <view class="nav_scroll">
-				<view class="li">
+				<view class="li" @tap.stop="$editGoods(goodsId)">
 					<view class="li-box">
 						<image src="../../../static/goods/bj1.png"></image>
 						<text>编辑</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="delGoods(goodsId)">
 					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/sc1.png"></image>
@@ -242,7 +242,7 @@
 					</view>
 				</view>
 				
-				<view class="li">
+				<view class="li" @tap.stop="$toPlaceOrder(goodsId)">
 					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/xd1.png"></image>
@@ -318,6 +318,30 @@
 				for(let i=0;i<this.goods.picList.length;i++){
 					this.imgArr.push(this.$imgUrl+this.goods.picList[i].imagePath)
 				}
+			},
+			//删除商品
+			delGoods(goodsId){
+				uni.showModal({
+					title: '提示',
+					content: '确实要删除商品吗？',
+					success: async (resolve)=> {
+						if(resolve.confirm){
+					        let res = await this.$get({
+							    url:'/goodsSku/logicDelete?id='+goodsId,
+							})
+							if(res.data.succeed){
+								for(let i=0;i<this.goodsArr.length;i++){
+									if(goodsId==this.goodsArr[i].id){
+										this.goodsArr.splice(i,1)
+										return
+									}
+								}
+							}
+						}else if(resolve.cancel) {
+			
+						}
+					}
+				})
 			},
 			downImg(arr){
 				for(let i=0;i<arr.length;i++){

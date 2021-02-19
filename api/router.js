@@ -41,6 +41,11 @@ function toPlaceOrder(id){
 		url:"/pages/order/placeOrder/placeOrder?id="+id,
 	})
 }
+// function toHoldOrder(id){
+// 	uni.navigateTo({
+// 		url:"/pages/order/placeOrder/placeOrder?id="+id,
+// 	})
+// }
 function toOrderDetails(id){
 	uni.navigateTo({
 		url:"/pages/order/orderDetails/orderDetails?id="+id,
