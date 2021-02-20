@@ -195,14 +195,14 @@
 				<text>常用应用</text>
 			</view>
 			<view class="ul">
-				<view class="li">
+				<!-- <view class="li">
 					<image src="../../../static/index/ysgl.png"></image>
 					<text>友商管理</text>
 				</view>
 				<view class="li">
 					<image src="../../../static/index/ystj.png"></image>
 					<text>添加友商</text>
-				</view>
+				</view> -->
 				<view class="li">
 					<image src="../../../static/index/kh.png"></image>
 					<text>客户管理</text>

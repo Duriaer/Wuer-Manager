@@ -85,7 +85,19 @@
 				    }
 				    
 				}
-		    ]
+		        ,{
+                    "path" : "staffManagement/staffManagement",
+                    "style" :{
+                    "navigationBarTitleText": "员工管理",
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none"
+					}
+                }
+                
+                }
+            ]
 		},
 		{
 			"root":"pages/goods",
@@ -123,7 +135,14 @@
 							"titleNView": {
 								"splitLine": {
 									"color": "#EEEEEE"
-								}
+								},
+								"buttons":[
+									{
+										"text":"日志",
+										"fontSize":"32rpx",
+										"fontWeight":"500"
+									}
+								]
 							},
 							"bounce":"none",
 							"scrollIndicator": "none"
