@@ -10,11 +10,12 @@ Vue.prototype.$get = get
 Vue.prototype.$post = post
 
 // 路由
-import {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401} from '@/api/router.js'
+import {toPath,goPath,back,toHome,addEmployees,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401} from '@/api/router.js'
 Vue.prototype.$toPath = toPath
 Vue.prototype.$goPath = goPath
 Vue.prototype.$back = back
 Vue.prototype.$toHome = toHome
+Vue.prototype.$addEmployees = addEmployees
 Vue.prototype.$toGoods = toGoods
 Vue.prototype.$addGoods = addGoods
 Vue.prototype.$editGoods = editGoods

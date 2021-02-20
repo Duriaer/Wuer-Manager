@@ -1,17 +1,20 @@
+page{
+	background: #F9F9F9;
+}
 .home-page{
 	width: 750rpx;
 	height: 100vh;
 	.top{
 		width: 750rpx;
 		height: 700rpx;
-		box-sizing: border-box;
-		padding-left: 24rpx;
 		background-image: url(../../../static/index/background.png);
 		background-repeat:no-repeat;
-		background-size: 750rpx 600rpx;
+		background-size: 100% 600rpx;
 		.search{
 			width: 100%;
 			height: 96rpx;
+			box-sizing: border-box;
+			padding-left: 24rpx;
 			display: flex;
 			align-items: flex-end;
 			justify-content: space-between;
@@ -31,6 +34,7 @@
 			.right{
 				width: 56rpx;
 				height: 56rpx;
+				margin-right: 20rpx;
 				image{
 					width: 100%;
 					height: 100%;
@@ -38,8 +42,120 @@
 				
 			}
 		}
+		.sale{
+			width: 100%;
+			height: 326rpx;
+			box-sizing: border-box;
+			padding-left: 24rpx;
+			color: #FFFFFF;
+			.swiper{
+				width: 100%;
+				height: 100%;
+				.swiper-item{
+					.title{
+						margin-top: 28rpx;
+						font-size: 32rpx;
+						opacity: 0.9;
+					}
+					.ul{
+						margin-top: 26rpx;
+						display: flex;
+						.li{
+							&:first-child{
+								margin-right: 150rpx;
+							}
+							.head{
+								display: flex;
+								align-items: center;
+								text{
+									font-size: 20rpx;
+									opacity: 0.7;
+								}
+								image{
+									width: 24rpx;
+									height: 24rpx;
+								}
+							}
+							.figure{
+								opacity: 1;
+								font-size: 30rpx;
+							}
+						}
+					}
+				}
+			}
+		}
+		.button{
+			width: 702rpx;
+			height: 252rpx;
+			background-color: #FFFFFF;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			border-radius: 16rpx;
+			margin-left: 24rpx;
+			.li{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				image{
+					width: 124rpx;
+					height: 124rpx;
+				}
+				text{
+					margin-top: 10rpx;
+					font-size: 26rpx;
+					color: #505050;
+				}
+			}
+		}
 	}
 	.bot{
-		
+		margin-top: 20rpx;
+		width: 750rpx;
+		.title{
+			margin-left: 24rpx;
+			font-size: 32rpx;
+			font-weight: bold;
+		}
+		.ul{
+			width: 702rpx;
+			height: 518rpx;
+			background-color: #FFFFFF;
+			font-size: 26rpx;
+			margin-left: 24rpx;
+			margin-top: 28rpx;
+			border-radius: 16rpx;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			.li{
+				width: 174rpx;
+				height: 150rpx;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				image{
+					width: 76rpx;
+					height: 76rpx;
+				}
+				text{
+					
+				}
+			}
+		}
 	}
+}
+uni-swiper .uni-swiper-dot {
+	width: 20rpx;
+	height: 8rpx;
+	background-color: #FFFFFF;
+	opacity: 0.5;
+	border-radius: 46rpx;
+}
+
+uni-swiper .uni-swiper-dot-active {
+	background-color: #FFFFFF;
+	opacity: 1;
 }

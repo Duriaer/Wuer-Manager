@@ -20,6 +20,12 @@ function toHome(){
 	})
 }
 
+function addEmployees(){
+	uni.navigateTo({
+		url:"/pages/index/addEmployees/addEmployees",
+	})
+}
+
 function toGoods(id){
 	uni.navigateTo({
 		url:"/pages/goods/goodsDetails/goodsDetails?goodsId="+id,
@@ -71,4 +77,4 @@ function to401(){
 	},1000)
 }
 
-export {toPath,goPath,back,toHome,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}
+export {toPath,goPath,back,toHome,addEmployees,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}
