@@ -1,8 +1,15 @@
 <template>
 	<view class="home-page">
 		<view class="top">
+			<!-- 头部安全区 -->
+			<view class="status"></view>
 			<view class="search">
-				
+				<view class="left">
+					<image src="../../../static/index/ss.png"></image>
+				</view>
+				<view class="right">
+					<image src="../../../static/index/sm.png" ></image>
+				</view>
 			</view>
 			<view class="sale">
 				

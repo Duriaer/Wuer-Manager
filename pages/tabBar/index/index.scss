@@ -2,11 +2,42 @@
 	width: 750rpx;
 	height: 100vh;
 	.top{
-		width: 100%;
+		width: 750rpx;
 		height: 700rpx;
+		box-sizing: border-box;
+		padding-left: 24rpx;
 		background-image: url(../../../static/index/background.png);
 		background-repeat:no-repeat;
-		background-size: 750rpx 650rpx;
+		background-size: 750rpx 600rpx;
+		.search{
+			width: 100%;
+			height: 96rpx;
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			.left{
+				width: 646rpx;
+				height: 60rpx;
+				background: #40AE90;
+				border-radius: 46rpx;
+				display: flex;
+				align-items: center;
+				image{
+					width: 30rpx;
+					height: 30rpx;
+					margin-left: 20rpx;
+				}
+			}
+			.right{
+				width: 56rpx;
+				height: 56rpx;
+				image{
+					width: 100%;
+					height: 100%;
+				}
+				
+			}
+		}
 	}
 	.bot{
 		

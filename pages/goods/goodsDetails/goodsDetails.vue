@@ -235,7 +235,6 @@
 					</view>
 				</view>
 				<view class="li" @tap.stop="delGoods(goodsId)">
-					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/sc1.png"></image>
 						<text>删除</text>
@@ -243,35 +242,30 @@
 				</view>
 				
 				<view class="li" @tap.stop="$toPlaceOrder(goodsId)">
-					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/xd1.png"></image>
 						<text>下单</text>
 					</view>
 				</view>
 				<view class="li">
-					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/hold.png"></image>
 						<text>hold</text>
 					</view>
 				</view>
 				<view class="li">
-					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/jc.png"></image>
 						<text>借出</text>
 					</view>
 				</view>
 				<view class="li">
-					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/bq1.png"></image>
 						<text>打印标签</text>
 					</view>
 				</view>
 				<view class="li">
-					<view class="line"></view>
 					<view class="li-box">
 						<image src="../../../static/goods/fx1.png"></image>
 						<text>分享</text>
