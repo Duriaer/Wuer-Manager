@@ -9,6 +9,7 @@ Vue.prototype.$url = url
 Vue.prototype.$get = get
 Vue.prototype.$post = post
 
+
 // 路由
 import {toPath,goPath,back,toHome,addEmployees,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401} from '@/api/router.js'
 Vue.prototype.$toPath = toPath
