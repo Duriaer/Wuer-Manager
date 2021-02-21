@@ -18,16 +18,18 @@
 						<text>性别</text>
 					</view>
 					<view class="right">
-						<checkbox-group>
+						<!-- <checkbox-group>
 							<label class="gender">
 								<checkbox value="man" color="#57BFA3" style="transform:scale(0.6)" checked="true" />男
 							</label>
 							<label class="gender">
 								<checkbox value="woman" color="#57BFA3" style="transform:scale(0.6)"/>女
 							</label>
-						</checkbox-group>
-						<!-- <label class="gender"><radio value="man" color="#57BFA3" :checked="!genderChecked" style="transform:scale(0.6)" @tap.stop="genderChange"/>男</label>
-						<label class="gender"><radio value="woman" color="#57BFA3" :checked="genderChecked" style="transform:scale(0.6)" @tap.stop="genderChange"/>女</label> -->
+						</checkbox-group> -->
+						<radio-group class="gender">
+							<radio value="man" color="#57BFA3" style="transform:scale(0.6)" />男
+							<radio value="woman" color="#57BFA3" style="transform:scale(0.6)" />女
+						</radio-group>
 					</view>
 				</view>
 				<view class="line_input">
