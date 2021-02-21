@@ -553,10 +553,10 @@
 			},
 			async getCount(){
 				let params = {
-					goodsTypeIdList:this.goodsTypeIdList,// 所选分类id
+					goodsTypeIdList:this.goodsTypeIdList,// 所选分类
 					saleStatusList:this.saleStatusList,//  所选销售状态
-					originTypeList:this.originTypeList, //  所选来源id
-					storePlaceList: JSON.stringify(this.storePlaceList),//所选所在位置id
+					originTypeList:this.originTypeList, //  所选来源
+					storePlaceList: this.storePlaceList,//所选所在位置
 					qualityList: this.qualityList,//所选成色
 					shopId: this.shopId,
 				};
@@ -566,7 +566,6 @@
 				})
 				if(res.data.succeed&&res.data.status){
 					this.rightCount = res.data.data
-					
 				}
 			},
 			//重置
@@ -629,7 +628,10 @@
 			},
 			selectItem(arr,index){
 				arr[index].selected = !arr[index].selected
-				this.getCount()
+				setTimeout(()=>{
+					this.getCount()
+				},100)
+				
 			},
 			//获取全部分类列表
 			async getGoodsTypeArr(){
