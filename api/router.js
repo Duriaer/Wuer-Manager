@@ -52,10 +52,16 @@ function toPlaceOrder(id){
 // 		url:"/pages/order/placeOrder/placeOrder?id="+id,
 // 	})
 // }
-function toOrderDetails(id){
-	uni.navigateTo({
-		url:"/pages/order/orderDetails/orderDetails?id="+id,
-	})
+function toOrderDetails(id,type){
+	if(type==1){
+		uni.navigateTo({
+			url:`/pages/order/orderDetails/orderDetails?id=${id}&mode=sale`,
+		})
+	}else if(type==2){
+		uni.navigateTo({
+			url:`/pages/order/orderDetails/orderDetails?id=${id}&mode=reserve`,
+		})
+	}
 }
 
 function toLogin(){

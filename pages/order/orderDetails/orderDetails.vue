@@ -176,7 +176,7 @@
 			</view>
 		</view> -->
 		<view class="botBox">
-			<view class="bottom-but">
+			<view class="bottom-but" v-if="mode == 'sale'">
 				<view class="left">
 					<text>编辑</text>
 				</view>
@@ -189,6 +189,8 @@
 			</view>
 			<view class="safety"></view>
 		</view>
+		
+		
 		<view class="popupMask" v-if="popupMaskShow" @touchmove.prevent @tap.stop="hidePopup()">
 			<view class="popup" @tap.stop>
 				<view class="popup-title">
@@ -227,6 +229,7 @@
 	export default {
 		data() {
 			return {
+				mode:'',
 				token:uni.getStorageSync('token'),
 				shopId: uni.getStorageSync("shopUser").shopId,
 				id:'',
@@ -242,6 +245,16 @@
 		},
 		onLoad(options){
 			console.log(options)
+			if(options.mode){
+				this.mode = options.mode
+			}else{
+				this.mode = 'sale'
+			}
+			if(this.mode == 'sale'){
+				uni.setNavigationBarTitle({title:'销售单信息'})
+			}else if(this.mode == 'reserve'){
+				uni.setNavigationBarTitle({title:'预订单信息'})
+			}
 			this.id = options.id
 			this.getOrderDetails()
 		},
