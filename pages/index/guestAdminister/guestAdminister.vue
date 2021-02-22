@@ -15,11 +15,11 @@
 			</view>
 			<view class="right">
 				<view class="top">
-					<view class="state">
-						<text>启用</text>
+					<view class="li">
+						<text>vip</text>
 					</view>
-					<view class="role">
-						<text>销售</text>
+					<view class="li">
+						<text>vvip</text>
 					</view>
 				</view>
 				<view class="bot">
@@ -39,11 +39,8 @@
 			</view>
 			<view class="right">
 				<view class="top">
-					<view class="state">
-						<text>启用</text>
-					</view>
-					<view class="role">
-						<text>销售</text>
+					<view class="li">
+						<text>vip</text>
 					</view>
 				</view>
 				<view class="bot">

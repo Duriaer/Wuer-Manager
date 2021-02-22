@@ -46,28 +46,23 @@ page{
 			}
 		}
 		.right{
-			width: 180rpx;
+			width: 200rpx;
 			font-size: 22rpx;
 			position: relative;
 			.top{
 				display: flex;
-				justify-content: space-between;
-				.state{
-					width: 76rpx;
+				justify-content: flex-end;
+				.li{
 					height: 30rpx;
-					border: 2rpx solid #888888;
+					border: 2rpx solid #57BFA3;
 					border-radius: 46rpx;
 					text-align: center;
 					line-height: 30rpx;
-				}
-				.role{
-					width: 80rpx;
-					height: 34rpx;
-					background: #57BFA3;
-					color: #FFFFFF;
-					border-radius: 46rpx;
-					text-align: center;
-					line-height: 30rpx;
+					margin-left: 16rpx;
+					color: #57BFA3;
+					text{
+						margin: 0 14rpx;
+					}
 				}
 			}
 			.bot{

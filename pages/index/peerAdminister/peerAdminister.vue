@@ -40,9 +40,6 @@
 					<view class="li">
 						<text>vip</text>
 					</view>
-					<view class="li">
-						<text>vvip</text>
-					</view>
 				</view>
 				<view class="bot">
 					<image src="../../../static/administer/phone.png"></image>

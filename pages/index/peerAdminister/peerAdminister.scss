@@ -41,18 +41,19 @@ page{
 			}
 		}
 		.right{
-			width: 180rpx;
+			width: 200rpx;
 			font-size: 22rpx;
 			position: relative;
 			.top{
 				display: flex;
-				justify-content: space-between;
+				justify-content: flex-end;
 				.li{
 					height: 30rpx;
 					border: 2rpx solid #57BFA3;
 					border-radius: 46rpx;
 					text-align: center;
 					line-height: 30rpx;
+					margin-left: 16rpx;
 					color: #57BFA3;
 					text{
 						margin: 0 14rpx;

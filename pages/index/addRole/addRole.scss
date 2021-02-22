@@ -1,25 +1,10 @@
 page{
 	background: #F9F9F9;
 }
-.addPeer{
+.addRole{
 	font-family: PingFang SC;
 	color: #333333;
 	width: 750rpx;
-	.title{
-		display: flex;
-		align-items: center;
-		width: 750rpx;
-		height: 96rpx;
-		box-sizing: border-box;
-		padding: 0 24rpx;
-		border-bottom: 2rpx solid #EEEEEE;
-		background: #FFFFFF;
-		text{
-			font-sie: 36rpx;
-			font-weight: bold;
-			line-height: 36rpx;
-		}
-	}
 	.ul{
 		width: 750rpx;
 		box-sizing: border-box;
@@ -42,7 +27,7 @@ page{
 			}
 		}
 		.line_input,
-		.line_picker{
+		.line_switch{
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -60,10 +45,6 @@ page{
 					&.noSet{
 						color: #D4D4D4;
 					}
-				}
-				image{
-					width: 36rpx;
-					height: 36rpx;
 				}
 				input{
 					width: 100%;
@@ -85,49 +66,5 @@ page{
 				}
 			}
 		}
-		.line_textarea{
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-			padding: 28rpx 0;
-			border-bottom: 2rpx solid #F2F2F2;
-			.textarea{
-				position: relative;
-				width: 100%;
-				box-sizing: border-box;
-				padding: 12rpx 16rpx 38rpx;
-				margin-top: 18rpx;
-				background: #F8F8F8;
-				border-radius: 4px;
-				textarea{
-					width: 100%;
-					height: 168rpx;
-					font-size: 26rpx;
-					line-height: 34rpx;
-					color: #333333;
-					overflow: hidden;
-				}
-				.textarea-placeholder{
-					font-size: 26rpx;
-					line-height: 34rpx;
-					color: #D4D4D4;
-				}
-				.count{
-					position: absolute;
-					bottom: 10rpx;
-					right: 12rpx;
-					font-size: 20rpx;
-					line-height: 28rpx;
-					color: #A8A8A8;
-				}
-			}
-		}
 	}
-	.message{
-		margin-top: 16rpx;
-	}
-}
-.picker{
-	display: flex;
-	align-items: center;
 }
