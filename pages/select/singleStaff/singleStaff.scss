@@ -2,43 +2,9 @@ page{
 	background: #F9F9F9;
 	font-family: PingFang SC;
 }
-.guestAdminister{
+.singleStaff{
 	color: #333333;
 	width: 750rpx;
-	.nav{
-		width: 100%;
-		height: 88rpx;
-		border-top: 2rpx solid #EEEEEE;
-		background: #FFFFFF;
-		display: flex;
-		align-items: center;
-		.nav_title {
-			width: 100%;
-			height: 88rpx;
-			font-size: 32rpx;
-			font-weight: 500;
-			line-height: 88rpx;
-			color: #333333;
-			text-align: center;
-			.active {
-				position: relative;
-				color:#57BFA3;
-				&::after {
-					content: "";
-					position: absolute;
-					width: 375rpx;
-					height: 4rpx;
-					border-radius: 8px;
-					background: #57BFA3;
-					left: 0rpx;
-					right: 0rpx;
-					bottom: 0rpx;
-					margin: auto;
-				}
-			}
-			
-		}
-	}
 	.total{
 		width: 100%;
 		height: 60rpx;

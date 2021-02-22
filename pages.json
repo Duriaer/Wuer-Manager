@@ -1,11 +1,11 @@
 {
-	// "condition":{
-	// 	"current":1,
-	// 	"list":[{
-	// 		"name":"addStaff",
-	// 		"path":"pages/index/addStaff/addStaff"
-	// 	}]
-	// },
+	"condition":{
+		"current":1,
+		"list":[{
+			"name":"multiStaff",
+			"path":"pages/select/multiStaff/multiStaff"
+		}]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "無二",
@@ -152,7 +152,15 @@
                     "enablePullDownRefresh": false,
 						"app-plus": {
 							"bounce":"none",
-							"scrollIndicator": "none"
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
 						}
 					}
                 }
@@ -160,29 +168,58 @@
                     "path" : "guestAdminister/guestAdminister",
                     "style" :{
                     "navigationBarTitleText": "客户管理",
-                    "enablePullDownRefresh": false
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[{
+								"fontSize": "24",
+								"fontSrc":"/static/navbar/iconfont.ttf",
+								"text": "\ue69b",
+								"width":"32px"
+							}]
+						}
+					}
                     }
                 }
                 ,{
                     "path" : "peerAdminister/peerAdminister",
                     "style" :{
                     "navigationBarTitleText": "同行管理",
-                    "enablePullDownRefresh": false
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[{
+								"fontSize": "24",
+								"fontSrc":"/static/navbar/iconfont.ttf",
+								"text": "\ue69b",
+								"width":"32px"
+							}]
+						}
+					}
                     }
                 }
                 ,{
                     "path" : "roleAdminister/roleAdminister",
                     "style" :{
                     "navigationBarTitleText": "角色管理",
-                    "enablePullDownRefresh": false
-                    }
-                }
-                ,{
-                    "path" : "selectPeer/selectPeer",
-                    "style" :{
-                    "navigationBarTitleText": "选择同行",
-                    "enablePullDownRefresh": false
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[{
+								"fontSize": "24",
+								"fontSrc":"/static/navbar/iconfont.ttf",
+								"text": "\ue69b",
+								"width":"32px"
+							}]
+						}
 					}
+                    }
                 }
             ]
 		},
@@ -226,6 +263,7 @@
 								"buttons":[
 									{
 										"text":"日志",
+										"color":"#57BFA3",
 										"fontSize":"32rpx",
 										"fontWeight":"500"
 									}
@@ -250,7 +288,17 @@
 						"enablePullDownRefresh":true,
 						"app-plus": {
 							"bounce":"none",
-							"scrollIndicator": "none"
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[
+									{
+										"text":"日志",
+										"color":"#57BFA3",
+										"fontSize":"32rpx",
+										"fontWeight":"500"
+									}
+								]
+							}
 						}
 					}
 				}
@@ -266,6 +314,91 @@
 						}
 					}
 				}
+            ]
+		}
+		,{
+			"root":"pages/select",
+			"pages":[
+				{
+		           "path" : "selectPeer/selectPeer",
+		           "style" :{
+		           "navigationBarTitleText": "选择同行",
+		           "enablePullDownRefresh": false,
+				   "app-plus": {
+				   	"bounce":"none",
+				   	"scrollIndicator": "none",
+				   	"titleNView":{
+				   		"buttons":[{
+				   			"fontSize": "24",
+				   			"fontSrc":"/static/navbar/iconfont.ttf",
+				   			"text": "\ue69b",
+				   			"width":"32px"
+				   		}]
+				   	}
+				   }
+		           }
+		        }
+		        ,{
+                    "path" : "selectGuest/selectGuest",
+                    "style" :{
+                    "navigationBarTitleText": "选择客人",
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[{
+								"fontSize": "24",
+								"fontSrc":"/static/navbar/iconfont.ttf",
+								"text": "\ue69b",
+								"width":"32px"
+							}]
+						}
+					}
+                }
+                
+                }
+                ,{
+                    "path" : "singleStaff/singleStaff",
+                    "style" :{
+                    "navigationBarTitleText": "选择员工",
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[{
+								"fontSize": "24",
+								"fontSrc":"/static/navbar/iconfont.ttf",
+								"text": "\ue69b",
+								"width":"32px"
+							}]
+						}
+					}
+                }
+                
+                }
+                ,{
+                    "path" : "multiStaff/multiStaff",
+                    "style" :{
+                    "navigationBarTitleText": "选择员工",
+                    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[
+								{
+									"text":"完成",
+									"fontSize":"32rpx",
+									"fontWeight":"500"
+								}
+							]
+						}
+					}
+                }
+                
+                }
             ]
 		}
 		,{

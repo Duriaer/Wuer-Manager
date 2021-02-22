@@ -1,8 +1,8 @@
 page{
 	background: #F9F9F9;
+	font-family: PingFang SC;
 }
 .addRole{
-	font-family: PingFang SC;
 	color: #333333;
 	width: 750rpx;
 	.message{
@@ -107,15 +107,47 @@ page{
 			}
 		}
 	}
-	.title{
+	.authority-title{
+		margin-top: 20rpx;
 		margin-left: 24rpx;
-		font-size: 32rpx;
-		line-height: 90rpx;
+		font-size: 34rpx;
+		line-height: 100rpx;
 		font-weight: bold;
 	}
 	.authority{
 		background: #FFFFFF;
 		margin-bottom: 16rpx;
-		
+		.title{
+			height: 100rpx;
+			padding-left: 24rpx;
+			border-bottom: 2rpx solid #EEEEEE;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			image{
+				margin-right: 24rpx;
+				width: 60rpx;
+				height: 60rpx;
+			}
+		}
+		.ul{
+			font-size: 28rpx;
+			.option{
+				display: flex;
+				align-items: center;
+				height: 90rpx;
+				border-bottom: 2rpx solid #EEEEEE;
+			}
+		}
 	}
+}
+.safety{
+	height: 100rpx;
+}
+uni-checkbox .uni-checkbox-input{
+	border-radius: 50% !important;
+}
+uni-checkbox .uni-checkbox-input.uni-checkbox-input-checked {
+	color: #57BFA3;
+	border-color: #57BFA3;
 }

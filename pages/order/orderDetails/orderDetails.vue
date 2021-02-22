@@ -58,7 +58,8 @@
 					<view class="li">
 						<text class="paid">实付价</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
-						<text class="price">{{ord.realPrice}}</text>
+						<text class="price">{{ord.actualPaidAmount}}</text><!-- 销售单 -->
+						<!-- <text class="price">{{ord.sumPrice}}</text> --><!-- 预订单 -->
 					</view>
 				</view>
 			</view>
@@ -77,12 +78,12 @@
 						<text>{{ord.orderNo}}</text>
 					</view>
 				</view>
-				<view class="li" v-if="ord.realPrice">
+				<view class="li" v-if="ord.actualPaidAmount">
 					<view class="left">
 						<text>实付金额（元）</text>
 					</view>
 					<view class="right">
-						<text>{{ord.realPrice}}</text>
+						<text>{{ord.actualPaidAmount}}</text>
 					</view>
 				</view>
 				<view class="li" v-if="ord.customerTypeDesc">
@@ -180,11 +181,19 @@
 				<view class="left">
 					<text>编辑</text>
 				</view>
-				<!-- <view class="middle">
-					<text>取消</text>
-				</view> -->
 				<view class="right" @tap.stop="showPopup()">
 					<text>退货</text>
+				</view>
+			</view>
+			<view class="bottom-but" v-if="mode == 'reserve'">
+				<view class="left">
+					<text>编辑</text>
+				</view>
+				<view class="middle">
+					<text>取消</text>
+				</view>
+				<view class="right" @tap.stop="showPopup()">
+					<text>付尾款</text>
 				</view>
 			</view>
 			<view class="safety"></view>
@@ -192,7 +201,7 @@
 		
 		
 		<view class="popupMask" v-if="popupMaskShow" @touchmove.prevent @tap.stop="hidePopup()">
-			<view class="popup" @tap.stop>
+			<view class="popup" @tap.stop v-if="mode == 'sale'">
 				<view class="popup-title">
 					<text>退货</text>
 				</view>
@@ -221,7 +230,37 @@
 				</view>
 				<view class="safety"></view>
 			</view>
+			<view class="popup" @tap.stop v-if="mode == 'reserve'">
+				<view class="popup-title">
+					<text>付尾款</text>
+				</view>
+				<view class="popupul">
+					<view class="line_input">
+						<view class="left">
+							<text>尾款金额（元）</text>
+						</view>
+						<view class="right">
+							<text>1000</text>
+						</view>
+					</view>
+					<view class="line_textarea">
+						<view class="line_name">
+							<text>备注</text>
+						</view>
+						<view class="textarea">
+							<textarea placeholder="请输入" maxlength="100" />
+							<text class="count">0/100</text>
+						</view>
+					</view>
+				</view>
+				<view class="popup_btn">
+					<view class="popup_left" @tap.stop="hidePopup()">取消</view>
+					<view class="popup_right">确定</view>
+				</view>
+				<view class="safety"></view>
+			</view>
 		</view>
+		
 	</view>
 </template>
 

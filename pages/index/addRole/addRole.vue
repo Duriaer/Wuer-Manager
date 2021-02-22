@@ -30,38 +30,125 @@
 				</view>
 			</view>
 		</view>
-		<text class="title">权限列表</text>
+		<view class="authority-title">
+			<text>权限列表</text>
+		</view>
 		<view class="authority">
 			<view class="title">
 				<text>基础</text>
+				<image src="../../../static/addrole/xl.png"></image>
+				<!-- <image src="../../../static/addrole/sq.png"></image> -->
+			</view>
+			<view class="ul">
+				<checkbox-group @change="checkboxChange">
+					<label class="option" v-for="item in items" :key="item.value">
+						<view>
+							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
+						</view>
+						<view>{{item.name}}</view>
+					</label>
+				</checkbox-group>
 			</view>
 		</view>
 		<view class="authority">
 			<view class="title">
 				<text>商品</text>
+				<image src="../../../static/addrole/xl.png"></image>
+			</view>
+			<view class="ul">
+				<checkbox-group @change="checkboxChange">
+					<label class="option" v-for="item in items" :key="item.value">
+						<view>
+							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
+						</view>
+						<view>{{item.name}}</view>
+					</label>
+				</checkbox-group>
 			</view>
 		</view>
 		<view class="authority">
 			<view class="title">
 				<text>销售</text>
+				<image src="../../../static/addrole/xl.png"></image>
+			</view>
+			<view class="ul">
+				<checkbox-group @change="checkboxChange">
+					<label class="option" v-for="item in items" :key="item.value">
+						<view>
+							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
+						</view>
+						<view>{{item.name}}</view>
+					</label>
+				</checkbox-group>
 			</view>
 		</view>
 		<view class="authority">
 			<view class="title">
 				<text>客户</text>
+				<image src="../../../static/addrole/xl.png"></image>
+			</view>
+			<view class="ul">
+				<checkbox-group @change="checkboxChange">
+					<label class="option" v-for="item in items" :key="item.value">
+						<view>
+							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
+						</view>
+						<view>{{item.name}}</view>
+					</label>
+				</checkbox-group>
 			</view>
 		</view>
+		<view class="safety"></view>
 	</view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				
-			};
+export default {
+	data() {
+		return {
+			items: [{
+					value: 'USA',
+					name: '美国'
+				},
+				{
+					value: 'CHN',
+					name: '中国',
+					checked: 'true'
+				},
+				{
+					value: 'BRA',
+					name: '巴西'
+				},
+				{
+					value: 'JPN',
+					name: '日本'
+				},
+				{
+					value: 'ENG',
+					name: '英国'
+				},
+				{
+					value: 'FRA',
+					name: '法国'
+				}
+			]
+		};
+	},
+	methods: {
+		checkboxChange: function (e) {
+			var items = this.items,
+				values = e.detail.value;
+			for (var i = 0, lenI = items.length; i < lenI; ++i) {
+				const item = items[i]
+				if(values.includes(item.value)){
+					this.$set(item,'checked',true)
+				}else{
+					this.$set(item,'checked',false)
+				}
+			}
 		}
 	}
+}
 </script>
 
 <style lang="scss">
