@@ -1,7 +1,7 @@
 page{
 	background: #F9F9F9;
 }
-.peerAdminister{
+.selectPeer{
 	font-family: PingFang SC;
 	color: #333333;
 	width: 750rpx;
@@ -57,17 +57,6 @@ page{
 					text{
 						margin: 0 14rpx;
 					}
-				}
-			}
-			.bot{
-				width: 46rpx;
-				height: 46rpx;
-				position: absolute;
-				bottom: 0;
-				right: 0;
-			    image{
-					width: 100%;
-					height: 100%;
 				}
 			}
 		}

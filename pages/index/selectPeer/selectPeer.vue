@@ -1,5 +1,5 @@
 <template>
-	<view class="peerAdminister">
+	<view class="selectPeer">
 		<view class="total">
 			<text>员工总数:999个</text>
 		</view>
@@ -21,9 +21,6 @@
 						<text>vvip</text>
 					</view>
 				</view>
-				<view class="bot">
-					<image src="../../../static/administer/phone.png"></image>
-				</view>
 			</view>
 		</view>
 		<view class="list">
@@ -44,9 +41,6 @@
 						<text>vvip</text>
 					</view>
 				</view>
-				<view class="bot">
-					<image src="../../../static/administer/phone.png"></image>
-				</view>
 			</view>
 		</view>
 	</view>
@@ -63,5 +57,5 @@
 </script>
 
 <style lang="scss">
-    @import "./peerAdminister.scss";
+    @import "./selectPeer.scss";
 </style>

@@ -157,6 +157,13 @@
                     "enablePullDownRefresh": false
                     }
                 }
+                ,{
+                    "path" : "selectPeer/selectPeer",
+                    "style" :{
+                    "navigationBarTitleText": "选择同行",
+                    "enablePullDownRefresh": false
+					}
+                }
             ]
 		},
 		{

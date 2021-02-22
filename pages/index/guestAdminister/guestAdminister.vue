@@ -14,11 +14,16 @@
 				<text>最后交易:</text>
 			</view>
 			<view class="right">
-				<view class="state">
-					<text>启用</text>
+				<view class="top">
+					<view class="state">
+						<text>启用</text>
+					</view>
+					<view class="role">
+						<text>销售</text>
+					</view>
 				</view>
-				<view class="role">
-					<text>销售</text>
+				<view class="bot">
+					<image src="../../../static/administer/phone.png"></image>
 				</view>
 			</view>
 		</view>
@@ -33,11 +38,16 @@
 				<text>最后交易:</text>
 			</view>
 			<view class="right">
-				<view class="state">
-					<text>启用</text>
+				<view class="top">
+					<view class="state">
+						<text>启用</text>
+					</view>
+					<view class="role">
+						<text>销售</text>
+					</view>
 				</view>
-				<view class="role">
-					<text>销售</text>
+				<view class="bot">
+					<image src="../../../static/administer/phone.png"></image>
 				</view>
 			</view>
 		</view>
