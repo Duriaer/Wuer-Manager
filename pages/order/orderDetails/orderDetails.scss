@@ -46,6 +46,10 @@ page{
 					.goods-title{
 						font-size: 26rpx;
 						width: 400rpx;
+						display: -webkit-box;
+						-webkit-box-orient: vertical;
+						-webkit-line-clamp: 2;
+						overflow: hidden;
 					}
 					.label{
 						display: flex;

@@ -40,7 +40,7 @@
 								<text>{{order.goodsTypeName}}</text>
 							</view>
 						</view>
-						<view class="address">
+						<view class="address"  v-if="order.storePlaceName">
 							<image src="../../../static/goods/coordinate.png"></image>
 							<text>{{order.storePlaceName}}</text>
 						</view>
