@@ -46,7 +46,7 @@ page{
 			position: relative;
 			.top{
 				display: flex;
-				justify-content: space-between;
+				justify-content: flex-end;
 				.li{
 					height: 30rpx;
 					border: 2rpx solid #57BFA3;

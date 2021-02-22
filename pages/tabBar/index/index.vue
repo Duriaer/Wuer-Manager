@@ -203,11 +203,11 @@
 					<image src="../../../static/index/ystj.png"></image>
 					<text>添加友商</text>
 				</view> -->
-				<view class="li">
+				<view class="li" @tap.stop="$guestAdminister()">
 					<image src="../../../static/index/kh.png"></image>
 					<text>客户管理</text>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="$addGuest()">
 					<image src="../../../static/index/xzkh.png"></image>
 					<text>新增客户</text>
 				</view>
@@ -217,7 +217,7 @@
 				</view>
 				<view class="li">
 					<image src="../../../static/index/xzsp.png"></image>
-					<text>新增客户</text>
+					<text>新增商品</text>
 				</view>
 				<view class="li">
 					<image src="../../../static/index/ddgl.png"></image>
@@ -227,11 +227,11 @@
 					<image src="../../../static/index/xzdd.png"></image>
 					<text>新增订单</text>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="$staffAdminister()">
 					<image src="../../../static/index/yggl.png"></image>
 					<text>员工管理</text>
 				</view>
-				<view class="li" @tap.stop="$addEmployees()">
+				<view class="li" @tap.stop="$addStaff()">
 					<image src="../../../static/index/xzyg.png"></image>
 					<text>新增员工</text>
 				</view>

@@ -551,6 +551,7 @@
 					}
 				}
 			},
+			//动态获取数量
 			async getCount(){
 				let params = {
 					goodsTypeIdList:this.goodsTypeIdList,// 所选分类

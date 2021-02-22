@@ -20,9 +20,24 @@ function toHome(){
 	})
 }
 
-function addEmployees(){
+function addStaff(){
 	uni.navigateTo({
-		url:"/pages/index/addEmployees/addEmployees",
+		url:"/pages/index/addStaff/addStaff",
+	})
+}
+function addGuest(){
+	uni.navigateTo({
+		url:"/pages/index/addGuest/addGuest",
+	})
+}
+function staffAdminister(){
+	uni.navigateTo({
+		url:"/pages/index/staffAdminister/staffAdminister",
+	})
+}
+function guestAdminister(){
+	uni.navigateTo({
+		url:"/pages/index/guestAdminister/guestAdminister",
 	})
 }
 
@@ -83,4 +98,4 @@ function to401(){
 	},1000)
 }
 
-export {toPath,goPath,back,toHome,addEmployees,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}
+export {toPath,goPath,back,toHome,addStaff,addGuest,staffAdminister,guestAdminister,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}

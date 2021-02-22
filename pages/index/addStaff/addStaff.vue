@@ -1,5 +1,5 @@
 <template>
-	<view class="addEmployees">
+	<view class="addStaff">
 		<view class="message">
 			<view class="title">
 				<text>基本信息</text>
@@ -107,7 +107,7 @@
 				console.log(res.data.data)
 				let user = res.data.data		
 			},
-			async addEmployeesSave(){
+			async addStaffSave(){
 				uni.showLoading({title:'添加中...'})
 				if(this.goodsBrandId==''||this.goodsBrandId==null){
 					uni.hideLoading()

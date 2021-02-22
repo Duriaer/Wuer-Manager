@@ -16,15 +16,6 @@
 				</view>
 			</view>
 		</view>
-		<view class="list">
-			<view class="left">
-				<view class="title">
-					<text>大美丽</text>
-				</view>
-				<text>备注:</text>
-				<text>创建时间:</text>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -32,8 +23,25 @@
 	export default {
 		data() {
 			return {
-				
+				shopRole:'',
 			};
+		},
+		onLoad(){
+			this.getShopRole()
+		},
+		methods:{
+			// 获取角色列表
+			async getShopRole(){
+				let params = {
+					keyText: '管理', //搜索关键字(字符串)
+				};
+				let res = await this.$post({
+					url:'/shopRole/list',
+					data:params,
+				})
+				console.log(res.data.data)
+				this.shopRole = res.data.data
+			},
 		}
 	}
 </script>
