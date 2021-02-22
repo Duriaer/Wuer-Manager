@@ -3,7 +3,7 @@
 		<view class="total">
 			<text>员工总数:{{this.friendShops.length}}个</text>
 		</view>
-		<view class="list" v-for="item in this.friendShops" :key="item.id">
+		<view class="list" v-for="item in this.friendShops" :key="item.id" @tap.stop="selectCooperateShop(item)">
 			<view class="left">
 				<view class="title">
 					<text>{{item.shortName}}</text>
@@ -41,6 +41,17 @@
 				})
 				console.log(res.data.data)
 				this.friendShops = res.data.data
+			},
+			
+			selectCooperateShop(item){
+				let cooperateShop = {}
+					cooperateShop = {
+						cooperateShop:item,
+						cooperateShopId:item.id,
+						cooperateShopName:item.shortName
+					}
+				uni.setStorageSync('cooperateShop',cooperateShop)
+				this.$back()
 			},
 		}
 	}

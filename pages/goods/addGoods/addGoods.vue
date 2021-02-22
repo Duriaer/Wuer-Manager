@@ -353,14 +353,12 @@
 							<view class="left">
 								<text>名称</text>
 							</view>
-							<view class="right">
-								<picker :value="friendShopsIndex" :range="friendShopsPickerArr" @change="pickerChang($event,'cooperateShopName')" >
-									<view class="picker">
-										<text class="noSet" v-if="!cooperateShopId">请选择</text>
-										<text v-else>{{cooperateShopName}}</text>
-										<image src="../../../static/addGoods/go.png" ></image>
-									</view>
-								</picker>
+							<view class="right" @tap.stop="$toPath('../../select/selectPeer/selectPeer')">
+								<view class="picker">
+									<text class="noSet" v-if="!cooperateShopId">请选择</text>
+									<text v-else>{{cooperateShopName}}</text>
+									<image src="../../../static/addGoods/go.png" ></image>
+								</view>
 							</view>
 						</view>
 						<view class="agentli">
@@ -479,12 +477,9 @@
 				profitPercentage:'',//分润比例
 				profitPercentageFocus:false,
 				
+				cooperateShop:'',//合作店铺
 				cooperateShopId:'',//合作店铺id
 				cooperateShopName:'',//合作店铺简称
-				friendShopsArr:[],//所有合作店铺
-				friendShopsPickerArr:[],//所有合作店铺选择器数组
-				friendShopsIndex:'',
-				//}
 				
 				costPrice:'',//成本价
 				costPriceFocus:false,
@@ -538,12 +533,12 @@
 			this.getPickerArr('/dictItem/getGoodsQualityItems')
 			this.getPickerArr('/dictItem/getOriginTypeItems')
 			this.getPickerArr('/shop/getStorePlaces')
-			this.getPickerArr('/goodsSku/getShopUserItems')
-			this.getPickerArr('/shop/getFriendShops')
 		},
 		onShow() {
 			this.getGoodsBrands()
 			this.getCheckupUser()
+			this.getRecycleUser()
+			this.getCooperateShop()
 		},
 		onReady() {
 			this.getBoxTop()
@@ -609,10 +604,6 @@
 				this.storeInCurrShop = this.storePlaceArr[val].storeInCurrShop
 				this.storePlaceId = this.storePlaceArr[val].storePlaceId
 				this.storePlaceName = this.storePlaceArr[val].storePlaceName
-			},
-			friendShopsIndex(val){
-				this.cooperateShopId = this.friendShopsArr[val].id
-				this.cooperateShopName = this.friendShopsArr[val].shortName
 			}
 		},
 		methods: {
@@ -658,8 +649,6 @@
 					this.originTypeIndex = e.detail.value
 				}else if(type == 'storePlace'){
 					this.storePlaceIndex = e.detail.value
-				}else if(type == 'cooperateShopName'){
-					this.friendShopsIndex = e.detail.value
 				}
 			},
 			//时间选择器触发
@@ -700,11 +689,6 @@
 							}
 						}
 					}
-				}else if(url == '/shop/getFriendShops'){
-					this.friendShopsArr = res.data.data
-					for(let item of res.data.data){
-						this.friendShopsPickerArr.push(item.fullName)
-					}
 				}
 			},
 			getGoodsBrands(){
@@ -714,6 +698,15 @@
 					this.goodsBrandId = goodsBrands.goodsBrandId
 					this.goodsBrandName = goodsBrands.goodsBrandName
 					uni.removeStorageSync('goodsBrands')
+				}
+			},
+			getCooperateShop(){
+				let cooperateShop = uni.getStorageSync('cooperateShop')
+				if(this.$isObject(cooperateShop)&&cooperateShop!={}){
+					this.cooperateShop = cooperateShop.cooperateShop
+					this.cooperateShopId = cooperateShop.cooperateShopId
+					this.cooperateShopName = cooperateShop.cooperateShopName
+					uni.removeStorageSync('cooperateShop')
 				}
 			},
 			getRecycleUser(){
