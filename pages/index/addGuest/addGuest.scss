@@ -1,7 +1,7 @@
 page{
 	background: #F9F9F9;
 }
-.addEmployees{
+.addGuest{
 	font-family: PingFang SC;
 	color: #333333;
 	.title{
@@ -42,7 +42,6 @@ page{
 		}
 		.line_input,
 		.line_radio,
-		.line_switch,
 		.line_picker{
 			display: flex;
 			justify-content: space-between;
@@ -103,9 +102,6 @@ page{
 						line-height: 52rpx;
 					}
 				}
-				.right_date{
-					font-size: 28rpx;
-				}
 				.gender{
 					font-size: 28rpx;
 					line-height: 28rpx;
@@ -113,23 +109,49 @@ page{
 				}
 			}
 		}
+		.line_textarea{
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			padding: 28rpx 0;
+			border-bottom: 2rpx solid #F2F2F2;
+			.textarea{
+				position: relative;
+				width: 100%;
+				box-sizing: border-box;
+				padding: 12rpx 16rpx 38rpx;
+				margin-top: 18rpx;
+				background: #F8F8F8;
+				border-radius: 4px;
+				textarea{
+					width: 100%;
+					height: 168rpx;
+					font-size: 26rpx;
+					line-height: 34rpx;
+					color: #333333;
+					overflow: hidden;
+				}
+				.textarea-placeholder{
+					font-size: 26rpx;
+					line-height: 34rpx;
+					color: #D4D4D4;
+				}
+				.count{
+					position: absolute;
+					bottom: 10rpx;
+					right: 12rpx;
+					font-size: 20rpx;
+					line-height: 28rpx;
+					color: #A8A8A8;
+				}
+			}
+		}
 	}
 	.message{
-		margin-top: 16rpx;
-	}
-	.account{
 		margin-top: 16rpx;
 	}
 }
 .picker{
 	display: flex;
 	align-items: center;
-}
-/deep/.uni-checkbox-input{
-	border-radius: 50rpx !important;
-	border: 2rpx solid #57BFA3 !important;
-}
-/deep/.uni-checkbox-input-checked{
-	color: #fff !important;
-	background: #57BFA3 !important;
 }

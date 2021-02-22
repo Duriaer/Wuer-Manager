@@ -1,0 +1,156 @@
+page{
+	background: #F9F9F9;
+}
+.addPeer{
+	font-family: PingFang SC;
+	color: #333333;
+	.title{
+		display: flex;
+		align-items: center;
+		width: 750rpx;
+		height: 96rpx;
+		box-sizing: border-box;
+		padding: 0 24rpx;
+		border-bottom: 2rpx solid #EEEEEE;
+		background: #FFFFFF;
+		text{
+			font-sie: 36rpx;
+			font-weight: bold;
+			line-height: 36rpx;
+		}
+	}
+	.ul{
+		width: 750rpx;
+		box-sizing: border-box;
+		padding: 0 24rpx;
+		background: #FFFFFF;
+		.line_name{
+			display: flex;
+			align-items: center;
+			text{
+				font-size: 30rpx;
+				line-height: 30rpx;
+			}
+			.star{
+				color: #E94500;
+			}
+			.warn_img{
+				display: inline-block;
+				width: 40rpx;
+				height: 40rpx;
+			}
+		}
+		.line_input,
+		.line_picker{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			height: 100rpx;
+			border-bottom: 2rpx solid #F2F2F2;
+			.right{
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				width: 50%;
+				text{
+					font-size: 28rpx;
+					line-height: 28rpx;
+					&.noSet{
+						color: #D4D4D4;
+					}
+				}
+				image{
+					width: 36rpx;
+					height: 36rpx;
+				}
+				input{
+					width: 100%;
+					box-sizing: border-box;
+					padding-right: 20rpx;
+					font-size: 28rpx;
+					font-family: PingFang SC;
+					font-weight: 400;
+					line-height: 28rpx;
+					color: #333333;
+					text-align: right;
+				}
+				.input-placeholder{
+					font-size: 28rpx;
+					font-family: PingFang SC;
+					font-weight: 400;
+					line-height: 28rpx;
+					color: #D4D4D4;
+				}
+				.unchecked{
+					margin-left: 16rpx;
+					width: 112rpx;
+					height: 48rpx;
+					border: 2rpx solid #D9D9D9;
+					border-radius: 4px;
+					text-align: center;
+					font-size: 28rpx;
+					color: #A8A8A8;
+					line-height: 48rpx;
+					&.active{
+						width: 116rpx;
+						height: 52rpx;
+						border: 0;
+						background: #57BFA3;
+						color: #FFFFFF;
+						line-height: 52rpx;
+					}
+				}
+				.gender{
+					font-size: 28rpx;
+					line-height: 28rpx;
+					margin-left: 36rpx;
+				}
+			}
+		}
+		.line_textarea{
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			padding: 28rpx 0;
+			border-bottom: 2rpx solid #F2F2F2;
+			.textarea{
+				position: relative;
+				width: 100%;
+				box-sizing: border-box;
+				padding: 12rpx 16rpx 38rpx;
+				margin-top: 18rpx;
+				background: #F8F8F8;
+				border-radius: 4px;
+				textarea{
+					width: 100%;
+					height: 168rpx;
+					font-size: 26rpx;
+					line-height: 34rpx;
+					color: #333333;
+					overflow: hidden;
+				}
+				.textarea-placeholder{
+					font-size: 26rpx;
+					line-height: 34rpx;
+					color: #D4D4D4;
+				}
+				.count{
+					position: absolute;
+					bottom: 10rpx;
+					right: 12rpx;
+					font-size: 20rpx;
+					line-height: 28rpx;
+					color: #A8A8A8;
+				}
+			}
+		}
+	}
+	.message{
+		margin-top: 16rpx;
+	}
+}
+.picker{
+	display: flex;
+	align-items: center;
+}

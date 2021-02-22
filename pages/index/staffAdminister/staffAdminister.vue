@@ -52,5 +52,5 @@
 </script>
 
 <style lang="scss">
-    @import "./staffManagement.scss";
+    @import "./staffAdminister.scss";
 </style>

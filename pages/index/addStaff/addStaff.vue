@@ -10,7 +10,7 @@
 						<text>姓名</text><text class="star">*</text>
 					</view>
 					<view class="right">
-						<input v-model="realname" type="number" placeholder="请输入" />
+						<input v-model="realname" type="text" placeholder="请输入" />
 					</view>
 				</view>
 				<view class="line_radio">
@@ -18,14 +18,6 @@
 						<text>性别</text>
 					</view>
 					<view class="right">
-						<!-- <checkbox-group>
-							<label class="gender">
-								<checkbox value="man" color="#57BFA3" style="transform:scale(0.6)" checked="true" />男
-							</label>
-							<label class="gender">
-								<checkbox value="woman" color="#57BFA3" style="transform:scale(0.6)"/>女
-							</label>
-						</checkbox-group> -->
 						<radio-group class="gender">
 							<radio value="man" color="#57BFA3" style="transform:scale(0.6)" />男
 							<radio value="woman" color="#57BFA3" style="transform:scale(0.6)" />女
@@ -75,7 +67,7 @@
 						<text>账号</text><text class="star">*</text>
 					</view>
 					<view class="right">
-						<input v-model="username" type="number" placeholder="请输入" />
+						<input v-model="username" type="text" placeholder="请输入" />
 					</view>
 				</view>
 				<view class="line_input">
@@ -83,7 +75,7 @@
 						<text>密码</text><text class="star">*</text>
 					</view>
 					<view class="right">
-						<input type="number" placeholder="请输入" />
+						<input password="ture" type="text" placeholder="请输入" />
 					</view>
 				</view>
 			</view>
@@ -95,6 +87,9 @@
 	export default {
 		data() {
 			return {
+				realname:'',
+				telephone:'',
+				username:'',
 				
 			};
 		},
@@ -166,5 +161,5 @@
 </script>
 
 <style lang="scss">
-    @import "./addEmployees.scss";
+    @import "./addStaff.scss";
 </style>

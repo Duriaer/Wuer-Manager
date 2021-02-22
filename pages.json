@@ -2,8 +2,8 @@
 	// "condition":{
 	// 	"current":1,
 	// 	"list":[{
-	// 		"name":"addEmployees",
-	// 		"path":"pages/index/addEmployees/addEmployees"
+	// 		"name":"addStaff",
+	// 		"path":"pages/index/addStaff/addStaff"
 	// 	}]
 	// },
 	"globalStyle": {
@@ -65,7 +65,7 @@
 			"root":"pages/index",
 			"pages":[
 				{
-				    "path" : "/addEmployees/addEmployees",
+				    "path" : "/addStaff/addStaff",
 				    "style" :{
 				        "navigationBarTitleText": "新增员工",
 				        "enablePullDownRefresh": false,
@@ -85,17 +85,77 @@
 				    }
 				    
 				}
+				,{
+				    "path" : "addGuest/addGuest",
+				    "style" :{
+				    "navigationBarTitleText": "新增客户",
+				    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[
+								{
+									"text":"完成",
+									"fontSize":"32rpx",
+									"fontWeight":"500"
+								}
+							]
+						}
+					}
+				    }
+				}
+				,{
+				    "path" : "addPeer/addPeer",
+				    "style" :{
+				    "navigationBarTitleText": "新增同行",
+				    "enablePullDownRefresh": false,
+					"app-plus": {
+						"bounce":"none",
+						"scrollIndicator": "none",
+						"titleNView":{
+							"buttons":[
+								{
+									"text":"完成",
+									"fontSize":"32rpx",
+									"fontWeight":"500"
+								}
+							]
+						}
+					}
+				    }
+				}
 		        ,{
-                    "path" : "staffManagement/staffManagement",
+                    "path" : "staffAdminister/staffAdminister",
                     "style" :{
                     "navigationBarTitleText": "员工管理",
                     "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none"
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none"
+						}
 					}
                 }
-                
+                ,{
+                    "path" : "guestAdminister/guestAdminister",
+                    "style" :{
+                    "navigationBarTitleText": "客户管理",
+                    "enablePullDownRefresh": false
+                    }
+                }
+                ,{
+                    "path" : "peerAdminister/peerAdminister",
+                    "style" :{
+                    "navigationBarTitleText": "同行管理",
+                    "enablePullDownRefresh": false
+                    }
+                }
+                ,{
+                    "path" : "roleAdminister/roleAdminister",
+                    "style" :{
+                    "navigationBarTitleText": "角色管理",
+                    "enablePullDownRefresh": false
+                    }
                 }
             ]
 		},
