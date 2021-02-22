@@ -1,5 +1,5 @@
 <template>
-	<view class="staffManagement">
+	<view class="guestAdminister">
 		<!-- nav -->
 		<view class="nav">
 			<view class="nav_title">
@@ -24,7 +24,12 @@
 				<text>创建时间:</text>
 			</view>
 			<view class="right">
-				
+				<view class="state">
+					<text>启用</text>
+				</view>
+				<view class="role">
+					<text>销售</text>
+				</view>
 			</view>
 		</view>
 	</view>

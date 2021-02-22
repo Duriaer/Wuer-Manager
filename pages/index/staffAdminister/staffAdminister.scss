@@ -1,7 +1,7 @@
 page{
 	background: #F9F9F9;
 }
-.staffManagement{
+.guestAdminister{
 	font-family: PingFang SC;
 	color: #333333;
 	width: 750rpx;
@@ -50,23 +50,49 @@ page{
 		align-items: center;
 	}
 	.list{
-		background-color: #EFFBF8;
 		width: 100%;
+		background: #FFFFFF;
 		box-sizing: border-box;
 		padding: 24rpx;
+		display: flex;
+		justify-content: space-between;
 		.left{
+			width: 480rpx;
 			font-size: 24rpx;
-			font-weight: 500;
+			line-height: 40rpx;
 			color: #8F8F8F;
 			display: flex;
 			flex-direction: column;
 			.title{
 				font-size: 28rpx;
+				font-weight: 500;
 				color: #333333;
+				line-height: 34rpx;
+				margin-bottom: 12rpx;
 			}
 		}
 		.right{
-			
+			width: 180rpx;
+			font-size: 22rpx;
+			display: flex;
+			justify-content: space-between;
+			.state{
+				width: 76rpx;
+				height: 30rpx;
+				border: 2rpx solid #888888;
+				border-radius: 46rpx;
+				text-align: center;
+				line-height: 30rpx;
+			}
+			.role{
+				width: 80rpx;
+				height: 34rpx;
+				background: #57BFA3;
+				color: #FFFFFF;
+				border-radius: 46rpx;
+				text-align: center;
+				line-height: 30rpx;
+			}
 		}
 	}
 }
