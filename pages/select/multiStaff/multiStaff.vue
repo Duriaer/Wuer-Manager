@@ -4,7 +4,7 @@
 			<text>员工总数:{{this.shopUser.length}}个</text>
 		</view>
 		<checkbox-group @change="checkboxChange">
-			<label class="select" v-for="item in this.shopUser" :key="item.id">
+			<label class="select" v-for="item in this.shopUser" :key="item.id" @tap.stop="selectRecycleUser(item)">
 				<view class="list">
 					<view class="checkbox">
 						<checkbox style="transform:scale(0.7)" color="#57BFA3"/>
@@ -47,6 +47,17 @@
 				})
 				console.log(res.data.data)
 				this.shopUser = res.data.data
+			},
+			
+			selectRecycleUser(item){
+				let recycleUser = {}
+					recycleUser = {
+						recycleUser:item,
+						recycleUserId:item.id,
+						recycleUserName:item.username
+					}
+				uni.setStorageSync('recycleUser',recycleUser)
+				this.$back()
 			},
 		}
 	}

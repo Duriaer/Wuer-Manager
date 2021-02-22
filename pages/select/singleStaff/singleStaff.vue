@@ -3,7 +3,7 @@
 		<view class="total">
 			<text>员工总数:{{this.shopUser.length}}个</text>
 		</view>
-		<view class="list" v-for="item in this.shopUser" :key="item.id">
+		<view class="list" v-for="item in this.shopUser" :key="item.id" @tap.stop="selectCheckupUser(item)">
 			<view class="left">
 				<text class="title">{{item.realname}}</text>
 				<text>登录账号:{{item.username}}</text>
@@ -40,6 +40,17 @@
 				})
 				console.log(res.data.data)
 				this.shopUser = res.data.data
+			},
+			
+			selectCheckupUser(item){
+				let checkupUser = {}
+					checkupUser = {
+						checkupUser:item,
+						checkupUserId:item.id,
+						checkupUserName:item.username
+					}
+				uni.setStorageSync('checkupUser',checkupUser)
+				this.$back()
 			},
 		}
 	}

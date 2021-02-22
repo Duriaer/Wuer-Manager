@@ -57,6 +57,23 @@
 			return {
 				
 			};
+		},
+		onLoad() {
+			this.getCustomer()
+		},
+		methods:{
+			// 获取客户列表
+			async getCustomer(){
+				let params = {
+					keyText: this.keyText, //搜索关键字(字符串)
+				};
+				let res = await this.$post({
+					url:'/customer/list',
+					data:params,
+				})
+				console.log(res.data.data)
+				this.customer = res.data.data
+			},
 		}
 	}
 </script>

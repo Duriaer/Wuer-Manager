@@ -281,28 +281,24 @@
 						<view class="line_name">
 							<text>回收人员</text>
 						</view>
-						<view class="right">
-							<picker :value="recycleUserIndex" :range="shopUserPickerArr" @change="pickerChang($event,'recycleUser')" >
-								<view class="picker">
-									<text class="noSet" v-if="!recycleUserId">请选择</text>
-									<text v-else>{{recycleUserName}}</text>
-									<image src="../../../static/addGoods/go.png" ></image>
-								</view>
-							</picker>
+						<view class="right" @tap.stop="$toPath('../../select/multiStaff/multiStaff')">
+							<view class="picker">
+								<text class="noSet" v-if="!recycleUserId">请选择</text>
+								<text v-else>{{recycleUserName}}</text>
+								<image src="../../../static/addGoods/go.png" ></image>
+							</view>
 						</view>
 					</view>
 					<view class="line_picker">
 						<view class="line_name">
 							<text>鉴定人员</text>
 						</view>
-						<view class="right">
-							<picker :value="checkupUserIndex" :range="shopUserPickerArr" @change="pickerChang($event,'checkupUser')" >
-								<view class="picker">
-									<text class="noSet" v-if="!checkupUserId">请选择</text>
-									<text v-else>{{checkupUserName}}</text>
-									<image src="../../../static/addGoods/go.png" ></image>
-								</view>
-							</picker>
+						<view class="right" @tap.stop="$toPath('../../select/singleStaff/singleStaff')">
+							<view class="picker">
+								<text class="noSet" v-if="!checkupUserId">请选择</text>
+								<text v-else>{{checkupUserName}}</text>
+								<image src="../../../static/addGoods/go.png" ></image>
+							</view>
 						</view>
 					</view>
 					<view class="line_date">
@@ -500,15 +496,13 @@
 				storePlacePickerArr:[],//存放地点选择器数组
 				storePlaceIndex:'',
 
+                recycleUser:'',//回收员工
 				recycleUserId:'',//回收员工id
 				recycleUserName:'',//回收员工用户名
-				recycleUserIndex:'',
+				checkupUser:'',//鉴定员工
 				checkupUserId:'',//鉴定员工id
 				checkupUserName:'',//鉴定员工用户名
-				checkupUserIndex:'',
 				
-				shopUserArr:[],//所有员工 传id 获取
-				shopUserPickerArr:[],//所有员工选择器数组
 				
 
 				
@@ -549,6 +543,7 @@
 		},
 		onShow() {
 			this.getGoodsBrands()
+			this.getCheckupUser()
 		},
 		onReady() {
 			this.getBoxTop()
@@ -615,14 +610,6 @@
 				this.storePlaceId = this.storePlaceArr[val].storePlaceId
 				this.storePlaceName = this.storePlaceArr[val].storePlaceName
 			},
-			recycleUserIndex(val){
-				this.recycleUserId = this.shopUserArr[val].id
-				this.recycleUserName = this.shopUserArr[val].username
-			},
-			checkupUserIndex(val){
-				this.checkupUserId = this.shopUserArr[val].id
-				this.checkupUserName = this.shopUserArr[val].username
-			},
 			friendShopsIndex(val){
 				this.cooperateShopId = this.friendShopsArr[val].id
 				this.cooperateShopName = this.friendShopsArr[val].shortName
@@ -671,10 +658,6 @@
 					this.originTypeIndex = e.detail.value
 				}else if(type == 'storePlace'){
 					this.storePlaceIndex = e.detail.value
-				}else if(type == 'recycleUser'){
-					this.recycleUserIndex = e.detail.value
-				}else if(type == 'checkupUser'){
-					this.checkupUserIndex = e.detail.value
 				}else if(type == 'cooperateShopName'){
 					this.friendShopsIndex = e.detail.value
 				}
@@ -717,11 +700,6 @@
 							}
 						}
 					}
-				}else if(url == '/goodsSku/getShopUserItems'){
-					this.shopUserArr = res.data.data
-					for(let item of res.data.data){
-						this.shopUserPickerArr.push(item.username)
-					}
 				}else if(url == '/shop/getFriendShops'){
 					this.friendShopsArr = res.data.data
 					for(let item of res.data.data){
@@ -736,6 +714,24 @@
 					this.goodsBrandId = goodsBrands.goodsBrandId
 					this.goodsBrandName = goodsBrands.goodsBrandName
 					uni.removeStorageSync('goodsBrands')
+				}
+			},
+			getRecycleUser(){
+				let recycleUser = uni.getStorageSync('recycleUser')
+				if(this.$isObject(recycleUser)&&recycleUser!={}){
+					this.recycleUser = recycleUser.recycleUser
+					this.recycleUserId = recycleUser.recycleUserId
+					this.recycleUserName = recycleUser.recycleUserName
+					uni.removeStorageSync('recycleUser')
+				}
+			},
+			getCheckupUser(){
+				let checkupUser = uni.getStorageSync('checkupUser')
+				if(this.$isObject(checkupUser)&&checkupUser!={}){
+					this.checkupUser = checkupUser.checkupUser
+					this.checkupUserId = checkupUser.checkupUserId
+					this.checkupUserName = checkupUser.checkupUserName
+					uni.removeStorageSync('checkupUser')
 				}
 			},
 			// 获取商品详情数据

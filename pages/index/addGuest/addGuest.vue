@@ -66,6 +66,61 @@
 			return {
 				
 			};
+		},
+		onLoad() {
+			this.addGuestSave()
+		},
+		methods:{
+			//保存客户信息
+			async addGuestSave(){
+				uni.showLoading({title:'添加中...'})
+				if(this.goodsBrandId==''||this.goodsBrandId==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请选择品牌',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'goodsBrand'
+					},100)
+					return
+				}else if(this.salePrice==''||this.salePrice==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请输入销售价',
+						icon:'none'
+					})
+					this.scrollTopId = ''
+					setTimeout(()=>{
+						this.scrollTopId = 'salePrice'
+					},100)
+					return
+				}
+				let res = await this.$post({
+					url:'/shopUser/save',
+					data:{
+						// "accessories": this.accessories,
+					},
+				})
+				uni.hideLoading()
+				if(res.data.succeed){
+					if(this.mode == 'edit'){
+						this.$store.commit('setUpGoodsId',this.goodsId)
+					}else if(this.mode == 'add'){
+						this.$store.commit('setUpGoodsId','all')
+					}
+					uni.showToast({title:'添加成功'})
+					setTimeout(()=>{
+						this.$back()
+					},500)
+				}else if(res.data.failed){
+					uni.showToast({
+						title:res.data.message,
+						icon:"none"
+					})
+				}
+			},
 		}
 	}
 </script>

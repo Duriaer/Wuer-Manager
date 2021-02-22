@@ -33,7 +33,7 @@
 			// 获取角色列表
 			async getShopRole(){
 				let params = {
-					keyText: '管理', //搜索关键字(字符串)
+					keyText: this.keyText, //搜索关键字(字符串)
 				};
 				let res = await this.$post({
 					url:'/shopRole/list',
