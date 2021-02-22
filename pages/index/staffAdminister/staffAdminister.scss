@@ -58,6 +58,8 @@ page{
 			font-size: 24rpx;
 			font-weight: 500;
 			color: #8F8F8F;
+			display: flex;
+			flex-direction: column;
 			.title{
 				font-size: 28rpx;
 				color: #333333;
