@@ -1,9 +1,9 @@
 page{
 	background: #F9F9F9;
 	font-family: PingFang SC;
+	color: #333333;
 }
 .singleStaff{
-	color: #333333;
 	width: 750rpx;
 	.total{
 		width: 100%;
@@ -20,6 +20,7 @@ page{
 		background: #FFFFFF;
 		box-sizing: border-box;
 		padding: 24rpx;
+		margin-bottom: 16rpx;
 		display: flex;
 		justify-content: space-between;
 		.left{

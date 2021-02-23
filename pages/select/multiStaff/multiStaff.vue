@@ -1,13 +1,13 @@
 <template>
 	<view class="multiStaff">
 		<view class="total">
-			<text>员工总数:{{this.shopUser.length}}个</text>
+			<text>员工总数:{{shopUser.length}}个</text>
 		</view>
 		<checkbox-group @change="checkboxChange">
-			<label class="select" v-for="item in this.shopUser" :key="item.id" @tap.stop="selectRecycleUser(item)">
+			<label class="select" v-for="(item,index) in shopUser" :key="item.id">
 				<view class="list">
 					<view class="checkbox">
-						<checkbox style="transform:scale(0.7)" color="#57BFA3"/>
+						<checkbox :value="item" :disabled="item.disabled" style="transform:scale(0.7)" color="#57BFA3"/>
 					</view>
 					<view class="left">
 						<text class="title">{{item.realname}}</text>
@@ -34,10 +34,47 @@
 		data() {
 			return {
 				shopUser:[],
+				recycleUser:[],
+				recycleUserLength:''
 			};
 		},
 		onLoad(){
 			this.getShopUserArr()
+		},
+		onNavigationBarButtonTap(e){
+			if(e.index ==0){
+				uni.setStorageSync('recycleUser',this.recycleUser)
+				this.$back()
+			}
+		},
+		watch:{
+			recycleUserLength(val){
+				if(val>=3){
+					for(let item of this.shopUser){
+						for(let j of this.recycleUser){
+							if(item.id!=j.id){
+								item.disabled = true
+							}else{
+								item.disabled = false
+							}
+						}
+					}
+				}else{
+					for(let item of this.shopUser){
+						item.disabled = false
+					}
+				}
+				
+				if(val>0){
+					uni.setNavigationBarTitle({
+						title:`选择员工（已选择${val}个）`
+					})
+				}else{
+					uni.setNavigationBarTitle({
+						title:`选择员工`
+					})
+				}
+			}
 		},
 		methods:{
 			// 获取本店所有员工
@@ -46,19 +83,18 @@
 					url:'/goodsSku/getShopUserItems',
 				})
 				console.log(res.data.data)
+				for(let item of res.data.data){
+					item.disabled = false
+				}
 				this.shopUser = res.data.data
 			},
 			
-			selectRecycleUser(item){
-				let recycleUser = {}
-					recycleUser = {
-						recycleUser:item,
-						recycleUserId:item.id,
-						recycleUserName:item.username
-					}
-				uni.setStorageSync('recycleUser',recycleUser)
-				this.$back()
-			},
+			checkboxChange(e){
+				console.log(e.detail)
+				this.recycleUser = e.detail.value
+				this.recycleUserLength = this.recycleUser.length
+				console.log(this.recycleUserLength)
+			}
 		}
 	}
 </script>

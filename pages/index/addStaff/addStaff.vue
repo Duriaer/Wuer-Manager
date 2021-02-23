@@ -19,8 +19,8 @@
 					</view>
 					<view class="right">
 						<radio-group class="gender">
-							<radio value="man" color="#57BFA3" style="transform:scale(0.6)" />男
-							<radio value="woman" color="#57BFA3" style="transform:scale(0.6)" />女
+							<radio value="sex" color="#57BFA3" style="transform:scale(0.6)" />男
+							<radio value="sex" color="#57BFA3" style="transform:scale(0.6)" />女
 						</radio-group>
 					</view>
 				</view>
@@ -90,6 +90,7 @@
 				realname:'',
 				telephone:'',
 				username:'',
+				sex:'',
 				
 			};
 		},
@@ -101,7 +102,7 @@
 			async getDetailArr(){
 				this.dragShow=false
 				let res = await this.$get({
-					// url:'/shopUser/detail?id='+this.goodsId,
+					// url:'/shopUser/detail?id='+this.id,
 					url:'/shopUser/detail?id=2',
 				})
 				console.log(res.data.data)

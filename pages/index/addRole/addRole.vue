@@ -7,7 +7,7 @@
 						<text>角色名称</text><text class="star">*</text>
 					</view>
 					<view class="right">
-						<input type="text" placeholder="请输入" />
+						<input v-model="roleName" type="text" placeholder="请输入" />
 					</view>
 				</view>
 				<view class="line_textarea">
@@ -106,6 +106,8 @@
 export default {
 	data() {
 		return {
+			roleName:'',
+
 			items: [{
 					value: 'USA',
 					name: '美国'
@@ -134,6 +136,9 @@ export default {
 			]
 		};
 	},
+	onLoad() {
+		this.getRoleArr()
+	},
 	methods: {
 		checkboxChange: function (e) {
 			var items = this.items,
@@ -146,7 +151,27 @@ export default {
 					this.$set(item,'checked',false)
 				}
 			}
-		}
+		},
+		// 获取角色详情数据
+		async getRoleArr(){
+			let res = await this.$get({
+				// url:'/shopRole/detail?id='+this.id,
+				url:'/shopRole/detail?id=1',
+			})
+			console.log(res.data.data)
+			let role = res.data.data		
+		},
+		// 保存角色信息
+		async roleSave(){
+			let params = {
+				keyText: '', 
+			};
+			let res = await this.$post({
+				url:'/shopRole/save',
+				data:params,
+			})
+			// console.log(res.data.data)
+		},
 	}
 }
 </script>

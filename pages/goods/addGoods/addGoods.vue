@@ -285,7 +285,7 @@
 							<view class="picker">
 								<text class="noSet" v-if="!recycleUserId">请选择</text>
 								<text v-else>{{recycleUserName}}</text>
-								<image src="../../../static/addGoods/go.png" ></image>
+								<image src="../../../static/addGoods/go.png"></image>
 							</view>
 						</view>
 					</view>
@@ -401,7 +401,7 @@
 				mode:'edit',//add 增加 edit编辑
 				goodsId:'',
 				token:uni.getStorageSync('token'),
-				shopUser: uni.getStorageSync("shopUser"),
+				// shopUser: uni.getStorageSync("shopUser"),
 				
 				navIndex: 1,//导航栏index
 				scrollTopId:'',//滚动ID
@@ -491,17 +491,13 @@
 				storePlacePickerArr:[],//存放地点选择器数组
 				storePlaceIndex:'',
 
-                recycleUser:'',//回收员工
 				recycleUserId:'',//回收员工id
 				recycleUserName:'',//回收员工用户名
-				checkupUser:'',//鉴定员工
+
 				checkupUserId:'',//鉴定员工id
 				checkupUserName:'',//鉴定员工用户名
 				
-				
 
-				
-				
 				storeTime:'',//入库完整时间(日期+时间),格式：yyyy-MM-dd HH:mm:ss
 
 				internalRemark:'',//内部备注
@@ -712,19 +708,17 @@
 			getRecycleUser(){
 				let recycleUser = uni.getStorageSync('recycleUser')
 				if(this.$isObject(recycleUser)&&recycleUser!={}){
-					this.recycleUser = recycleUser.recycleUser
 					this.recycleUserId = recycleUser.recycleUserId
 					this.recycleUserName = recycleUser.recycleUserName
 					uni.removeStorageSync('recycleUser')
 				}
 			},
 			getCheckupUser(){
-				let checkupUser = uni.getStorageSync('checkupUser')
+				let checkupUser = uni.getStorageSync('user')
 				if(this.$isObject(checkupUser)&&checkupUser!={}){
-					this.checkupUser = checkupUser.checkupUser
-					this.checkupUserId = checkupUser.checkupUserId
-					this.checkupUserName = checkupUser.checkupUserName
-					uni.removeStorageSync('checkupUser')
+					this.checkupUserId = checkupUser.userId
+					this.checkupUserName = checkupUser.userName
+					uni.removeStorageSync('user')
 				}
 			},
 			// 获取商品详情数据

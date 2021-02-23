@@ -24,6 +24,8 @@
 		data() {
 			return {
 				shopRole:'',
+				
+				keyText: '', //搜索关键字
 			};
 		},
 		onLoad(){

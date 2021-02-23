@@ -1,9 +1,9 @@
 page{
 	background: #F9F9F9;
-}
-.addStaff{
 	font-family: PingFang SC;
 	color: #333333;
+}
+.addStaff{
 	width: 750rpx;
 	.title{
 		display: flex;
@@ -72,7 +72,6 @@ page{
 					box-sizing: border-box;
 					padding-right: 20rpx;
 					font-size: 28rpx;
-					font-family: PingFang SC;
 					font-weight: 400;
 					line-height: 28rpx;
 					color: #333333;
@@ -80,7 +79,6 @@ page{
 				}
 				.input-placeholder{
 					font-size: 28rpx;
-					font-family: PingFang SC;
 					font-weight: 400;
 					line-height: 28rpx;
 					color: #D4D4D4;

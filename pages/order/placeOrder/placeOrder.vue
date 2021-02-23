@@ -28,14 +28,12 @@
 				<view class="line_name">
 					<text>销售员工</text>
 				</view>
-				<view class="right">
-					<picker :value="shopUserIndex" :range="shopUserPickerArr" @change="pickerChang($event,'shopUser')" >
-						<view class="picker">
-							<text class="noSet" v-if="!shopUserId">请选择</text>
-							<text v-else>{{shopUserName}}</text>
-							<image src="../../../static/addGoods/go.png" ></image>
-						</view>
-					</picker>
+				<view class="right" @tap.stop="$toPath('../../select/singleStaff/singleStaff')">
+					<view class="picker">
+						<text class="noSet" v-if="!operatorId">请选择</text>
+						<text v-else>{{operatorName}}</text>
+						<image src="../../../static/addGoods/go.png" ></image>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -100,7 +98,7 @@
 					<text>定金(元)</text>
 				</view>
 				<view class="right">
-					<input v-model="realPrice" type="text" placeholder="请填写金额" />
+					<input v-model="downPayment" type="text" placeholder="请填写金额" />
 				</view>
 			</view>
 			<view class="line_picker" v-if="mode == 'sale'">
@@ -169,15 +167,13 @@
 				},
 				pic:'',
 				realPrice:'',// 订单实售总价
+				downPayment:'',//定金
 				remark:'',// 备注
 				
 				customertype:false,//客户类型 客人/同行
 				
-				shopUserId:'',//所有员工id
-				shopUserName:'',//所有员工名
-				shopUserArr:[],//所有员工 传id 获取
-				shopUserPickerArr:[],//所有员工选择器数组
-				shopUserIndex:'',
+				operatorId:'',//销售员工id
+				operatorName:'',//销售员工
 				
 				delivery:'',//发货方式
 				deliveryInfo:'',//发货方式描述
@@ -202,7 +198,7 @@
 			this.goodsId = options.id
 			//搜索商品信息的函数（接口）
 			this.getDetailArr()
-			this.getPickerArr('/goodsSku/getShopUserItems')
+			this.getShopUser()
 			this.getPickerArr('/goodsSku/getDeliveryMethodItems')
 		},
 		watch:{
@@ -210,10 +206,6 @@
 				this.delivery = this.deliveryArr[val].itemValue
 				this.deliveryInfo = this.deliveryArr[val].itemName
 			},
-			shopUserIndex(val){
-				this.shopUserId = this.shopUserArr[val].id
-				this.shopUserName = this.shopUserArr[val].username
-			}
 		},
 		methods:{
 			tabCustomertype(type){
@@ -221,9 +213,7 @@
 			},
 			//普通选择器触发
 			pickerChang(e,type){
-				if(type == 'shopUser'){
-					this.shopUserIndex = e.detail.value
-				}else if(type == 'delivery'){
+				if(type == 'delivery'){
 					this.deliveryIndex = e.detail.value
 				}
 			},
@@ -232,16 +222,19 @@
 				let res = await this.$get({
 					url:url,
 				})
-				if(url == '/goodsSku/getShopUserItems'){
-					this.shopUserArr = res.data.data
-					for(let item of res.data.data){
-						this.shopUserPickerArr.push(item.username)
-					}
-				}else if(url == '/goodsSku/getDeliveryMethodItems'){
+				if(url == '/goodsSku/getDeliveryMethodItems'){
 					this.deliveryArr = res.data.data
 					for(let item of res.data.data){
 						this.deliveryPickerArr.push(item.itemName)
 					}
+				}
+			},
+			getShopUser(){
+				let user = uni.getStorageSync('user')
+				if(this.$isObject(user)&&user!={}){
+					this.operatorId = user.userId
+					this.operatorName = user.userName
+					uni.removeStorageSync('user')
 				}
 			},
 			// 获取商品详情数据
@@ -256,7 +249,7 @@
 			//保存订单
 			async saveOrder(){
 				uni.showLoading()
-				if(this.shopUserId==''||this.shopUserId==null){
+				if(this.operatorId==''||this.operatorId==null){
 					uni.hideLoading()
 					uni.showToast({
 						title:'请选择销售员工',

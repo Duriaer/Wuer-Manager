@@ -687,7 +687,7 @@
 			//下单
 			toPlaceOrder(goodsId){
 				this.hideWindow()
-				this.$toPlaceOrder(goodsId)
+				this.$toPlaceOrder(goodsId,1)
 			},
 			//编辑商品
 			editGoods(goodsId){
