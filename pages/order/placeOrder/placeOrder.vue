@@ -72,7 +72,7 @@
 							<text>{{goods.goodsTypeName}}</text>
 						</view>
 					</view>
-					<view class="address">
+					<view class="address" v-if="goods.storePlaceName">
 						<image src="../../../static/goods/coordinate.png"></image>
 						<text>{{goods.storePlaceName}}</text>
 					</view>
@@ -269,7 +269,6 @@
 				let res = await this.$post({
 					url:'/shopOrder/save',
 					data:{
-						"accessories": this.accessories,
 						"actualPaidAmount": this.actualPaidAmount,//实付金额
 						
 						// consignee	收货人
@@ -287,17 +286,11 @@
 						
                         // deliveryMethodDesc	// 快递方式描述
 						
-						// deliveryPrice// 快递费
-						
 						// downPayment	// 预付金额
 						
 						// goodsSkuId	// 商品id
 						
 						// hasPaid	// 是否已付款
-						
-						// id	integer($int64)
-						// itemCount	// 订单项数量
-						
 						
 						// operator	ShopUser{...}
 						// operatorId	// 操作员工id
@@ -312,15 +305,12 @@
 						
 						// payTime	// 付款时间，格式：yyyy-MM-dd HH:mm:ss
 						
-						// payType	// 付款方式
-						
 						// realPrice	// 订单实售总价
 						
 						// remark	// 备注
 						
 						// reserved	// 是否是预订单 boolean
 						
-						// shop	Shop{...}
 						// shopId	// 门店id
 					},
 				})

@@ -56,10 +56,11 @@
 						<text>{{order.salePrice}}</text>
 					</view>
 					<view class="li">
-						<text class="paid">实付价</text>
+						<text class="paid" v-if="mode == 'sale'">实付价</text>
+						<text class="paid" v-if="mode == 'reserve'">定金</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
-						<text class="price">{{ord.actualPaidAmount}}</text><!-- 销售单 -->
-						<!-- <text class="price">{{ord.sumPrice}}</text> --><!-- 预订单 -->
+						<text class="price" v-if="mode == 'sale'">{{ord.actualPaidAmount}}</text><!-- 销售单 -->
+						<text class="price" v-if="mode == 'reserve'">{{ord.downPayment}}</text><!-- 预订单 -->
 					</view>
 				</view>
 			</view>

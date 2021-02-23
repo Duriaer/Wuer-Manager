@@ -181,7 +181,7 @@
 							<text class="opponent" v-if="item.peerPrice">同行价¥{{item.peerPrice}}</text>
 						</view>
 						<view class="bot_bot">
-							<view class="address">
+							<view class="address" v-if="item.storePlaceName">
 								<image src="../../../static/goods/coordinate.png"></image>
 								<text>{{item.storePlaceName}}</text>
 							</view>

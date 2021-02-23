@@ -33,67 +33,19 @@
 		<view class="authority-title">
 			<text>权限列表</text>
 		</view>
-		<view class="authority">
+		<view class="authority" v-for="item in authority" :key="item.id">
 			<view class="title">
-				<text>基础</text>
+				<text>{{item.name}}</text>
 				<image src="../../../static/addrole/xl.png"></image>
 				<!-- <image src="../../../static/addrole/sq.png"></image> -->
 			</view>
 			<view class="ul">
 				<checkbox-group @change="checkboxChange">
-					<label class="option" v-for="item in items" :key="item.value">
+					<label class="option" v-for="children in item.children" :key="children.id">
 						<view>
-							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
+							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="children.name" :checked="children.checked" />
 						</view>
-						<view>{{item.name}}</view>
-					</label>
-				</checkbox-group>
-			</view>
-		</view>
-		<view class="authority">
-			<view class="title">
-				<text>商品</text>
-				<image src="../../../static/addrole/xl.png"></image>
-			</view>
-			<view class="ul">
-				<checkbox-group @change="checkboxChange">
-					<label class="option" v-for="item in items" :key="item.value">
-						<view>
-							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
-						</view>
-						<view>{{item.name}}</view>
-					</label>
-				</checkbox-group>
-			</view>
-		</view>
-		<view class="authority">
-			<view class="title">
-				<text>销售</text>
-				<image src="../../../static/addrole/xl.png"></image>
-			</view>
-			<view class="ul">
-				<checkbox-group @change="checkboxChange">
-					<label class="option" v-for="item in items" :key="item.value">
-						<view>
-							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
-						</view>
-						<view>{{item.name}}</view>
-					</label>
-				</checkbox-group>
-			</view>
-		</view>
-		<view class="authority">
-			<view class="title">
-				<text>客户</text>
-				<image src="../../../static/addrole/xl.png"></image>
-			</view>
-			<view class="ul">
-				<checkbox-group @change="checkboxChange">
-					<label class="option" v-for="item in items" :key="item.value">
-						<view>
-							<checkbox style="transform:scale(0.7)" color="#57BFA3" :value="item.value" :checked="item.checked" />
-						</view>
-						<view>{{item.name}}</view>
+						<view>{{children.name}}</view>
 					</label>
 				</checkbox-group>
 			</view>
@@ -108,42 +60,18 @@ export default {
 		return {
 			roleName:'',
 
-			items: [{
-					value: 'USA',
-					name: '美国'
-				},
-				{
-					value: 'CHN',
-					name: '中国',
-					checked: 'true'
-				},
-				{
-					value: 'BRA',
-					name: '巴西'
-				},
-				{
-					value: 'JPN',
-					name: '日本'
-				},
-				{
-					value: 'ENG',
-					name: '英国'
-				},
-				{
-					value: 'FRA',
-					name: '法国'
-				}
-			]
+			authority: [],
 		};
 	},
 	onLoad() {
 		this.getRoleArr()
+		this.getAuthorityArr()
 	},
 	methods: {
 		checkboxChange: function (e) {
-			var items = this.items,
+			let items = this.authority,
 				values = e.detail.value;
-			for (var i = 0, lenI = items.length; i < lenI; ++i) {
+			for (let i = 0, lenI = items.length; i < lenI; ++i) {
 				const item = items[i]
 				if(values.includes(item.value)){
 					this.$set(item,'checked',true)
@@ -158,8 +86,16 @@ export default {
 				// url:'/shopRole/detail?id='+this.id,
 				url:'/shopRole/detail?id=1',
 			})
-			console.log(res.data.data)
+			// console.log(res.data.data)
 			let role = res.data.data		
+		},
+		// 获取系统资源详情数据
+		async getAuthorityArr(){
+			let res = await this.$get({
+				url:'/sysResource/apiResourceList',
+			})
+			console.log(res.data.data)
+			this.authority = res.data.data
 		},
 		// 保存角色信息
 		async roleSave(){
