@@ -241,13 +241,13 @@
 					</view>
 				</view>
 				
-				<view class="li" @tap.stop="$toPlaceOrder(goodsId)">
+				<view class="li" @tap.stop="$toPlaceOrder(goodsId,1)">
 					<view class="li-box">
 						<image src="../../../static/goods/xd1.png"></image>
 						<text>下单</text>
 					</view>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="$toPlaceOrder(goodsId,2)">
 					<view class="li-box">
 						<image src="../../../static/goods/hold.png"></image>
 						<text>hold</text>

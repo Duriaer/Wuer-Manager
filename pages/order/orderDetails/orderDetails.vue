@@ -176,6 +176,7 @@
 				</view>
 			</view>
 		</view> -->
+		<view class="footer_placeholder"></view>
 		<view class="botBox">
 			<view class="bottom-but" v-if="mode == 'sale'">
 				<view class="left">

@@ -57,16 +57,18 @@ function editGoods(id){
 	})
 }
 
-function toPlaceOrder(id){
-	uni.navigateTo({
-		url:"/pages/order/placeOrder/placeOrder?id="+id,
-	})
+function toPlaceOrder(id,type){
+	if(type==1){
+		uni.navigateTo({
+			url:`/pages/order/placeOrder/placeOrder?id=${id}&mode=sale`,
+		})
+	}else if(type==2){
+		uni.navigateTo({
+			url:`/pages/order/placeOrder/placeOrder?id=${id}&mode=reserve`,
+		})
+	}
 }
-// function toHoldOrder(id){
-// 	uni.navigateTo({
-// 		url:"/pages/order/placeOrder/placeOrder?id="+id,
-// 	})
-// }
+
 function toOrderDetails(id,type){
 	if(type==1){
 		uni.navigateTo({

@@ -78,7 +78,7 @@
 						<image src="../../../static/goods/coordinate.png"></image>
 						<text>{{goods.storePlaceName}}</text>
 					</view>
-					<view class="money">
+					<view class="money"><!-- 选择客人时为销售价 选择同行时为同行价 -->
 						<text class="paid">销售价</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
 						<text class="price">{{goods.salePrice}}</text>
@@ -87,7 +87,7 @@
 			</view>
 		</view>
 		<view class="payment">
-			<view class="line_picker">
+			<view class="line_input" v-if="mode == 'sale'">
 				<view class="line_name">
 					<text>实付金额(元)</text>
 				</view>
@@ -95,7 +95,15 @@
 					<input v-model="realPrice" type="text" placeholder="请填写金额" />
 				</view>
 			</view>
-			<view class="line_picker">
+			<view class="line_input" v-if="mode == 'reserve'">
+				<view class="line_name">
+					<text>定金(元)</text>
+				</view>
+				<view class="right">
+					<input v-model="realPrice" type="text" placeholder="请填写金额" />
+				</view>
+			</view>
+			<view class="line_picker" v-if="mode == 'sale'">
 				<view class="line_name">
 					<text>发货方式</text>
 				</view>
@@ -118,7 +126,7 @@
 					<text class="count">{{remark.length}}/100</text>
 				</view>
 			</view>
-			<view class="line_img">
+			<view class="line_img" v-if="mode == 'sale'">
 				<view class="line_name">
 					<view class="left">
 						<text>附件</text>
@@ -130,6 +138,7 @@
 				</view>
 			</view>
 		</view>
+		<view class="footer_placeholder"></view>
 		<view class="botBox">
 			<view class="bot">
 				<view class="left">
@@ -154,12 +163,13 @@
 				shopUser: uni.getStorageSync("shopUser"),
 				shopId: uni.getStorageSync("shopUser").shopId,
 				
+				mode:'',
 				goods:{
 					
 				},
 				pic:'',
-				realPrice:'',
-				remark:'',
+				realPrice:'',// 订单实售总价
+				remark:'',// 备注
 				
 				customertype:false,//客户类型 客人/同行
 				
@@ -178,6 +188,17 @@
 			};
 		},
 		onLoad(options) {
+			console.log(options)
+			if(options.mode){
+				this.mode = options.mode
+			}else{
+				this.mode = 'sale'
+			}
+			if(this.mode == 'sale'){
+				uni.setNavigationBarTitle({title:'下单'})
+			}else if(this.mode == 'reserve'){
+				uni.setNavigationBarTitle({title:'预订'})
+			}
 			this.goodsId = options.id
 			//搜索商品信息的函数（接口）
 			this.getDetailArr()

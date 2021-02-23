@@ -1,11 +1,11 @@
 {
-	"condition":{
-		"current":1,
-		"list":[{
-			"name":"multiStaff",
-			"path":"pages/select/multiStaff/multiStaff"
-		}]
-	},
+	// "condition":{
+	// 	"current":1,
+	// 	"list":[{
+	// 		"name":"multiStaff",
+	// 		"path":"pages/select/multiStaff/multiStaff"
+	// 	}]
+	// },
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "無二",
@@ -304,13 +304,18 @@
 				}
 				,{
 				    "path" : "placeOrder/placeOrder",
-				    "style" :  {
+				    "style" :{
 						"navigationBarTitleText": "下单",
 						"navigationBarBackgroundColor":"#FFFFFF",
 						"navigationBarTextStyle":"black",
 						"app-plus": {
 							"bounce":"none",
-							"scrollIndicator": "none"
+							"scrollIndicator": "none",
+							"titleNView": {
+								"splitLine": {
+									"color": "#EEEEEE"
+								}
+							}
 						}
 					}
 				}

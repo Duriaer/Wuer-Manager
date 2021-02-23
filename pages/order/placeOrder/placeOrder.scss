@@ -1,10 +1,12 @@
 page{
 	background: #F9F9F9;
-}
-.place-order{
 	font-family: PingFang SC;
 	color: #333333;
+}
+.place-order{
+	width: 750rpx;
 	.line_button,
+	.line_input,
 	.line_picker{
 		display: flex;
 		justify-content: space-between;
@@ -114,7 +116,6 @@ page{
 	}
 	.line_img{
 		border-bottom:0;
-		margin-bottom: 148rpx;
 		.line_name{
 			display: flex;
 			justify-content: space-between;
@@ -234,6 +235,9 @@ page{
 				}
 			}
 		}
+	}
+	.payment{
+		margin-bottom: 26rpx;
 	}
 	.botBox{
 		width: 750rpx;
