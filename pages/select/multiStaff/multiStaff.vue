@@ -7,7 +7,7 @@
 			<label class="select" v-for="(item,index) in shopUser" :key="item.id">
 				<view class="list">
 					<view class="checkbox">
-						<checkbox :value="item" :disabled="item.disabled" style="transform:scale(0.7)" color="#57BFA3"/>
+						<checkbox value="item" :disabled="item.disabled" style="transform:scale(0.7)" color="#57BFA3"/>
 					</view>
 					<view class="left">
 						<text class="title">{{item.realname}}</text>
@@ -42,6 +42,7 @@
 			this.getShopUserArr()
 		},
 		onNavigationBarButtonTap(e){
+			console.log(e)
 			if(e.index ==0){
 				uni.setStorageSync('recycleUser',this.recycleUser)
 				this.$back()
@@ -49,7 +50,7 @@
 		},
 		watch:{
 			recycleUserLength(val){
-				if(val>=3){
+				if(val>=2){
 					for(let item of this.shopUser){
 						for(let j of this.recycleUser){
 							if(item.id!=j.id){
@@ -82,7 +83,6 @@
 				let res = await this.$get({
 					url:'/goodsSku/getShopUserItems',
 				})
-				console.log(res.data.data)
 				for(let item of res.data.data){
 					item.disabled = false
 				}
@@ -93,7 +93,6 @@
 				console.log(e.detail)
 				this.recycleUser = e.detail.value
 				this.recycleUserLength = this.recycleUser.length
-				console.log(this.recycleUserLength)
 			}
 		}
 	}

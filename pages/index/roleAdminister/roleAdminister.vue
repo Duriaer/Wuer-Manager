@@ -31,6 +31,12 @@
 		onLoad(){
 			this.getShopRole()
 		},
+		onNavigationBarButtonTap(e){
+			console.log(e)
+			if(e.index ==0){
+				this.$addRole()
+			}
+		},
 		methods:{
 			// 获取角色列表
 			async getShopRole(){

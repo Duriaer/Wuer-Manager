@@ -32,13 +32,18 @@
 		onLoad(){
 			this.getShopUserArr()
 		},
+		onNavigationBarButtonTap(e){
+			console.log(e)
+			if(e.index ==0){
+				this.$addStaff()
+			}
+		},
 		methods:{
 			// 获取本店所有员工
 			async getShopUserArr(){
 				let res = await this.$get({
 					url:'/goodsSku/getShopUserItems',
 				})
-				console.log(res.data.data)
 				this.shopUser = res.data.data
 			},
 			

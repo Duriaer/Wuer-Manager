@@ -74,26 +74,15 @@
 			//保存客户信息
 			async addGuestSave(){
 				uni.showLoading({title:'添加中...'})
-				if(this.goodsBrandId==''||this.goodsBrandId==null){
+				if(this.name==''||this.name==null){
 					uni.hideLoading()
 					uni.showToast({
-						title:'请选择品牌',
+						title:'请输入姓名',
 						icon:'none'
 					})
 					this.scrollTopId = ''
 					setTimeout(()=>{
 						this.scrollTopId = 'goodsBrand'
-					},100)
-					return
-				}else if(this.salePrice==''||this.salePrice==null){
-					uni.hideLoading()
-					uni.showToast({
-						title:'请输入销售价',
-						icon:'none'
-					})
-					this.scrollTopId = ''
-					setTimeout(()=>{
-						this.scrollTopId = 'salePrice'
 					},100)
 					return
 				}

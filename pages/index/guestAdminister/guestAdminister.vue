@@ -63,6 +63,12 @@
 		onLoad() {
 			this.getCustomer()
 		},
+		onNavigationBarButtonTap(e){
+			console.log(e)
+			if(e.index ==0){
+				this.$addGuest()
+			}
+		},
 		methods:{
 			// 获取客户列表
 			async getCustomer(){

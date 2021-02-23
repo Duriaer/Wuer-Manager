@@ -47,6 +47,12 @@
 			this.tabNav(1)
 			this.getShopUserArr()
 		},
+		onNavigationBarButtonTap(e){
+			console.log(e)
+			if(e.index ==0){
+				this.$addStaff()
+			}
+		},
 	    methods:{
 			tabNav(index) {
 				if(this.navIndex == index){

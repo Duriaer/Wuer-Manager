@@ -198,8 +198,10 @@
 			this.goodsId = options.id
 			//搜索商品信息的函数（接口）
 			this.getDetailArr()
-			this.getShopUser()
 			this.getPickerArr('/goodsSku/getDeliveryMethodItems')
+		},
+		onShow() {
+			this.getShopUser()
 		},
 		watch:{
 			deliveryIndex(val){

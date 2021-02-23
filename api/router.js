@@ -1,19 +1,23 @@
+// 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面
 function toPath(path){
 	uni.navigateTo({
 		url:path
 	})
 }
 
+// 关闭当前页面，跳转到应用内的某个页面
 function goPath(path){
 	uni.redirectTo({
 		url:path
 	})
 }
 
+//关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层
 function back(path){
 	uni.navigateBack()
 }
 
+//跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
 function toHome(){
 	uni.switchTab({
 		url:"/pages/tabBar/home/home"
@@ -28,6 +32,16 @@ function addStaff(){
 function addGuest(){
 	uni.navigateTo({
 		url:"/pages/index/addGuest/addGuest",
+	})
+}
+function addRole(){
+	uni.navigateTo({
+		url:"/pages/index/addRole/addRole",
+	})
+}
+function addPeer(){
+	uni.navigateTo({
+		url:"/pages/index/addPeer/addPeer",
 	})
 }
 function staffAdminister(){
@@ -100,4 +114,4 @@ function to401(){
 	},1000)
 }
 
-export {toPath,goPath,back,toHome,addStaff,addGuest,staffAdminister,guestAdminister,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}
+export {toPath,goPath,back,toHome,addStaff,addGuest,addRole,addPeer,staffAdminister,guestAdminister,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}

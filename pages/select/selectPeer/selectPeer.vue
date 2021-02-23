@@ -33,6 +33,12 @@
 		onLoad(){
 			this.getFriendShopsArr()
 		},
+		onNavigationBarButtonTap(e){
+			console.log(e)
+			if(e.index ==0){
+				this.$addPeer()
+			}
+		},
 		methods:{
 			// 获取所有友店信息
 			async getFriendShopsArr(){
