@@ -12,7 +12,8 @@
 					</view>
 					<view class="middle">
 						<view class="goods-title">
-							<text style="margin-left: -10rpx;">【{{order.qualityInfo}}】{{order.name}}</text>
+							<text style="margin-left: -10rpx;">【{{order.qualityInfo}}</text>
+							<text>{{order.name}}</text>
 						</view>
 						<view class="label">
 							<view class="label_li" v-if="order.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
@@ -46,7 +47,8 @@
 						</view>
 					</view>
 					<view class="right">
-						<text>已销售</text>
+						<text v-if="mode == 'sale'">已销售</text>
+						<text v-if="mode == 'reserve'">已预定</text>
 					</view>
 				</view>
 				<view class="bot">

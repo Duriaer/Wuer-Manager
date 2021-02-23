@@ -16,8 +16,11 @@
 						<text>创建时间:{{item.createTime}}</text>
 					</view>
 					<view class="right">
-						<view class="state">
+						<view class="state-y" v-if="item.enable">
 							<text>启用</text>
+						</view>
+						<view class="state-n" v-else>
+							<text>禁用</text>
 						</view>
 						<view class="role">
 							<text>销售</text>

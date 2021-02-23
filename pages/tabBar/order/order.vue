@@ -56,7 +56,7 @@
 					<view class="details">
 						<view class="title">
 							<text v-if="item.mainItem.qualityInfo" style="margin-left: -10rpx;">【{{item.mainItem.qualityInfo}}】</text>
-							{{item.mainItem.name}}
+							<text>{{item.mainItem.name}}</text>
 						</view>
 						<text>销售时间:{{item.orderTime}}</text>
 						<text>销售员工:{{item.operatorName}}</text>

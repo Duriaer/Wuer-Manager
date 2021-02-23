@@ -44,7 +44,8 @@
 				</view>
 				<view class="middle">
 					<view class="goods-title">
-						<text style="margin-left: -10rpx;">【{{goods.qualityInfo}}】{{goods.name}}</text>
+						<text style="margin-left: -10rpx;">【{{goods.qualityInfo}}】</text>
+						<text>{{goods.name}}</text>
 					</view>
 					<view class="label">
 						<view class="label_li" v-if="goods.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
@@ -162,9 +163,7 @@
 				shopId: uni.getStorageSync("shopUser").shopId,
 				
 				mode:'',
-				goods:{
-					
-				},
+				goods:{},
 				pic:'',
 				realPrice:'',// 订单实售总价
 				downPayment:'',//定金

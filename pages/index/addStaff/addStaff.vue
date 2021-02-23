@@ -52,7 +52,7 @@
 					</view>
 					<view class="right">
 						<switch checked color="#57BFA3" style="transform:scale(0.6)"/>
-						<text>启用</text>
+						<text>启用</text><!-- enable -->
 					</view>
 				</view>
 			</view>

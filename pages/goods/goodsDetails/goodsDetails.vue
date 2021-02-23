@@ -29,7 +29,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="bot">
+				<view class="bot" v-if="goods.peerPrice">
 					<text>同行价¥{{goods.peerPrice}}</text>
 				</view>
 			</view>
@@ -39,7 +39,7 @@
 						<text>超期</text>
 					</view>
 					<text style="margin-left: -10rpx;">【{{goods.qualityInfo}}】</text>
-					<text>{{goods.name}}</text>
+					<text class="goodsname">{{goods.name}}</text>
 				</view>
 				
 				<view class="label_ul">

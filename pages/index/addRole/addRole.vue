@@ -83,10 +83,10 @@ export default {
 		// 获取角色详情数据
 		async getRoleArr(){
 			let res = await this.$get({
-				// url:'/shopRole/detail?id='+this.id,
-				url:'/shopRole/detail?id=1',
+				url:'/shopRole/detail?id=1'
+				// +this.id,
 			})
-			// console.log(res.data.data)
+			console.log(res.data.data)
 			let role = res.data.data		
 		},
 		// 获取系统资源详情数据
@@ -94,7 +94,6 @@ export default {
 			let res = await this.$get({
 				url:'/sysResource/apiResourceList',
 			})
-			console.log(res.data.data)
 			this.authority = res.data.data
 		},
 		// 保存角色信息

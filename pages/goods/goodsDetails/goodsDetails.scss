@@ -153,8 +153,11 @@
 			}
 		}
 		.details_title{
+			width: 100%;
+			box-sizing: border-box;
 			padding-left: 24rpx;
 			.goodstitle{
+				width: 700rpx;
 				font-size: 32rpx;
 				font-weight: bold;
 				line-height: 44rpx;
