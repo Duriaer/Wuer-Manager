@@ -76,7 +76,8 @@
 					</view>
 					<view class="centre">
 						<text class="symbol">¥</text>
-						<text>{{item.realPrice}}</text>
+						<text v-if="navIndex!==2">{{item.realPrice}}</text>
+						<text v-if="navIndex==2">{{item.downPayment}}</text>
 					</view>
 					<view class="bot">
 						<text v-if="item.orderStatus==2&&navIndex!=2">实收款</text>

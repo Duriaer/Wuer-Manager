@@ -14,9 +14,9 @@
 			</view>
 		</view>
 		<view class="total">
-			<text>员工总数:{{this.shopUser.length}}个</text>
+			<text>员工总数:{{shopUser.length}}个</text>
 		</view>
-		<view class="list" v-for="item in this.shopUser" :key="item.id">
+		<view class="list" v-for="item in shopUser" :key="item.id">
 			<view class="left">
 				<text class="title">{{item.realname}}</text>
 				<text>登录账号:{{item.username}}</text>
@@ -24,8 +24,11 @@
 				<text>创建时间:{{item.createTime}}</text>
 			</view>
 			<view class="right">
-				<view class="state">
+				<view class="state-y" v-if="item.enable">
 					<text>启用</text>
+				</view>
+				<view class="state-n" v-else>
+					<text>禁用</text>
 				</view>
 				<view class="role">
 					<text>销售</text>
@@ -58,6 +61,7 @@
 				if(this.navIndex == index){
 					return
 				}
+				console.log(index)
 				this.navIndex = index
 			},
 			// 获取本店所有员工

@@ -77,13 +77,23 @@ page{
 			font-size: 22rpx;
 			display: flex;
 			justify-content: space-between;
-			.state{
+			.state-y{
+				width: 76rpx;
+				height: 30rpx;
+				border: 2rpx solid #57BFA3;
+				border-radius: 46rpx;
+				text-align: center;
+				line-height: 30rpx;
+				color: #57BFA3;
+			}
+			.state-n{
 				width: 76rpx;
 				height: 30rpx;
 				border: 2rpx solid #888888;
 				border-radius: 46rpx;
 				text-align: center;
 				line-height: 30rpx;
+				color: #888888;
 			}
 			.role{
 				width: 80rpx;

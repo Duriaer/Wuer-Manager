@@ -137,11 +137,11 @@
 						</view>
 					</view>
 					<view class="line_input">
-						<view class="line_name">
+						<view class="line_name" style="width: 200rpx;">
 							<text>自定义标签</text>
 						</view>
-						<view class="right">
-							<input v-model="customLabel" type="text" placeholder="最多五个哟~" />
+						<view class="right" style="width: 600rpx;">
+							<input v-model="customLabel" type="text" placeholder="标签最多五个用,分隔每个不超过八个字" />
 						</view>
 					</view>
 				</view>
@@ -492,6 +492,7 @@
 				storePlaceIndex:'',
 
 				recycleUserId:'',//回收员工id
+				recycleUserIds:'',//回收员工id列表(用英文逗号分隔)
 				recycleUserName:'',//回收员工用户名
 
 				checkupUserId:'',//鉴定员工id
@@ -1057,6 +1058,7 @@
 						"quality": this.quality,
 						"qualityInfo": this.qualityInfo,
 						"recycleUserId": this.recycleUserId,
+						"recycleUserIds": this.recycleUserIds,
 						"recycleUserName": this.recycleUserName,
 						"salePrice": this.salePrice,
 						"shopId": this.shopId,

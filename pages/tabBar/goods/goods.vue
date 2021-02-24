@@ -24,8 +24,7 @@
 			<view class="search-l">
 				<image src="../../../static/goods/fdj.png" />
 			</view>
-			
-			<view class="search-r">
+			<view class="search-r" @tap.stop="scanCode()">
 				<image src="../../../static/goods/scanning.png" />
 			</view>
 		</view>
@@ -719,6 +718,14 @@
 					}
 				})
 			},
+			scanCode(){
+				uni.scanCode({
+				    success: function (res) {
+				        console.log('条码类型：' + res.scanType);
+				        console.log('条码内容：' + res.result);
+				    }
+				});
+			}
 		}
 	}
 </script>

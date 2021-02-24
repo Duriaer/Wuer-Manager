@@ -37,22 +37,20 @@
 						<text>角色</text>
 					</view>
 					<view class="right">
-						<picker>
-							<view class="picker">
-								<text class="noSet">请选择</text>
-								<text></text>
-								<image src="../../../static/addGoods/go.png" ></image>
-							</view>
-						</picker>
+						<view class="picker">
+							<text class="noSet">请选择</text>
+							<text>{{roleName}}</text>
+							<image src="../../../static/addGoods/go.png" ></image>
+						</view>
 					</view>
 				</view>
 				<view class="line_switch">
 					<view class="line_name">
 						<text>状态</text>
 					</view>
-					<view class="right">
+					<view class="right"><!-- enable -->
 						<switch checked color="#57BFA3" style="transform:scale(0.6)"/>
-						<text>启用</text><!-- enable -->
+						<text>启用</text>
 					</view>
 				</view>
 			</view>
@@ -75,7 +73,7 @@
 						<text>密码</text><text class="star">*</text>
 					</view>
 					<view class="right">
-						<input password="ture" type="text" placeholder="请输入" />
+						<input v-model="password" password="ture" type="text" placeholder="请输入" />
 					</view>
 				</view>
 			</view>
@@ -88,9 +86,11 @@
 		data() {
 			return {
 				realname:'',
-				telephone:'',
-				username:'',
 				sex:'',
+				telephone:'',
+				roleName:'',
+				username:'',
+				password:'',
 				
 			};
 		},
@@ -110,27 +110,27 @@
 			},
 			async addStaffSave(){
 				uni.showLoading({title:'添加中...'})
-				if(this.goodsBrandId==''||this.goodsBrandId==null){
+				if(this.realname==''||this.realname==null){
 					uni.hideLoading()
 					uni.showToast({
-						title:'请选择品牌',
+						title:'请输入姓名',
 						icon:'none'
 					})
-					this.scrollTopId = ''
-					setTimeout(()=>{
-						this.scrollTopId = 'goodsBrand'
-					},100)
 					return
-				}else if(this.salePrice==''||this.salePrice==null){
+				}else if(this.username==''||this.username==null){
 					uni.hideLoading()
 					uni.showToast({
-						title:'请输入销售价',
+						title:'请输入账号',
 						icon:'none'
 					})
-					this.scrollTopId = ''
-					setTimeout(()=>{
-						this.scrollTopId = 'salePrice'
-					},100)
+					return
+				}
+				else if(this.username==''||this.username==null){
+					uni.hideLoading()
+					uni.showToast({
+						title:'请输入账号',
+						icon:'none'
+					})
 					return
 				}
 				let res = await this.$post({
