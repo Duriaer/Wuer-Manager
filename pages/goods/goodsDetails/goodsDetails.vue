@@ -7,69 +7,62 @@
 				 	<image :src="item" mode="aspectFill" @tap.stop="$previewImg(index,imgArr)"></image>
 				 </view>
 			</view>
-			<view class="details_price">
-				<view class="top">
-					<view class="left">
-						<view class="price">
-							<text style="font-size: 32rpx;margin-right: 6rpx;">¥</text>
-							<text>{{goods.salePrice}}</text>
+			<view class="detailsTitle">
+				<view class="details_title">
+					<view class="goodstitle">
+						<view class="overdue" v-if="goods.overdueDays">
+							<text>超期</text>
 						</view>
-						<view class="share" v-if="goods.peerSharing">
-							<text>已共享</text>
-						</view>
+						<text style="margin-left: -10rpx;">【{{goods.qualityInfo}}】</text>
+						<text>{{goods.name}}</text>
 					</view>
-					<view class="right">
-						<view class="li" @tap.stop="downImg(imgArr)">
-							<image src="../../../static/goodsDetails/xz.png"></image>
-							<text>下载图片</text>
+					
+					<view class="label_ul">
+						<!-- 来源标签 -->
+						<view class="label_li" v-if="goods.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
+							<text>{{goods.originTypeInfo}}</text>
 						</view>
-						<view class="li">
-							<image src="../../../static/goodsDetails/fz.png"></image>
-							<text>复制描述</text>
+						<view class="label_li" v-else-if="goods.originTypeInfo=='回收客人'" style="background:#EFF7FF ;color: #759FFF;">
+							<text>{{goods.originTypeInfo}}</text>
+						</view>
+						<view class="label_li" v-else-if="goods.originTypeInfo=='客人寄售'" style="background:#FFF3E2 ;color: #EFA22A;">
+							<text>{{goods.originTypeInfo}}</text>
+						</view>
+						<view class="label_li" v-else-if="goods.originTypeInfo=='合作销售'" style="background:#FFF0F5 ;color: #DDA0DD;">
+							<text>{{goods.originTypeInfo}}</text>
+						</view>
+						<!-- 新增标签 -->
+						<!-- <view class="label_li labal_li2">
+							<text>标签标签</text>
+						</view> -->
+						<!-- 品牌标签 -->
+						<view class="label_li">
+							<text>{{goods.goodsBrandName}}</text>
+						</view>
+						<!-- 分类标签 -->
+						<view class="label_li">
+							<text>{{goods.goodsTypeName}}</text>
 						</view>
 					</view>
 				</view>
-				<view class="bot" v-if="goods.peerPrice">
-					<text>同行价¥{{goods.peerPrice}}</text>
+				<view class="right" @tap.stop="downImg(imgArr)">
+					<image src="../../../static/goodsDetails/xz.png"></image>
 				</view>
 			</view>
-			<view class="details_title">
-				<view class="goodstitle">
-					<view class="overdue" v-if="goods.overdueDays">
-						<text>超期</text>
-					</view>
-					<text style="margin-left: -10rpx;">【{{goods.qualityInfo}}】</text>
-					<text class="goodsname">{{goods.name}}</text>
+			<view class="details_price">
+				<view class="price">
+					<text>¥</text>
+					<text>{{goods.salePrice}}</text>
 				</view>
-				
-				<view class="label_ul">
-					<!-- 来源标签 -->
-					<view class="label_li" v-if="goods.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
-						<text>{{goods.originTypeInfo}}</text>
-					</view>
-					<view class="label_li" v-else-if="goods.originTypeInfo=='回收客人'" style="background:#EFF7FF ;color: #759FFF;">
-						<text>{{goods.originTypeInfo}}</text>
-					</view>
-					<view class="label_li" v-else-if="goods.originTypeInfo=='客人寄售'" style="background:#FFF3E2 ;color: #EFA22A;">
-						<text>{{goods.originTypeInfo}}</text>
-					</view>
-					<view class="label_li" v-else-if="goods.originTypeInfo=='合作销售'" style="background:#FFF0F5 ;color: #DDA0DD;">
-						<text>{{goods.originTypeInfo}}</text>
-					</view>
-					<!-- 新增标签 -->
-					<!-- <view class="label_li labal_li2">
-						<text>标签标签</text>
-					</view> -->
-					<!-- 品牌标签 -->
-					<view class="label_li">
-						<text>{{goods.goodsBrandName}}</text>
-					</view>
-					<!-- 分类标签 -->
-					<view class="label_li">
-						<text>{{goods.goodsTypeName}}</text>
-					</view>
+				<view class="share" v-if="goods.peerSharing">
+					<text>已共享</text>
 				</view>
-				<view class="loan">
+			</view>
+			<view class="details_bot">
+				<view class="left" v-if="goods.peerPrice">
+					<text>同行价¥{{goods.peerPrice}}</text>
+				</view>
+				<view class="right">
 					<image src="../../../static/goods/coordinate.png"></image>
 					<text>员工-萍萍借出（客户看货） 1小时</text>
 				</view>
@@ -79,6 +72,10 @@
 		<view class="details_describe">
 			<view class="title">
 				<text>商品描述</text>
+				<image src="../../../static/goodsDetails/fz.png"></image>
+			</view>
+			<view class="describe" v-if="goods.marketingDocument" @tap.stop="copyDescribe(goods.marketingDocument)">
+				<text>{{goods.marketingDocument}}</text>
 			</view>
 			<view class="ul">
 				<view class="li" v-if="goods.manufacturerCode">
@@ -153,7 +150,7 @@
 						<text>{{goods.originTypeInfo}}</text>
 					</view>
 				</view>
-				<view class="agent">
+				<!-- <view class="agent">
 					<view class="agent_box" style="border-bottom: 2rpx solid #F4F4F4;height: 96rpx;">
 						<view class="top">
 							<text>本店</text>
@@ -183,7 +180,7 @@
 							<text>待确认</text>
 						</view>
 					</view>
-				</view>
+				</view> -->
 				<view class="li" v-if="goods.recycleUserName">
 					<view class="left">
 						<text>回收人员</text>
@@ -307,6 +304,7 @@
 				let res = await this.$get({
 					url:'/goodsSku/detail?id='+this.goodsId,
 				})
+				console.log(res.data.data)
 				this.goods = res.data.data
 				this.imgArr = []
 				for(let i=0;i<this.goods.picList.length;i++){
@@ -353,6 +351,15 @@
 					    }
 					});
 				}
+			},
+			copyDescribe(val){
+				uni.setClipboardData({
+				    data: val,
+				    success: function (res) {
+						console.log('success');
+						uni.showToast({title: '复制成功',icon:'none'});
+				    }
+				})
 			}
 		}
 	}
