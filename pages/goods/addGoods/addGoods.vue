@@ -281,7 +281,7 @@
 						<view class="line_name">
 							<text>回收人员</text>
 						</view>
-						<view class="right" @tap.stop="$toPath('../../select/multiStaff/multiStaff')">
+						<view class="right" @tap.stop="$toPath('../../select/selectStaff/multiStaff')">
 							<view class="picker">
 								<text class="noSet" v-if="!recycleUserId">请选择</text>
 								<text v-else>{{recycleUserName}}</text>
@@ -293,7 +293,7 @@
 						<view class="line_name">
 							<text>鉴定人员</text>
 						</view>
-						<view class="right" @tap.stop="$toPath('../../select/singleStaff/singleStaff')">
+						<view class="right" @tap.stop="$toPath('../../select/selectStaff/singleStaff')">
 							<view class="picker">
 								<text class="noSet" v-if="!checkupUserId">请选择</text>
 								<text v-else>{{checkupUserName}}</text>

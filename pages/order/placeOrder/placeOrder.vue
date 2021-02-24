@@ -28,7 +28,7 @@
 				<view class="line_name">
 					<text>销售员工</text>
 				</view>
-				<view class="right" @tap.stop="$toPath('../../select/singleStaff/singleStaff')">
+				<view class="right" @tap.stop="$toPath('../../select/selectStaff/singleStaff')">
 					<view class="picker">
 						<text class="noSet" v-if="!operatorId">请选择</text>
 						<text v-else>{{operatorName}}</text>

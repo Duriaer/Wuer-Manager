@@ -3,7 +3,7 @@
 	// 	"current":1,
 	// 	"list":[{
 	// 		"name":"multiStaff",
-	// 		"path":"pages/select/multiStaff/multiStaff"
+	// 		"path":"pages/select/selectStaff/multiStaff"
 	// 	}]
 	// },
 	"globalStyle": {
@@ -364,7 +364,7 @@
                 
                 }
                 ,{
-                    "path" : "singleStaff/singleStaff",
+                    "path" : "selectStaff/singleStaff",
                     "style" :{
                     "navigationBarTitleText": "选择员工",
                     "enablePullDownRefresh": false,
@@ -384,7 +384,7 @@
                 
                 }
                 ,{
-                    "path" : "multiStaff/multiStaff",
+                    "path" : "selectStaff/multiStaff",
                     "style" :{
                     "navigationBarTitleText": "选择员工",
                     "enablePullDownRefresh": false,
