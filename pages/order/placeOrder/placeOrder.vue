@@ -61,9 +61,9 @@
 							<text>{{goods.originTypeInfo}}</text>
 						</view>
 						<!-- 自定义标签 -->
-						<!-- <view class="label_li labal_li2" v-if="goods.customLabelList!=null&&goods.customLabelList!=''">
+						<view class="label_li labal_li2" v-if="goods.customLabelList!=null&&goods.customLabelList!=''">
 							<text>{{goods.customLabelList}}</text>
-						</view> -->
+						</view>
 						<!-- 品牌标签 -->
 						<view class="label_li">
 							<text>{{goods.goodsBrandName}}</text>

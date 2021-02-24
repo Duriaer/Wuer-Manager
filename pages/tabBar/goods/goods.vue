@@ -11,7 +11,7 @@
 				</view>
 				<text class="title">商品</text>
 				<view class="box" @tap.stop="$addGoods()">
-					<text>增加商品</text>
+					<text>添加商品</text>
 				</view>
 			</view>
 			

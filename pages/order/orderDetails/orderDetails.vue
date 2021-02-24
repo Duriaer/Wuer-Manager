@@ -12,7 +12,7 @@
 					</view>
 					<view class="middle">
 						<view class="goods-title">
-							<text style="margin-left: -10rpx;">【{{order.qualityInfo}}</text>
+							<text style="margin-left: -10rpx;">【{{order.qualityInfo}}】</text>
 							<text>{{order.name}}</text>
 						</view>
 						<view class="label">
@@ -29,9 +29,9 @@
 								<text>{{order.originTypeInfo}}</text>
 							</view>
 							<!-- 自定义标签 -->
-							<!-- <view class="label_li labal_li2" v-if="order.customLabelList!=null&&item.customLabelList!=''">
+							<view class="label_li labal_li2" v-if="order.customLabelList!=null&&order.customLabelList!=''">
 								<text>{{order.customLabelList}}</text>
-							</view> -->
+							</view>
 							<!-- 品牌标签 -->
 							<view class="label_li">
 								<text>{{order.goodsBrandName}}</text>

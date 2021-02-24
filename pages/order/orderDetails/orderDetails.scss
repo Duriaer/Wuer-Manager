@@ -39,10 +39,10 @@ page{
 					image{
 						width: 146rpx;
 						height: 146rpx;
+						border-radius: 8rpx;
 					}
 				}
 				.middle{
-					position: relative;
 					.goods-title{
 						font-size: 26rpx;
 						width: 400rpx;
@@ -54,8 +54,7 @@ page{
 					.label{
 						display: flex;
 						flex-wrap: wrap;
-						height: 32rpx;
-						width: 400rpx;
+						width: 500rpx;
 						.label_li{
 							height: 28rpx;
 							padding: 0 10rpx;
@@ -77,14 +76,13 @@ page{
 						}
 					}
 					.address{
-						position: absolute;
-						bottom: 6rpx;
 						font-size: 24rpx;
 						color: #8F8F8F;
 						image{
 							width: 14rpx;
 							height: 20rpx;
 							margin-right: 4rpx;
+							vertical-align: -6%;
 						}
 					}
 				}

@@ -92,6 +92,7 @@ page{
 			justify-content: space-around;
 			align-items: center;
 			border-radius: 16rpx;
+			box-shadow: 0 10rpx 20rpx rgba(236, 236, 236, 0.16);
 			margin-left: 24rpx;
 			.li{
 				display: flex;
@@ -112,6 +113,7 @@ page{
 	.bot{
 		margin-top: 20rpx;
 		width: 750rpx;
+		box-shadow: 0 10rpx 20rpx rgba(236, 236, 236, 0.16);
 		.title{
 			margin-left: 24rpx;
 			font-size: 32rpx;
@@ -123,6 +125,7 @@ page{
 			font-size: 26rpx;
 			margin-left: 24rpx;
 			margin-top: 28rpx;
+			padding-bottom: 20rpx;
 			border-radius: 16rpx;
 			display: flex;
 			flex-wrap: wrap;
@@ -130,6 +133,7 @@ page{
 			.li{
 				width: 174rpx;
 				height: 150rpx;
+				border-radius: 16rpx;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
