@@ -33,13 +33,13 @@
 		<view class="authority-title">
 			<text>权限列表</text>
 		</view>
-		<view class="authority" v-for="item in authority" :key="item.id">
+		<view class="authority" v-for="(item,index) in authority" :key="item.id">
 			<view class="title">
 				<text>{{item.name}}</text>
-				<image src="../../../../static/addrole/xl.png"></image>
-				<!-- <image src="../../../static/addrole/sq.png"></image> -->
+				<image src="../../../../static/addrole/xl.png" v-if="item.show" @tap.stop="tabListShow(index)"></image>
+				<image src="../../../../static/addrole/sq.png" v-if="!item.show" @tap.stop="tabListShow(index)"></image>
 			</view>
-			<view class="ul">
+			<view class="ul" v-if="item.show">
 				<checkbox-group @change="checkboxChange">
 					<label class="option" v-for="children in item.children" :key="children.id">
 						<view>
@@ -94,7 +94,13 @@ export default {
 			let res = await this.$get({
 				url:'/sysResource/apiResourceList',
 			})
+			for(let item of res.data.data){
+				item.show = true
+			}
 			this.authority = res.data.data
+		},
+		tabListShow(i){
+			this.authority[i].show = !this.authority[i].show
 		},
 		// 保存角色信息
 		async roleSave(){
