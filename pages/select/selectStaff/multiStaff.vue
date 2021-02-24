@@ -1,13 +1,13 @@
 <template>
 	<view class="multiStaff">
 		<view class="total">
-			<text>员工总数:{{shopUser.length}}个</text>
+			<text>员工总数:{{listArr.length}}个</text>
 		</view>
 		<checkbox-group @change="checkboxChange">
-			<label class="select" v-for="(item,index) in shopUser" :key="item.id">
+			<label class="select" v-for="(item,index) in listArr" :key="item.id">
 				<view class="list">
 					<view class="checkbox">
-						<checkbox value="item" :disabled="item.disabled" style="transform:scale(0.7)" color="#57BFA3"/>
+						<checkbox :value="item" :disabled="item.disabled" style="transform:scale(0.7)" color="#57BFA3"/>
 					</view>
 					<view class="left">
 						<text class="title">{{item.realname}}</text>
@@ -36,36 +36,41 @@
 	export default {
 		data() {
 			return {
-				shopUser:[],
-				recycleUser:[],
-				recycleUserLength:''
+				listArr:[],
+				selectArr:[],
+				selectLength:''
 			};
 		},
-		onLoad(){
-			this.getShopUserArr()
+		onShow(){
+			this.getListArrArr()
 		},
 		onNavigationBarButtonTap(e){
-			console.log(e)
 			if(e.index ==0){
-				uni.setStorageSync('recycleUser',this.recycleUser)
+				let idArr = []
+				let usernameArr = []
+				for(let i of this.selectArr){
+					idArr.push(i.id)
+					usernameArr.push(i.username)
+				}
+				uni.setStorageSync('multiStaff',{idArr,usernameArr})
 				this.$back()
 			}
 		},
 		watch:{
-			recycleUserLength(val){
+			selectLength(val){
 				if(val>=2){
-					for(let item of this.shopUser){
-						for(let j of this.recycleUser){
-							if(item.id!=j.id){
-								item.disabled = true
+					for(let i of this.listArr){
+						for(let j of this.selectArr){
+							if(i.id!=j.id){
+								i.disabled = true
 							}else{
-								item.disabled = false
+								i.disabled = false
 							}
 						}
 					}
 				}else{
-					for(let item of this.shopUser){
-						item.disabled = false
+					for(let i of this.listArr){
+						i.disabled = false
 					}
 				}
 				
@@ -82,20 +87,20 @@
 		},
 		methods:{
 			// 获取本店所有员工
-			async getShopUserArr(){
+			async getListArrArr(){
 				let res = await this.$get({
 					url:'/goodsSku/getShopUserItems',
 				})
 				for(let item of res.data.data){
 					item.disabled = false
 				}
-				this.shopUser = res.data.data
+				this.listArr = res.data.data
 			},
 			
 			checkboxChange(e){
 				console.log(e.detail)
-				this.recycleUser = e.detail.value
-				this.recycleUserLength = this.recycleUser.length
+				this.selectArr = e.detail.value
+				this.selectLength = this.selectArr.length
 			}
 		}
 	}

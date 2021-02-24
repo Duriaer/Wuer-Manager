@@ -1,9 +1,9 @@
 <template>
 	<view class="selectPeer">
 		<view class="total">
-			<text>员工总数:{{this.friendShops.length}}个</text>
+			<text>员工总数:{{listArr.length}}个</text>
 		</view>
-		<view class="list" v-for="item in this.friendShops" :key="item.id" @tap.stop="selectCooperateShop(item)">
+		<view class="list" v-for="item in listArr" :key="item.id" @tap.stop="selectListArr(item)">
 			<view class="left">
 				<view class="title">
 					<text>{{item.shortName}}</text>
@@ -27,11 +27,11 @@
 	export default {
 		data() {
 			return {
-				friendShops:[],
+				listArr:[],
 			};
 		},
-		onLoad(){
-			this.getFriendShopsArr()
+		onShow(){
+			this.getListArr()
 		},
 		onNavigationBarButtonTap(e){
 			console.log(e)
@@ -41,22 +41,20 @@
 		},
 		methods:{
 			// 获取所有友店信息
-			async getFriendShopsArr(){
+			async getListArr(){
 				let res = await this.$get({
 					url:'/shop/getFriendShops',
 				})
 				console.log(res.data.data)
-				this.friendShops = res.data.data
+				this.listArr = res.data.data
 			},
 			
-			selectCooperateShop(item){
-				let cooperateShop = {}
-					cooperateShop = {
-						cooperateShop:item,
-						cooperateShopId:item.id,
-						cooperateShopName:item.shortName
+			selectListArr(item){
+				let data = {
+						id:item.id,
+						shortName:item.shortName
 					}
-				uni.setStorageSync('cooperateShop',cooperateShop)
+				uni.setStorageSync('selectPeer',data)
 				this.$back()
 			},
 		}

@@ -1,9 +1,9 @@
 <template>
 	<view class="singleStaff">
 		<view class="total">
-			<text>员工总数:{{shopUser.length}}个</text>
+			<text>员工总数:{{listArr.length}}个</text>
 		</view>
-		<view class="list" v-for="item in shopUser" :key="item.id" @tap.stop="selectShopUser(item)">
+		<view class="list" v-for="item in listArr" :key="item.id" @tap.stop="selectListArr(item)">
 			<view class="left">
 				<text class="title">{{item.realname}}</text>
 				<text>登录账号:{{item.username}}</text>
@@ -29,36 +29,33 @@
 	export default {
 		data() {
 			return {
-				shopUser:[],
+				listArr:[],
 			};
 		},
-		onLoad(){
-			this.getShopUserArr()
+		onShow(){
+			this.getListArr()
 		},
 		onNavigationBarButtonTap(e){
-			console.log(e)
 			if(e.index ==0){
 				this.$addStaff()
 			}
 		},
 		methods:{
 			// 获取本店所有员工
-			async getShopUserArr(){
+			async getListArr(){
 				let res = await this.$get({
 					url:'/goodsSku/getShopUserItems',
 				})
-				this.shopUser = res.data.data
-				console.log(this.shopUser)
+				this.listArr = res.data.data
 			},
 			
-			selectShopUser(item){
-				let user = {}
-				user = {
-					user:item,
-					userId:item.id,
-					userName:item.username
+			selectListArr(item){
+				let data = {
+					// user:item,
+					id:item.id,
+					username:item.username
 				}
-				uni.setStorageSync('user',user)
+				uni.setStorageSync('singleStaff',data)
 				this.$back()
 			},
 		}

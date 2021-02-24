@@ -41,7 +41,7 @@
 							<view class="picker">
 								<text class="noSet">请选择</text>
 								<text></text>
-								<image src="../../../static/addGoods/go.png" ></image>
+								<image src="../../../../static/addGoods/go.png" ></image>
 							</view>
 						</picker>
 					</view>

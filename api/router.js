@@ -12,6 +12,12 @@ function goPath(path){
 	})
 }
 
+function goTabbar(path){
+	uni.switchTab({
+		url:path
+	})
+}
+
 //关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层
 function back(path){
 	uni.navigateBack()
@@ -24,34 +30,44 @@ function toHome(){
 	})
 }
 
-function addStaff(){
-	uni.navigateTo({
-		url:"/pages/index/addStaff/addStaff",
-	})
-}
-function addGuest(){
-	uni.navigateTo({
-		url:"/pages/index/addGuest/addGuest",
-	})
-}
-function addRole(){
-	uni.navigateTo({
-		url:"/pages/index/addRole/addRole",
-	})
-}
-function addPeer(){
-	uni.navigateTo({
-		url:"/pages/index/addPeer/addPeer",
-	})
-}
 function staffAdminister(){
 	uni.navigateTo({
-		url:"/pages/index/staffAdminister/staffAdminister",
+		url:"/pages/Administer/staffAdminister/staffAdminister",
+	})
+}
+function addStaff(){
+	uni.navigateTo({
+		url:"/pages/Administer/staffAdminister/addStaff/addStaff",
 	})
 }
 function guestAdminister(){
 	uni.navigateTo({
-		url:"/pages/index/guestAdminister/guestAdminister",
+		url:"/pages/Administer/guestAdminister/guestAdminister",
+	})
+}
+function addGuest(){
+	uni.navigateTo({
+		url:"/pages/Administer/guestAdminister/addGuest/addGuest",
+	})
+}
+function roleAdminister(){
+	uni.navigateTo({
+		url:"/pages/Administer/roleAdminister/roleAdminister",
+	})
+}
+function addRole(){
+	uni.navigateTo({
+		url:"/pages/Administer/roleAdminister/addRole/addRole",
+	})
+}
+function peerAdminister(){
+	uni.navigateTo({
+		url:"/pages/Administer/peerAdminister/peerAdminister",
+	})
+}
+function addPeer(){
+	uni.navigateTo({
+		url:"/pages/Administer/peerAdminister/addPeer/addPeer",
 	})
 }
 
@@ -114,4 +130,4 @@ function to401(){
 	},1000)
 }
 
-export {toPath,goPath,back,toHome,addStaff,addGuest,addRole,addPeer,staffAdminister,guestAdminister,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}
+export {toPath,goPath,goTabbar,back,toHome,staffAdminister,addStaff,guestAdminister,addGuest,roleAdminister,addRole,peerAdminister,addPeer,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}

@@ -283,7 +283,7 @@
 						</view>
 						<view class="right" @tap.stop="$toPath('../../select/selectStaff/multiStaff')">
 							<view class="picker">
-								<text class="noSet" v-if="!recycleUserId">请选择</text>
+								<text class="noSet" v-if="!recycleUserIds">请选择</text>
 								<text v-else>{{recycleUserName}}</text>
 								<image src="../../../static/addGoods/go.png"></image>
 							</view>
@@ -401,7 +401,7 @@
 				mode:'edit',//add 增加 edit编辑
 				goodsId:'',
 				token:uni.getStorageSync('token'),
-				// shopUser: uni.getStorageSync("shopUser"),
+				shopUser: uni.getStorageSync("shopUser"),
 				
 				navIndex: 1,//导航栏index
 				scrollTopId:'',//滚动ID
@@ -477,7 +477,6 @@
 				profitPercentage:'',//分润比例
 				profitPercentageFocus:false,
 				
-				cooperateShop:'',//合作店铺
 				cooperateShopId:'',//合作店铺id
 				cooperateShopName:'',//合作店铺简称
 				
@@ -491,7 +490,7 @@
 				storePlacePickerArr:[],//存放地点选择器数组
 				storePlaceIndex:'',
 
-				recycleUserId:'',//回收员工id
+				// recycleUserId:'',//回收员工id
 				recycleUserIds:'',//回收员工id列表(用英文逗号分隔)
 				recycleUserName:'',//回收员工用户名
 
@@ -533,9 +532,9 @@
 		},
 		onShow() {
 			this.getGoodsBrands()
+			this.getCooperateShop()
 			this.getCheckupUser()
 			this.getRecycleUser()
-			this.getCooperateShop()
 		},
 		onReady() {
 			this.getBoxTop()
@@ -689,37 +688,37 @@
 				}
 			},
 			getGoodsBrands(){
-				let goodsBrands = uni.getStorageSync('goodsBrands')
-				if(this.$isObject(goodsBrands)&&goodsBrands!={}){
-					this.goodsBrand = goodsBrands.goodsBrand
-					this.goodsBrandId = goodsBrands.goodsBrandId
-					this.goodsBrandName = goodsBrands.goodsBrandName
+				let data = uni.getStorageSync('goodsBrands')
+				if(this.$isObject(data)&&data!={}){
+					this.goodsBrand = data.goodsBrand
+					this.goodsBrandId = data.goodsBrandId
+					this.goodsBrandName = data.goodsBrandName
 					uni.removeStorageSync('goodsBrands')
 				}
 			},
 			getCooperateShop(){
-				let cooperateShop = uni.getStorageSync('cooperateShop')
-				if(this.$isObject(cooperateShop)&&cooperateShop!={}){
-					this.cooperateShop = cooperateShop.cooperateShop
-					this.cooperateShopId = cooperateShop.cooperateShopId
-					this.cooperateShopName = cooperateShop.cooperateShopName
-					uni.removeStorageSync('cooperateShop')
+				let data = uni.getStorageSync('selectPeer')
+				if(this.$isObject(data)&&data!={}){
+					this.cooperateShopId = data.id
+					this.cooperateShopName = data.shortName
+					uni.removeStorageSync('selectPeer')
 				}
 			},
 			getRecycleUser(){
-				let recycleUser = uni.getStorageSync('recycleUser')
-				if(this.$isObject(recycleUser)&&recycleUser!={}){
-					this.recycleUserId = recycleUser.recycleUserId
-					this.recycleUserName = recycleUser.recycleUserName
-					uni.removeStorageSync('recycleUser')
+				let data = uni.getStorageSync('multiStaff')
+				if(this.$isObject(data)&&data!={}){
+					console.log(data)
+					this.recycleUserIds = data.idArr.toString()
+					this.recycleUserName = data.usernameArr.toString()
+					uni.removeStorageSync('multiStaff')
 				}
 			},
 			getCheckupUser(){
-				let checkupUser = uni.getStorageSync('user')
-				if(this.$isObject(checkupUser)&&checkupUser!={}){
-					this.checkupUserId = checkupUser.userId
-					this.checkupUserName = checkupUser.userName
-					uni.removeStorageSync('user')
+				let data = uni.getStorageSync('singleStaff')
+				if(this.$isObject(data)&&data !={}){
+					this.checkupUserId = data.id
+					this.checkupUserName = data.username
+					uni.removeStorageSync('singleStaff')
 				}
 			},
 			// 获取商品详情数据
@@ -783,7 +782,8 @@
 				this.storePlaceId = goods.storePlaceId//存放地点id
 				this.storePlaceName = goods.storePlaceName//存放地点名称
 			
-				this.recycleUserId = goods.recycleUserId//回收员工id
+				// this.recycleUserId = goods.recycleUserId//回收员工id
+				this.recycleUserIds = goods.recycleUserIds//回收员工id
 				this.recycleUserName = goods.recycleUserName//回收员工用户名
 			
 				this.checkupUserId = goods.checkupUserId//鉴定员工id
@@ -1057,7 +1057,7 @@
 						"picList": this.picList,
 						"quality": this.quality,
 						"qualityInfo": this.qualityInfo,
-						"recycleUserId": this.recycleUserId,
+						// "recycleUserId": this.recycleUserId,
 						"recycleUserIds": this.recycleUserIds,
 						"recycleUserName": this.recycleUserName,
 						"salePrice": this.salePrice,

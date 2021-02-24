@@ -55,8 +55,11 @@
 	export default {
 		data() {
 			return {
-				
+				listArr:[],
 			};
+		},
+		onShow(){
+			this.getListArr()
 		},
 		onNavigationBarButtonTap(e){
 			console.log(e)
@@ -64,6 +67,31 @@
 				this.$addGuest()
 			}
 		},
+		methods:{
+			// 获取本店所有员工
+			async getListArr(){
+				let res = await this.$post({
+					url:'/customer/list',
+					data:{
+						keyText:'',
+						pageNo: 1,
+						pageSize: 999,
+					}
+				})
+				console.log(res)
+				this.listArr = res.data.data
+			},
+			
+			selectListArr(item){
+				let data = {
+					user:item,
+					id:item.id,
+					username:item.username
+				}
+				uni.setStorageSync('selectGuest',data)
+				this.$back()
+			},
+		}
 	}
 </script>
 

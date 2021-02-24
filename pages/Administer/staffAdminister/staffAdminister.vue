@@ -16,25 +16,42 @@
 		<view class="total">
 			<text>员工总数:{{shopUser.length}}个</text>
 		</view>
-		<view class="list" v-for="item in shopUser" :key="item.id">
-			<view class="left">
-				<text class="title">{{item.realname}}</text>
-				<text>登录账号:{{item.username}}</text>
-				<text>手机号码:{{item.telephone}}</text>
-				<text>创建时间:{{item.createTime}}</text>
+		<template v-if="navIndex==1">
+			<view class="list" v-for="item in shopUser" :key="item.id" v-if="item.enable">
+				<view class="left">
+					<text class="title">{{item.realname}}</text>
+					<text>登录账号:{{item.username}}</text>
+					<text>手机号码:{{item.telephone}}</text>
+					<text>创建时间:{{item.createTime}}</text>
+				</view>
+				<view class="right">
+					<view class="state-y">
+						<text>启用</text>
+					</view>
+					<view class="role">
+						<text>销售</text>
+					</view>
+				</view>
 			</view>
-			<view class="right">
-				<view class="state-y" v-if="item.enable">
-					<text>启用</text>
+		</template>
+		<template v-if="navIndex==2">
+			<view class="list" v-for="item in shopUser" :key="item.id" v-if="!item.enable">
+				<view class="left">
+					<text class="title">{{item.realname}}</text>
+					<text>登录账号:{{item.username}}</text>
+					<text>手机号码:{{item.telephone}}</text>
+					<text>创建时间:{{item.createTime}}</text>
 				</view>
-				<view class="state-n" v-else>
-					<text>禁用</text>
-				</view>
-				<view class="role">
-					<text>销售</text>
+				<view class="right">
+					<view class="state-n">
+						<text>禁用</text>
+					</view>
+					<view class="role">
+						<text>销售</text>
+					</view>
 				</view>
 			</view>
-		</view>
+		</template>
 	</view>
 </template>
 

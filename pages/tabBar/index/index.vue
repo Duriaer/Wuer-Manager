@@ -211,15 +211,15 @@
 					<image src="../../../static/index/xzkh.png"></image>
 					<text>新增客户</text>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="$goTabbar('/pages/tabBar/goods/goods')">
 					<image src="../../../static/index/spgl.png"></image>
 					<text>商品管理</text>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="$addGoods()">
 					<image src="../../../static/index/xzsp.png"></image>
 					<text>新增商品</text>
 				</view>
-				<view class="li">
+				<view class="li" @tap.stop="$goTabbar('/pages/tabBar/order/order')">
 					<image src="../../../static/index/ddgl.png"></image>
 					<text>订单管理</text>
 				</view>
@@ -258,7 +258,7 @@
 				        console.log('条码内容：' + res.result);
 				    }
 				});
-			}
+			},
 		}
 	}
 </script>

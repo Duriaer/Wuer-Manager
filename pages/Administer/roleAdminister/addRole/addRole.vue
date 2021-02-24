@@ -36,7 +36,7 @@
 		<view class="authority" v-for="item in authority" :key="item.id">
 			<view class="title">
 				<text>{{item.name}}</text>
-				<image src="../../../static/addrole/xl.png"></image>
+				<image src="../../../../static/addrole/xl.png"></image>
 				<!-- <image src="../../../static/addrole/sq.png"></image> -->
 			</view>
 			<view class="ul">
