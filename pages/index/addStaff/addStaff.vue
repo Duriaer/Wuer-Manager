@@ -37,11 +37,13 @@
 						<text>角色</text>
 					</view>
 					<view class="right">
-						<view class="picker">
-							<text class="noSet">请选择</text>
-							<text>{{roleName}}</text>
-							<image src="../../../static/addGoods/go.png" ></image>
-						</view>
+						<picker>
+							<view class="picker">
+								<text class="noSet">请选择</text>
+								<text>{{roleName}}</text>
+								<image src="../../../static/addGoods/go.png" ></image>
+							</view>
+						</picker>
 					</view>
 				</view>
 				<view class="line_switch">

@@ -58,10 +58,13 @@
 		},
 	    methods:{
 			tabNav(index) {
-				if(this.navIndex == index){
-					return
+				if(this.navIndex==1){
+					this.shopUser.enable = true
+					this.getShopUserArr()
+				}else if(this.navIndex==2){
+					this.shopUser.enable = false
+					this.getShopUserArr()
 				}
-				console.log(index)
 				this.navIndex = index
 			},
 			// 获取本店所有员工
