@@ -75,10 +75,15 @@
 						<image src="../../../static/goods/coordinate.png"></image>
 						<text>{{goods.storePlaceName}}</text>
 					</view>
-					<view class="money"><!-- 选择客人时为销售价 选择同行时为同行价 -->
+					<view class="money" v-if="customerType==1">
 						<text class="paid">销售价</text>
 						<text class="symbol" style="color: #EFA22A;">¥</text>
 						<text class="price">{{goods.salePrice}}</text>
+					</view>
+					<view class="money" v-if="customerType==2">
+						<text class="paid">同行价</text>
+						<text class="symbol" style="color: #EFA22A;">¥</text>
+						<text class="price">{{goods.peerPrice}}</text>
 					</view>
 				</view>
 			</view>
