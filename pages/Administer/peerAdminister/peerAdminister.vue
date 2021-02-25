@@ -33,7 +33,7 @@
 				friendShops:[],
 			};
 		},
-		onLoad(){
+		onShow(){
 			this.getFriendShopsArr()
 		},
 		onNavigationBarButtonTap(e){

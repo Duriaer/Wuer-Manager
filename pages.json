@@ -345,7 +345,7 @@
 		        ,{
                     "path" : "selectGuest/selectGuest",
                     "style" :{
-                    "navigationBarTitleText": "选择客人",
+                    "navigationBarTitleText": "选择客户",
                     "enablePullDownRefresh": false,
 					"app-plus": {
 						"bounce":"none",

@@ -60,7 +60,7 @@
 				keyText: '', //搜索关键字
 			};
 		},
-		onLoad() {
+		onShow() {
 			this.getCustomer()
 		},
 		onNavigationBarButtonTap(e){

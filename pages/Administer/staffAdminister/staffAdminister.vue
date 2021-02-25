@@ -65,6 +65,8 @@
 		},
 		onLoad(){
 			this.tabNav(1)
+		},
+		onShow(){
 			this.getShopUserArr()
 		},
 		onNavigationBarButtonTap(e){

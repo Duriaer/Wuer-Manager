@@ -29,9 +29,9 @@
 				keyText: '', //搜索关键字
 			};
 		},
-		onLoad(){
-			// this.getShopRole()
+		onShow(){
 			this.getRoleArr()
+			this.getShopRole()
 		},
 		onNavigationBarButtonTap(e){
 			console.log(e)
@@ -50,17 +50,19 @@
 				this.role = res.data.data		
 			},
 			// 获取角色列表
-			// async getShopRole(){
-			// 	let params = {
-			// 		keyText: this.keyText, //搜索关键字(字符串)
-			// 	};
-			// 	let res = await this.$post({
-			// 		url:'/shopRole/list',
-			// 		data:params,
-			// 	})
-			// 	console.log(res.data.data)
-			// 	this.shopRole = res.data.data
-			// },
+			async getShopRole(){
+				let params = {
+					keyText: this.keyText, //搜索关键字(字符串)
+					pageNo: 1,
+					pageSize: 999,
+				};
+				let res = await this.$post({
+					url:'/shopRole/list',
+					data:params,
+				})
+				console.log(res.data.data)
+				this.shopRole = res.data.data
+			},
 		}
 	}
 </script>

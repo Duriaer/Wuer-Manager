@@ -68,7 +68,7 @@
 			}
 		},
 		methods:{
-			// 获取本店所有员工
+			// 获取客户列表数据
 			async getListArr(){
 				let res = await this.$post({
 					url:'/customer/list',
