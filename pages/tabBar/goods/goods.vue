@@ -61,7 +61,7 @@
 				</view>
 			</view>
 			
-			<view class="filterTopUlBox" v-if="filterTopShow">
+			<view class="filterTopUlBox" v-if="filterTopShow" @touchmove.prevent>
 				<!-- 分类 -->
 				<template v-if="filterTopShow==2">
 					<view class="ul">
@@ -72,10 +72,62 @@
 				</template>
 				<!-- 位置 -->
 				<template v-if="filterTopShow==3">
-					<view class="ul">
+					<!-- <view class="ul">
 						<view class="list" :class="item.selected?'active':''" v-for="(item,index) in storePlaceArr" :key="index" @tap.stop="selectItem(storePlaceArr,index)">
 							<text>{{item.storePlaceName}}</text>
 						</view>
+					</view> -->
+					<view class="picker_box">
+						<view class="one_bar">
+							<scroll-view scroll-y="true">
+								<view class="list" :class="oneBarIndex==index?'active':''" v-for="(item,index) in storePlaceArr" :key='index' @tap.stop="selectOneBar(index,item)">
+									<text>{{item.storePlaceName}}</text>
+								</view>
+								<view class="list" :class="oneBarIndex==-1?'active':''" @tap.stop="selectOneBar(-1)">
+									<text>{{oneBotName}}</text>
+								</view>
+							</scroll-view>
+						</view>
+						<template v-if="!threeBarShow">
+							<view class="two_bar_big">
+								<scroll-view scroll-y="true">
+									<view class="list" :class="twoBigBarIndex==index+1?'active':''" v-for="(item,index) in twoBigBarArr" :key='index' @tap.stop="selectTwoBigBar(index+1,item)">
+										<text></text>
+									</view>
+								</scroll-view>
+							</view>
+						</template>
+						<template v-else>
+							
+							<view class="two_bar">
+								<scroll-view scroll-y="true">
+									<scroll-view scroll-y="true">
+										<view class="list" style="color: #000000;">
+											<text>全部借出</text>
+											<text></text>
+										</view>
+										<view class="list" :class="twoBarIndex==index+1?'active':''" v-for="(item,index) in twoBarArr" :key='index' @tap.stop="selectTwoBar(index+1,item)">
+											<text>{{item.itemName}}</text>
+											<text></text>
+										</view>
+									</scroll-view>
+								</scroll-view>
+							</view>
+							
+							<view class="three_bar">
+								<scroll-view scroll-y="true">
+									<scroll-view scroll-y="true">
+										<view class="list" style="color: #000000;">
+											<text>{{threeTitle}}</text>
+											<text></text>
+										</view>
+										<view class="list" :class="threeBarIndex==index+1?'active':''" v-for="(item,index) in threeBarArr" :key='index' @tap.stop="selectThreeBar(index+1,item)">
+											<text></text>
+										</view>
+									</scroll-view>
+								</scroll-view>
+							</view>
+						</template>
 					</view>
 				</template>
 				<!-- 来源 -->
@@ -87,11 +139,11 @@
 					</view>
 				</template>
 				
-				<view class="box_bot">
+				<view class="box_bot" v-if="filterTopShow!=3">
 					<view class="btn" @tap.stop="reset()">
 						<text>重置</text>
 					</view>
-					<view class="btn btn_green" @tap.stop="getGoodArr()">
+					<view class="btn btn_green" @tap.stop="startPull()">
 						<text>完成</text>
 					</view>
 				</view>
@@ -260,7 +312,7 @@
 							</view>
 						</view>
 						<!-- 位置 -->
-						<view class="filterRightUlBox" v-if="storePlaceArr.length">
+						<!-- <view class="filterRightUlBox" v-if="storePlaceArr.length">
 							<view class="ulBox_top">
 								<text class="left">位置</text>
 							</view>
@@ -269,7 +321,7 @@
 									<text>{{item.storePlaceName}}</text>
 								</view>
 							</view>
-						</view>
+						</view> -->
 						<!-- 成色 -->
 						<view class="filterRightUlBox" v-if="qualityArr.length">
 							<view class="ulBox_top">
@@ -298,7 +350,7 @@
 					<view class="btn" @tap.stop="reset()">
 						<text>重置</text>
 					</view>
-					<view class="btn btn_green" @tap.stop="getGoodArr()">
+					<view class="btn btn_green" @tap.stop="startPull()">
 						<text>完成</text><text class="small">（{{rightCount}}件商品）</text>
 					</view>
 				</view>
@@ -334,7 +386,19 @@
 				goodsTypeIdList: [],  // 所选分类id 用数组
 				saleStatusList: [],//  所选销售状态, 用数组 (value)
 				originTypeList:[], //  所选来源id, 用数组 （value)
-				storePlaceList:[],//所选所在位置id 
+				
+				storePlaceList:[],//所选所在位置
+				oneBarIndex:'',
+				oneBotName:'外借中',
+				twoBigBarArr:[],
+				twoBigBarIndex:'',
+				twoBarArr:[],
+				twoBarIndex:'',
+				threeTitle:'',
+				threeBarArr:[],
+				threeBarIndex:'',
+				threeBarShow:false,
+				
 				qualityList: [],//  所选成色, 用数组 （value）
 				shopId: uni.getStorageSync("shopUser").shopId, // 所选店铺id,此处为固定值,根据登录用户从本地存储中取
 				
@@ -348,7 +412,11 @@
 			this.getGoodsTypeArr()
 			this.getSaleStatusArr()
 			this.getOriginTypeArr()
+			
 			this.getStorePlaceArr()
+			this.getTwoBigBarArr()
+			this.getTwoBarArr()
+			
 			this.getQualityArr()
 			uni.startPullDownRefresh()
 		},
@@ -363,7 +431,7 @@
 			}else if(this.$store.state.upGoodsId&&typeof(this.$store.state.upGoodsId*1)=='number'&&this.$store.state.upGoodsId*1!=NaN){
 				this.replaceDetailObj(this.$store.state.upGoodsId)
 			}else{
-				console.log('空')
+				console.log('无刷新')
 			}
 		},
 		onPullDownRefresh(){
@@ -415,18 +483,32 @@
 			//所在位置列表
 			storePlaceArr:{
 				handler(val){
-					this.storePlaceList = []
-					for(let i=0;i<val.length;i++){
-						if(val[i].selected){
-							let obj = {
-								storePlaceId:val[i].storePlaceId,
-								storeInCurrShop:val[i].storeInCurrShop,
-							}
-							this.storePlaceList.push(obj)
-						}
-					}
+					// this.storePlaceList = []
+					// for(let i=0;i<val.length;i++){
+					// 	if(val[i].selected){
+					// 		let obj = {
+					// 			storePlaceId:val[i].storePlaceId,
+					// 			storeInCurrShop:val[i].storeInCurrShop,
+					// 		}
+					// 		this.storePlaceList.push(obj)
+					// 	}
+					// }
 				},
 				deep:true
+			},
+			oneBarIndex(val){
+				if(val==-1&&this.twoBarIndex!=''&&this.twoBarArr[this.twoBarIndex-1].itemValue=='WASH_PROTECT'){
+					this.oneBotName = '借出'
+				}else{
+					this.oneBotName = '外借中'
+				}
+			},
+			twoBarIndex(val){
+				if(this.twoBarArr[val-1].itemValue=='WASH_PROTECT'){
+					this.oneBotName = '借出'
+				}else{
+					this.oneBotName = '外借中'
+				}
 			},
 			//成色列表
 			qualityArr:{
@@ -461,8 +543,12 @@
 			
 		},
 		methods:{
+			startPull(){
+				uni.startPullDownRefresh()
+			},
 			async getGoodArr(){
 				// uni.showLoading()
+				this.hideMask()
 				let params = {
 					sort: "",
 					pageNo: 1,
@@ -493,7 +579,6 @@
 						data.pageData.records[i].windowShow = false
 					}
 					this.goodsArr = data.pageData.records
-					this.hideMask()
 				}
 			},
 			async addGoodArr(){
@@ -574,7 +659,7 @@
 				this.allSelectedFasle(this.goodsTypeIdArr)
 				this.allSelectedFasle(this.saleStatusArr)
 				this.allSelectedFasle(this.originTypeArr)
-				this.allSelectedFasle(this.storePlaceArr)
+				// this.allSelectedFasle(this.storePlaceArr)
 				this.allSelectedFasle(this.qualityArr)
 				this.searchText = ''
 				this.goodsTypeIdList= []
@@ -582,7 +667,7 @@
 				this.originTypeList = []
 				this.storePlaceList = []
 				this.qualityList =  []
-				this.getGoodArr()
+				uni.startPullDownRefresh()
 			},
 			allSelectedFasle(arr){
 				for(let i=0;i<arr.length;i++){
@@ -633,6 +718,49 @@
 				},100)
 				
 			},
+			selectOneBar(index,item){
+				this.oneBarIndex = index
+				if(index>-1){
+					this.threeBarShow = false
+					if(!item.storeInCurrShop){
+						this.storePlaceList = []
+						let obj = {
+							storePlaceId:item.storePlaceId,
+							storeInCurrShop:item.storeInCurrShop,
+							storeWarehouseZoneId:item.storeWarehouseZoneId,
+							storeWarehouseZoneName:item.storeWarehouseZoneName
+						}
+						this.storePlaceList.push(obj)
+						uni.startPullDownRefresh()
+					}
+				}else{
+					this.threeBarShow = true
+				}
+			},
+			selectTwoBigBar(index,item){
+				this.twoBigBarIndex = index
+				this.storePlaceList = []
+				let obj = {
+					storePlaceId:this.storePlaceArr[this.oneBarIndex].storePlaceId,
+					storeInCurrShop:this.storePlaceArr[this.oneBarIndex].storeInCurrShop,
+					storeWarehouseZoneId:item.storeWarehouseZoneId,
+					storeWarehouseZoneName:item.storeWarehouseZoneName
+				}
+				this.storePlaceList.push(obj)
+				uni.startPullDownRefresh()
+			},
+			selectTwoBar(index,item){
+				this.twoBarIndex = index
+				this.threeTitle = '全部'+item.itemName
+				this.getThreeBarArr(item.itemValue)
+			},
+			selectThreeBar(index,item){
+				this.threeBarIndex = index
+				// this.storePlaceList = []
+				// let obj = {}
+				// this.storePlaceList.push(obj)
+				// uni.startPullDownRefresh()
+			},
 			//获取全部分类列表
 			async getGoodsTypeArr(){
 					let res = await this.$get({
@@ -665,13 +793,33 @@
 			},
 			//获取位置列表
 			async getStorePlaceArr(){
-					let res = await this.$get({
-						url:'/shop/getStorePlaces',
-					})
-					for(let i=0;i<res.data.data.length;i++){
-						res.data.data[i].selected = false
+				let res = await this.$get({
+					url:'/shop/getStorePlaces',
+				})
+				this.storePlaceArr = res.data.data
+				console.log(res.data.data)
+			},
+			async getTwoBigBarArr(){
+				let res = await this.$post({
+					url:'/warehouseZone/list',
+					data:{
+						shopId:this.shopId,
 					}
-					this.storePlaceArr = res.data.data
+				})
+				console.log(res.data)
+			},
+			async getTwoBarArr(){
+				let res = await this.$get({
+					url:'/dictItem/getGoodsLendRemarkItems',
+				})
+				console.log(res.data)
+				if(res.data.succeed){
+					this.twoBarArr = res.data.data
+					console.log(res.data.data)
+				}
+			},
+			async getThreeBarArr(val){
+				
 			},
 			//获取成色列表
 			async getQualityArr(){
