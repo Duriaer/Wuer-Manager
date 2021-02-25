@@ -55,19 +55,19 @@
 					<swiper-item>
 						<view class="swiper-item">
 							<view class="title">
-								<text>今日销售</text>
+								<text>今日库存</text>
 							</view>
 							<view class="ul">
 								<view class="li">
 									<view class="head">
-										<text>销售数量</text>
+										<text>到货数量</text>
 										<image src="../../../static/index/go.png"></image>
 									</view>
 									<text class="figure">80</text>
 								</view>
 								<view class="li">
 									<view class="head">
-										<text>销售金额</text>
+										<text>到货金额</text>
 										<image src="../../../static/index/go.png"></image>
 									</view>
 									<text class="figure">888888.00</text>
@@ -76,14 +76,37 @@
 							<view class="ul">
 								<view class="li">
 									<view class="head">
-										<text>退货数量</text>
+										<text>外借数量</text>
 										<image src="../../../static/index/go.png"></image>
 									</view>
 									<text class="figure">80</text>
 								</view>
 								<view class="li">
 									<view class="head">
-										<text>退货金额</text>
+										<text>寄卖退回数量</text>
+										<image src="../../../static/index/go.png"></image>
+									</view>
+									<text class="figure">8</text>
+								</view>
+							</view>
+						</view>
+					</swiper-item>
+					<swiper-item>
+						<view class="swiper-item">
+							<view class="title">
+								<text>今日回收</text>
+							</view>
+							<view class="ul">
+								<view class="li">
+									<view class="head">
+										<text>回收数量</text>
+										<image src="../../../static/index/go.png"></image>
+									</view>
+									<text class="figure">80</text>
+								</view>
+								<view class="li">
+									<view class="head">
+										<text>回收金额</text>
 										<image src="../../../static/index/go.png"></image>
 									</view>
 									<text class="figure">888888.00</text>
@@ -92,80 +115,43 @@
 						</view>
 					</swiper-item>
 					<swiper-item>
-						<view class="swiper-item">
-							<view class="title">
-								<text>今日销售</text>
+						<view class="swiper-item" style="display: flex;justify-content: space-between;">
+							<view class="list">
+								<text class="title" style="font-size: 32rpx;">库存概况</text>
+								<view class="subtitle">
+									<text>gugus罗湖</text>
+									<image src="../../../static/index/go.png"></image>
+								</view>
+								<view class="subtitle">
+									<text>gugus南山</text>
+									<image src="../../../static/index/go.png"></image>
+								</view>
+								<view class="subtitle">
+									<text>爱宝乐</text>
+									<image src="../../../static/index/go.png"></image>
+								</view>
+								<text>合计</text>
 							</view>
-							<view class="ul">
-								<view class="li">
-									<view class="head">
-										<text>销售数量</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">80</text>
-								</view>
-								<view class="li">
-									<view class="head">
-										<text>销售金额</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">888888.00</text>
-								</view>
+							<view class="list">
+								<text class="title">总数量</text>
+								<text>80</text>
+								<text>80</text>
+								<text>80</text>
+								<text>240</text>
 							</view>
-							<view class="ul">
-								<view class="li">
-									<view class="head">
-										<text>退货数量</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">80</text>
-								</view>
-								<view class="li">
-									<view class="head">
-										<text>退货金额</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">888888.00</text>
-								</view>
+							<view class="list">
+								<text class="title">寄卖数量</text>
+								<text>80</text>
+								<text>80</text>
+								<text>80</text>
+								<text>240</text>
 							</view>
-						</view>
-					</swiper-item>
-					<swiper-item>
-						<view class="swiper-item">
-							<view class="title">
-								<text>今日销售</text>
-							</view>
-							<view class="ul">
-								<view class="li">
-									<view class="head">
-										<text>销售数量</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">80</text>
-								</view>
-								<view class="li">
-									<view class="head">
-										<text>销售金额</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">888888.00</text>
-								</view>
-							</view>
-							<view class="ul">
-								<view class="li">
-									<view class="head">
-										<text>退货数量</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">80</text>
-								</view>
-								<view class="li">
-									<view class="head">
-										<text>退货金额</text>
-										<image src="../../../static/index/go.png"></image>
-									</view>
-									<text class="figure">888888.00</text>
-								</view>
+							<view class="list">
+								<text class="title">库存总额(不含寄卖)</text>
+								<text>80</text>
+								<text>80</text>
+								<text>80</text>
+								<text>240</text>
 							</view>
 						</view>
 					</swiper-item>
