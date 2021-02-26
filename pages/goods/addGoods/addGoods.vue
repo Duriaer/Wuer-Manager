@@ -133,7 +133,7 @@
 							<text>配件</text>
 						</view>
 						<view class="right">
-							<input v-model="accessories" type="text" placeholder="请输入" />
+							<input v-model="accessories" type="text" placeholder="多个配件用,分隔" />
 						</view>
 					</view>
 					<view class="line_input">
@@ -687,6 +687,7 @@
 					}
 				}
 			},
+			//选择品牌
 			getGoodsBrands(){
 				let data = uni.getStorageSync('goodsBrands')
 				if(this.$isObject(data)&&data!={}){
@@ -696,6 +697,7 @@
 					uni.removeStorageSync('goodsBrands')
 				}
 			},
+			//选择同行
 			getCooperateShop(){
 				let data = uni.getStorageSync('selectPeer')
 				if(this.$isObject(data)&&data!={}){
@@ -704,6 +706,7 @@
 					uni.removeStorageSync('selectPeer')
 				}
 			},
+			//选择回收员工
 			getRecycleUser(){
 				let data = uni.getStorageSync('multiStaff')
 				if(this.$isObject(data)&&data!={}){
@@ -713,6 +716,7 @@
 					uni.removeStorageSync('multiStaff')
 				}
 			},
+			//选择鉴定员工
 			getCheckupUser(){
 				let data = uni.getStorageSync('singleStaff')
 				if(this.$isObject(data)&&data !={}){

@@ -29,15 +29,15 @@
 								<text>{{order.originTypeInfo}}</text>
 							</view>
 							<!-- 自定义标签 -->
-							<view class="label_li labal_li2" v-if="order.customLabelList!=null&&order.customLabelList!=''">
+							<view class="label_li labal_li2" v-if="order.customLabelList">
 								<text>{{order.customLabelList}}</text>
 							</view>
 							<!-- 品牌标签 -->
-							<view class="label_li">
+							<view class="label_li" v-if="order.goodsBrandName">
 								<text>{{order.goodsBrandName}}</text>
 							</view>
 							<!-- 分类标签 -->
-							<view class="label_li">
+							<view class="label_li" v-if="order.goodsTypeName">
 								<text>{{order.goodsTypeName}}</text>
 							</view>
 						</view>

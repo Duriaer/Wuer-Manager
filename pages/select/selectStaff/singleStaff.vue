@@ -30,7 +30,11 @@
 		data() {
 			return {
 				listArr:[],
+				mode:'',
 			};
+		},
+		onLoad(options) {
+			this.mode = options.mode
 		},
 		onShow(){
 			this.getListArr()
@@ -55,9 +59,17 @@
 					id:item.id,
 					username:item.username
 				}
-				uni.setStorageSync('singleStaff',data)
+			// 	uni.setStorageSync('singleStaff',data)
+				if(this.mode == 'operator'){
+					uni.setStorageSync('operator',data)
+				}else if(this.mode == 'recycleUser'){
+					uni.setStorageSync('recycleUser',data)
+				}
+				else if(this.mode == 'checkupUser'){
+					uni.setStorageSync('checkupUser',data)
+				}
 				this.$back()
-			},
+		    },
 		}
 	}
 </script>

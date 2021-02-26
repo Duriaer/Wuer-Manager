@@ -9,21 +9,26 @@
 				<view class="li">
 					<view :class="{'active':navIndex==2}" @tap.stop="tabPagination(2)">预订单</view>
 				</view>
-				<view class="li">
+				<!-- <view class="li">
 					<view :class="{'active':navIndex==3}" @tap.stop="tabPagination(3)">退货单</view>
-				</view>
+				</view> -->
 			</view>
-			<view class="img">
+			<!-- <view class="img">
 				<image src="../../../static/order/tj.png"></image>
-			</view>
+			</view> -->
 		</view>
-		<view class="pagination_search">
+		<view class="pagination_search" v-if="navIndex==1">
 			<view class="search">
 				<image src="../../../static/goods/fdj.png" />
 			</view>
-			<view class="screen">
+			<view class="screen"  @tap.stop="$toPath('../../order/orderScreen/orderScreen')">
 				<image src="../../../static/order/sx.png"></image>
 				<text>筛选</text>
+			</view>
+		</view>
+		<view class="pagination_search" style="justify-content: center;" v-if="navIndex==2">
+			<view class="search">
+				<image src="../../../static/goods/fdj.png" />
 			</view>
 		</view>
 		<!-- 统计栏 -->

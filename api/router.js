@@ -112,6 +112,22 @@ function toOrderDetails(id,type){
 	}
 }
 
+function toSingleStaff(type){
+	if(type==1){
+		uni.navigateTo({
+			url:"/pages/select/selectStaff/singleStaff?mode="+'operator',
+		})
+	}else if(type==2){
+		uni.navigateTo({
+			url:"/pages/select/selectStaff/singleStaff?mode="+'recycleUser',
+		})
+	}else if(type==3){
+		uni.navigateTo({
+			url:"/pages/select/selectStaff/singleStaff?mode="+'checkupUser',
+		})
+	}
+}
+
 function toLogin(){
 	uni.navigateTo({
 		url:"/pages/my/login/login"
@@ -131,4 +147,4 @@ function to401(){
 	},1000)
 }
 
-export {toPath,goPath,goTabbar,back,toHome,staffAdminister,addStaff,guestAdminister,addGuest,roleAdminister,addRole,peerAdminister,addPeer,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toLogin,to401}
+export {toPath,goPath,goTabbar,back,toHome,staffAdminister,addStaff,guestAdminister,addGuest,roleAdminister,addRole,peerAdminister,addPeer,toGoods,addGoods,editGoods,toPlaceOrder,toOrderDetails,toSingleStaff,toLogin,to401}

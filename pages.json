@@ -2,8 +2,8 @@
 	// "condition":{
 	// 	"current":1,
 	// 	"list":[{
-	// 		"name":"multiStaff",
-	// 		"path":"pages/select/selectStaff/multiStaff"
+	// 		"name":"orderScreen",
+	// 		"path":"pages/order/orderScreen/orderScreen"
 	// 	}]
 	// },
 	"globalStyle": {
@@ -157,6 +157,13 @@
 						}
 					}
 				}
+                ,{
+                    "path" : "orderScreen/orderScreen",
+                    "style":{
+						"navigationBarTitleText": "订单筛选",
+						"enablePullDownRefresh": false
+                    }
+                }
             ]
 		}
 		,{
@@ -165,8 +172,8 @@
 				{
 				    "path" : "staffAdminister/staffAdminister",
 				    "style" :{
-				    "navigationBarTitleText": "员工管理",
-				    "enablePullDownRefresh": false,
+						"navigationBarTitleText": "员工管理",
+						"enablePullDownRefresh": false,
 						"app-plus": {
 							"bounce":"none",
 							"scrollIndicator": "none",
@@ -190,13 +197,11 @@
 							"bounce":"none",
 							"scrollIndicator": "none",
 							"titleNView":{
-								"buttons":[
-									{
+								"buttons":[{
 										"text":"完成",
 										"fontSize":"32rpx",
 										"fontWeight":"500"
-									}
-								]
+									}]
 							}
 						}
 				    }
@@ -204,118 +209,112 @@
 				,{
 				    "path" : "guestAdminister/guestAdminister",
 				    "style" :{
-				    "navigationBarTitleText": "客户管理",
-				    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[{
-								"fontSize": "24",
-								"fontSrc":"/static/navbar/iconfont.ttf",
-								"text": "\ue69b",
-								"width":"32px"
-							}]
+						"navigationBarTitleText": "客户管理",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
 						}
-					}
 				    }
 				}
 				,{
 				    "path" : "guestAdminister/addGuest/addGuest",
 				    "style" :{
-				    "navigationBarTitleText": "新增客户",
-				    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[
-								{
-									"text":"完成",
-									"fontSize":"32rpx",
-									"fontWeight":"500"
-								}
-							]
+						"navigationBarTitleText": "新增客户",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+										"text":"完成",
+										"fontSize":"32rpx",
+										"fontWeight":"500"
+								}]
+							}
 						}
-					}
 				    }
 				}
 				,{
 				    "path" : "peerAdminister/peerAdminister",
 				    "style" :{
-				    "navigationBarTitleText": "同行管理",
-				    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[{
-								"fontSize": "24",
-								"fontSrc":"/static/navbar/iconfont.ttf",
-								"text": "\ue69b",
-								"width":"32px"
-							}]
+						"navigationBarTitleText": "同行管理",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
 						}
-					}
 				    }
 				}
 				,{
 				    "path" : "peerAdminister/addPeer/addPeer",
 				    "style" :{
-				    "navigationBarTitleText": "新增同行",
-				    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[
-								{
-									"text":"完成",
-									"fontSize":"32rpx",
-									"fontWeight":"500"
-								}
-							]
+						"navigationBarTitleText": "新增同行",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+										"text":"完成",
+										"fontSize":"32rpx",
+										"fontWeight":"500"
+								}]
+							}
 						}
-					}
 				    }
 				}
 				,{
 				    "path" : "roleAdminister/roleAdminister",
 				    "style" :{
-				    "navigationBarTitleText": "角色管理",
-				    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[{
-								"fontSize": "24",
-								"fontSrc":"/static/navbar/iconfont.ttf",
-								"text": "\ue69b",
-								"width":"32px"
-							}]
+						"navigationBarTitleText": "角色管理",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
 						}
-					}
 				    }
 				}
 				,{
 				    "path" : "roleAdminister/addRole/addRole",
 				    "style" :{
-				    "navigationBarTitleText": "新增角色",
-				    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[
-								{
-									"text":"完成",
-									"fontSize":"32rpx",
-									"fontWeight":"500"
-								}
-							]
+						"navigationBarTitleText": "新增角色",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+										"text":"完成",
+										"fontSize":"32rpx",
+										"fontWeight":"500"
+								}]
+							}
 						}
-					}
 					}
 				}
 		    ]
@@ -326,82 +325,77 @@
 				{
 		           "path" : "selectPeer/selectPeer",
 		           "style" :{
-		           "navigationBarTitleText": "选择同行",
-		           "enablePullDownRefresh": false,
-				   "app-plus": {
-				   	"bounce":"none",
-				   	"scrollIndicator": "none",
-				   	"titleNView":{
-				   		"buttons":[{
-				   			"fontSize": "24",
-				   			"fontSrc":"/static/navbar/iconfont.ttf",
-				   			"text": "\ue69b",
-				   			"width":"32px"
-				   		}]
-				   	}
-				   }
+					    "navigationBarTitleText": "选择同行",
+					    "enablePullDownRefresh": false,
+					    "app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
+					   }
 		           }
 		        }
 		        ,{
                     "path" : "selectGuest/selectGuest",
                     "style" :{
-                    "navigationBarTitleText": "选择客户",
-                    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[{
-								"fontSize": "24",
-								"fontSrc":"/static/navbar/iconfont.ttf",
-								"text": "\ue69b",
-								"width":"32px"
-							}]
+						"navigationBarTitleText": "选择客户",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
 						}
-					}
-                }
-                
+                    }
                 }
                 ,{
                     "path" : "selectStaff/singleStaff",
                     "style" :{
-                    "navigationBarTitleText": "选择员工",
-                    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[{
-								"fontSize": "24",
-								"fontSrc":"/static/navbar/iconfont.ttf",
-								"text": "\ue69b",
-								"width":"32px"
-							}]
+						"navigationBarTitleText": "选择员工",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+									"fontSize": "24",
+									"fontSrc":"/static/navbar/iconfont.ttf",
+									"text": "\ue69b",
+									"width":"32px"
+								}]
+							}
 						}
 					}
-                }
-                
                 }
                 ,{
                     "path" : "selectStaff/multiStaff",
                     "style" :{
-                    "navigationBarTitleText": "选择员工",
-                    "enablePullDownRefresh": false,
-					"app-plus": {
-						"bounce":"none",
-						"scrollIndicator": "none",
-						"titleNView":{
-							"buttons":[
-								{
-									"text":"完成",
-									"fontSize":"32rpx",
-									"fontWeight":"500"
-								}
-							]
+						"navigationBarTitleText": "选择员工",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none",
+							"titleNView":{
+								"buttons":[{
+										"text":"完成",
+										"fontSize":"32rpx",
+										"fontWeight":"500"
+								}]
+							}
 						}
 					}
-                }
-                
                 }
             ]
 		}
@@ -413,7 +407,6 @@
                     "style" :{
 						"navigationBarTitleText": "登录"
 					}
-                
                 }
             ]
 		}

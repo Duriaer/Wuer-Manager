@@ -31,16 +31,16 @@
 						<view class="label_li" v-else-if="goods.originTypeInfo=='合作销售'" style="background:#FFF0F5 ;color: #DDA0DD;">
 							<text>{{goods.originTypeInfo}}</text>
 						</view>
-						<!-- 新增标签 -->
-						<!-- <view class="label_li labal_li2">
-							<text>标签标签</text>
+						<!-- 自定义标签 -->
+						<!-- <view class="label_li labal_li2" v-if="goods.customLabelList">
+							<text>{{goods.customLabelList}}</text>
 						</view> -->
 						<!-- 品牌标签 -->
-						<view class="label_li">
+						<view class="label_li" v-if="goods.goodsBrandName">
 							<text>{{goods.goodsBrandName}}</text>
 						</view>
 						<!-- 分类标签 -->
-						<view class="label_li">
+						<view class="label_li" v-if="goods.goodsTypeName">
 							<text>{{goods.goodsTypeName}}</text>
 						</view>
 					</view>
@@ -139,7 +139,7 @@
 						<text>总成本</text>
 					</view>
 					<view class="right">
-						<text>{{goods.costPrice}}</text>
+						<text>¥{{goods.costPrice}}</text>
 					</view>
 				</view>
 				<view class="li" v-if="goods.originTypeInfo">

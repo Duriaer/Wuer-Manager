@@ -59,15 +59,15 @@
 							<text>{{goods.originTypeInfo}}</text>
 						</view>
 						<!-- 自定义标签 -->
-						<view class="label_li labal_li2" v-if="goods.customLabelList!=null&&goods.customLabelList!=''">
+						<view class="label_li labal_li2" v-if="goods.customLabelList">
 							<text>{{goods.customLabelList}}</text>
 						</view>
 						<!-- 品牌标签 -->
-						<view class="label_li">
+						<view class="label_li" v-if="goods.goodsBrandName">
 							<text>{{goods.goodsBrandName}}</text>
 						</view>
 						<!-- 分类标签 -->
-						<view class="label_li">
+						<view class="label_li" v-if="goods.goodsTypeName">
 							<text>{{goods.goodsTypeName}}</text>
 						</view>
 					</view>
