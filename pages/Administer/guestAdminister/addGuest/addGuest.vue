@@ -37,10 +37,10 @@
 						<text>生日</text>
 					</view>
 					<view class="right">
-						<picker>
+						<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="dateChange">
 							<view class="picker">
-								<text class="noSet">请选择</text>
-								<text></text>
+								<text class="noSet" v-if="!date">请选择</text>
+								<text>{{date}}</text>
 								<image src="../../../../static/addGoods/go.png" ></image>
 							</view>
 						</picker>
@@ -62,25 +62,52 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				
+		data(){
+			const currentDate = this.getDate({
+				format: true
+			})
+			return{
+				date:'',
 			};
 		},
-		onLoad() {
+		onLoad(){
 			this.addGuestSave()
 		},
+		computed:{
+			startDate(){
+				return this.getDate('start');
+			},
+			endDate(){
+				return this.getDate('end');
+			}
+		},
 		methods:{
+			dateChange: function(e) {
+				this.date = e.target.value
+			},
+			getDate(type){
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+				if(type === 'start') {
+					year = year - 100;
+				}else if (type === 'end') {
+					year = year;
+				}
+				month = month > 9 ? month : '0' + month;;
+				day = day > 9 ? day : '0' + day;
+				return `${year}-${month}-${day}`;
+			},
 			//保存客户信息
 			async addGuestSave(){
 				uni.showLoading({title:'添加中...'})
 				if(this.name==''||this.name==null){
 					uni.hideLoading()
-					uni.showToast({
-						title:'请输入姓名',
-						icon:'none'
-					})
-					this.scrollTopId = ''
+					// uni.showToast({
+					// 	title:'请输入姓名',
+					// 	icon:'none'
+					// })
 					setTimeout(()=>{
 						this.scrollTopId = 'goodsBrand'
 					},100)

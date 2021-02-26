@@ -117,7 +117,7 @@
 					<swiper-item>
 						<view class="swiper-item" style="display: flex;justify-content: space-between;">
 							<view class="list">
-								<text class="title" style="font-size: 32rpx;">库存概况</text>
+								<text class="title" style="font-size: 32rpx;margin-bottom: 16rpx;">库存概况</text>
 								<view class="subtitle">
 									<text>gugus罗湖</text>
 									<image src="../../../static/index/go.png"></image>
