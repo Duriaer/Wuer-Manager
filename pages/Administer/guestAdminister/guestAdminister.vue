@@ -57,6 +57,8 @@
 			return {
 				customer:'',
 				
+				pageNo: 1,
+				pageSize: 10,
 				keyText: '', //搜索关键字
 			};
 		},
@@ -73,6 +75,8 @@
 			// 获取客户列表
 			async getCustomer(){
 				let params = {
+					pageNo: 1,
+					pageSize: this.pageSize,
 					keyText: this.keyText, //搜索关键字(字符串)
 				};
 				let res = await this.$post({

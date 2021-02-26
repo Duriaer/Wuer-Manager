@@ -16,8 +16,7 @@
 				</view>
 				<view class="right">
 					<view class="picker" @tap.stop="$toPath('../../select/selectGuest/selectGuest')">
-						<text class="noSet" v-if="!customerId">请选择</text>
-						<text v-else>{{customerName}}</text>
+						<text>{{customerName}}</text>
 						<image src="../../../static/addGoods/go.png" ></image>
 					</view>
 				</view>
@@ -174,15 +173,14 @@
 				
 				reserved:'',// 是否是预订单 boolean
 				customerType:1,// 客户类型(代码)：1-客人,2-同行
-				customerTypeDesc:'',// 客户类型描述：1-客人,2-同行
 				customerId:'',// 客户id
-				customerName:'',// 客户名称
+				customerName:'匿名客户',// 客户名称
 				
 				operatorId:uni.getStorageSync("shopUser").id,//操作员工id
 				operatorName:uni.getStorageSync("shopUser").username,//操作员工用户名
 				
-				goodsId:'',
-				goods:{},// 商品id
+				goodsId:'',// 商品id
+				goods:{},
 				pic:'',
 				
 				actualPaidAmount:'',// 订单实售总价
@@ -294,18 +292,15 @@
 					data = {
 						reserved:this.reserved,// 是否是预订单 boolean
 						customerType:this.customerType,// 客户类型(代码)：1-客人,2-同行
-						customerTypeDesc:this.customerTypeDesc,// 客户类型描述：1-客人,2-同行
 						customerId:this.customerId,// 客户id
 						customerName:this.customerName,// 客户名称
 						
 						operatorId:this.operatorId,// 操作员工id
-						operatorName:this.operatorName,// 操作员工用户名
 						
 						goodsSkuId:this.goodsId,// 商品id
 						
 						actualPaidAmount: this.actualPaidAmount,//实付金额
 						deliveryMethod:this.deliveryMethod,// 快递方式代码
-						deliveryMethodDesc:this.deliveryMethodDesc,// 快递方式描述
 						
 						remark:this.remark,	// 备注
 						shopId:this.shopUser.shopId,// 门店id
@@ -314,12 +309,10 @@
 					data = {
 						reserved:this.reserved,// 是否是预订单 boolean
 						customerType:this.customerType,// 客户类型(代码)：1-客人,2-同行
-						customerTypeDesc:this.customerTypeDesc,// 客户类型描述：1-客人,2-同行
 						customerId:this.customerId,// 客户id
 						customerName:this.customerName,// 客户名称
 						
 						operatorId:this.operatorId,// 操作员工id
-						operatorName:this.operatorName,// 操作员工用户名
 						
 						goodsSkuId:this.goodsId,// 商品id
 						

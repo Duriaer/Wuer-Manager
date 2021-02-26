@@ -161,7 +161,11 @@
                     "path" : "orderScreen/orderScreen",
                     "style":{
 						"navigationBarTitleText": "订单筛选",
-						"enablePullDownRefresh": false
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce":"none",
+							"scrollIndicator": "none"
+						}
                     }
                 }
             ]

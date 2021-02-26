@@ -102,7 +102,7 @@
 		</view>
 		<view class="botBox">
 			<view class="bottom-but">
-				<view class="left">
+				<view class="left" @tap.stop="reset()">
 					<text>重置</text>
 				</view>
 				<view class="right">
@@ -204,6 +204,18 @@
 					this.checkupUserName = data.username
 					uni.removeStorageSync('checkupUser')
 				}
+			},
+			//重置
+			reset(){
+				this.orderStatus = ''
+				this.operatorId = ''
+				this.operatorName = ''
+				this.recycleUserId = ''
+				this.recycleUserName = ''
+				this.checkupUserId = ''
+				this.checkupUserName = ''
+				this.orderDateStart = ''
+				this.orderDateEdn = ''
 			},
 			// 获取订单列表
 			async getShopOrder(){

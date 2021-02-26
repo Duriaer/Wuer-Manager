@@ -196,7 +196,7 @@
 						
 						<view class="label_ul">
 							<!-- 来源标签 -->
-							<view class="label_li" v-if="item.originTypeInfo=='店铺囤货'" style="background:#E5F9F4 ;color: #57BFA3;">
+							<view class="label_li" v-if="item.originTypeInfo=='本店自持'" style="background:#E5F9F4 ;color: #57BFA3;">
 								<text>{{item.originTypeInfo}}</text>
 							</view>
 							<view class="label_li" v-else-if="item.originTypeInfo=='回收客人'" style="background:#EFF7FF ;color: #759FFF;">
@@ -390,6 +390,8 @@
 				storePlaceList:[],//所选所在位置
 				oneBarIndex:'',
 				oneBotName:'外借中',
+				storehouse:'',//仓库
+				zone:[],//仓库分区
 				twoBigBarArr:[],
 				twoBigBarIndex:'',
 				twoBarArr:[],
@@ -481,21 +483,21 @@
 				deep:true
 			},
 			//所在位置列表
-			storePlaceArr:{
-				handler(val){
-					// this.storePlaceList = []
-					// for(let i=0;i<val.length;i++){
-					// 	if(val[i].selected){
-					// 		let obj = {
-					// 			storePlaceId:val[i].storePlaceId,
-					// 			storeInCurrShop:val[i].storeInCurrShop,
-					// 		}
-					// 		this.storePlaceList.push(obj)
-					// 	}
-					// }
-				},
-				deep:true
-			},
+			// storePlaceArr:{
+			// 	handler(val){
+			// 		this.storePlaceList = []
+			// 		for(let i=0;i<val.length;i++){
+			// 			if(val[i].selected){
+			// 				let obj = {
+			// 					storePlaceId:val[i].storePlaceId,
+			// 					storeInCurrShop:val[i].storeInCurrShop,
+			// 				}
+			// 				this.storePlaceList.push(obj)
+			// 			}
+			// 		}
+			// 	},
+			// 	deep:true
+			// },
 			oneBarIndex(val){
 				if(val==-1&&this.twoBarIndex!=''&&this.twoBarArr[this.twoBarIndex-1].itemValue=='WASH_PROTECT'){
 					this.oneBotName = '借出'
@@ -799,23 +801,30 @@
 				this.storePlaceArr = res.data.data
 				console.log(res.data.data)
 			},
+			//获取仓库列表
 			async getTwoBigBarArr(){
 				let res = await this.$post({
-					url:'/warehouseZone/list',
+					url:'/warehouse/list',
 					data:{
-						shopId:this.shopId,
+						shopId:5,
+						pageNo: 1,
+						pageSize: this.pageSize,
 					}
 				})
-				console.log(res.data)
+				console.log(res.data.data)
+				this.storehouse = res.data.data
+				this.zone = this.storehouse.records
+				
 			},
+			//获取所有商品外借备注
 			async getTwoBarArr(){
 				let res = await this.$get({
 					url:'/dictItem/getGoodsLendRemarkItems',
 				})
-				console.log(res.data)
+				// console.log(res.data)
 				if(res.data.succeed){
 					this.twoBarArr = res.data.data
-					console.log(res.data.data)
+					// console.log(res.data.data)
 				}
 			},
 			async getThreeBarArr(val){

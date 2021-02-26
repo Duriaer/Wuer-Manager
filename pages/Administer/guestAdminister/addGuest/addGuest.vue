@@ -104,57 +104,24 @@
 				uni.showLoading({title:'添加中...'})
 				if(this.name==''||this.name==null){
 					uni.hideLoading()
-					// uni.showToast({
-					// 	title:'请输入姓名',
-					// 	icon:'none'
-					// })
+					uni.showToast({
+						title:'请输入姓名',
+						icon:'none'
+					})
 					setTimeout(()=>{
 						this.scrollTopId = 'goodsBrand'
 					},100)
 					return
 				}
 				let res = await this.$post({
-					url:'/shopUser/save',
+					url:'/customer/save',
 					data:{
-						description:this.accessories,	//客户
 						name:this.name,	//客户名称
-						
-						//address	客户地址
-						
-						//bankAccountName	银行账户名
-						
-						//bankAccountNumber	银行账号
-						
-						//bankName	银行名称
-						
-						//beenFriendShop	boolean是否有过合作同行关系, 要结合后面的解除字段
-						
-						//createTime	
-						//email	客户email
-						
-						//friendShopId	合作同行的店铺id
-						
-						//friendShopName	合作同行的店铺简称
-						
-						// id	
-						// lastFriendTime	最近建立合作时间
-						
-						// lastUnfriendTime	最近解除合作时间
-						
-						// openingBankName	开户行
-						
-						// qq	客户QQ
 						
 						// shopId	本客户所属店铺id
 						
-						// shopName	本客户所属店铺简称
 						
 						// telephone	客户手机号码
-						
-						// unfriend	boolean是否已解除合作关系
-						
-						// updateTime	string($date-time)
-						// wxid	客户微信id
 					},
 				})
 				uni.hideLoading()

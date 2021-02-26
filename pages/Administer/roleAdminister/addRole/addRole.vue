@@ -106,18 +106,13 @@ export default {
 		async roleSave(){
 			let params = {
 				keyText: '', 
-				// createTime	
-				// id	
 				// roleName	店铺角色名称
 				
 				// shopId	店铺
 				
-				// shopName	店铺简称
-				
 				// shopPermissionList	[...]
 				// shopUserList	[...]
 				// sysResourceList	[...]
-				// updateTime	
 			};
 			let res = await this.$post({
 				url:'/shopRole/save',
